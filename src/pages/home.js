@@ -5,18 +5,19 @@ import Grid from '@material-ui/core/Grid'
 
 // SVG
 import Photographer from '../images/photographer.svg'
+import Camera from '../images/camera.svg'
 import '../stylesheets/home.sass'
 const home = () => {
 
     return (
         <Grid
             container
-            spacing={0}
+            spacing={1}
             alignItems="center"
             justify="center"
             style={{ minHeight: '100vh', width: '100vw' }}>
-            <Grid item xs={1} />
-            <Grid item xs={3}>
+            <Grid item lg={1} />
+            <Grid item lg={3}>
                 <div className="home-context">
                     <div className="lg-text cyan-text bold-text">MELANIE <br />JANISSE-BARLOW </div>
                     <div className="md-text blue-text bold-text">Painting and projects</div>
@@ -24,10 +25,11 @@ const home = () => {
                     <div className="lg-text light-cyan-text">Lorem ipsum dolor sit amet, consectetur adipiscing elit.</div>
                 </div>
             </Grid>
-            <Grid item xs={7}>
-                <Photographer style={{ width: '100%' }} />
+            <Grid item lg={7}>
+                <Photographer style={{ width: '100%' }} className="photographer"/>
+                <Camera style={{ width: '100%' }} className="camera"/>
             </Grid>
-            <Grid item xs={1} />
+            <Grid item lg={1} />
         </Grid>
     )
 }
