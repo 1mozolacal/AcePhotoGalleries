@@ -14,7 +14,7 @@ export default function Sidebar({ activeTab }) {
     return (
         <React.Fragment key={'bar'}>
             <IconButton onClick={() => setOpen(true)} style={{ color: 'white' }}><MenuIcon /></IconButton>
-            <Drawer anchor={'left'} open={openVar} onClick={() => setOpen(false)} onClose={() => setOpen(false)}>
+            <Drawer anchor={'left'} open={openVar}  onClose={() => setOpen(false)}>
                 <div
                     style={{ width: 341 }}
                     onClick={() => setOpen(false)}
