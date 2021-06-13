@@ -8,6 +8,9 @@ import ListItemIcon from '@material-ui/core/ListItemIcon';
 import ListItemText from '@material-ui/core/ListItemText';
 import InboxIcon from '@material-ui/icons/MoveToInbox';
 import MailIcon from '@material-ui/icons/Mail'; 
+import MenuIcon from '@material-ui/icons/Menu';
+
+import '../stylesheets/sidebar.sass'
 
 export default function Sidebar(){
     const [openVar, setOpen] = React.useState(false)
@@ -40,12 +43,14 @@ export default function Sidebar(){
      
     return (
     <div>
-        <React.Fragment key={'bar'}>
-            <Button onClick={() => setOpen(true)}>{'open me'}</Button>
+        <div>
+            <Button onClick={() => setOpen(true)}>
+                <MenuIcon className='menu'></MenuIcon>
+            </Button>
+            </div>
             <Drawer anchor={'left'} open={openVar} onClick={() => setOpen(false)} onClose={() => setOpen(false)}>
             {displaySide()}
             </Drawer>
-        </React.Fragment>
     </div>
     );
 }
