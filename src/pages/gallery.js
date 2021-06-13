@@ -10,7 +10,7 @@ import Button from "@material-ui/core/Button";
 const gallery = () => {
   return (
     <>
-      <SideBar></SideBar>
+      <SideBar activeTab={2}/>
       <div
         className="lg-text bold-text cyan-text"
         style={{ width: "100%", textAlign: "center" }}

@@ -29,13 +29,27 @@
     color: $highlight
 
 .drawer
-    width: 30vw
+    width: 341px
 
 @media only screen and (max-width: 600px)
     .drawer
         width: 100vw
 
-.linkButton
-    @include gradient-animation( $nav-bg, $highlight, 0.85s )
+.link-button
     align-items: center
-    font-size: 2em
+    font-size: 1.5em
+    width: 200px
+    text-decoration: none
+    color: black
+
+.link-button span
+    width: 200px
+
+.link-button span.active
+    @include gradient-animation( $nav-bg, $highlight, 0.85s)
+
+
+.sidebar-grid-item
+    display: grid
+    place-items: center
+    

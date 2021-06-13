@@ -11,7 +11,7 @@ import "../stylesheets/home.sass";
 const BioPage = () => {
   return (
     <main>
-      <Sidebar />
+      <Sidebar activeTab={1} />
       <div style={{ padding: "20px" }}>
         <Grid container direction="row" spacing={2}>
           <Grid item xs={12} sm={6}>

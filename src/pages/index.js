@@ -13,7 +13,7 @@ import '../stylesheets/home.sass'
 const IndexPage = () => {
   return (
     <main>
-      <Sidebar />
+      <Sidebar activeTab={0}/>
       <Grid
         container
         spacing={1}
