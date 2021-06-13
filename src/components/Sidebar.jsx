@@ -1,56 +1,35 @@
 import React from 'react';
-import Drawer from '@material-ui/core/Drawer';
-import Button from '@material-ui/core/Button';
-import List from '@material-ui/core/List';
-import Divider from '@material-ui/core/Divider';
-import ListItem from '@material-ui/core/ListItem';
-import ListItemIcon from '@material-ui/core/ListItemIcon';
-import ListItemText from '@material-ui/core/ListItemText';
-import InboxIcon from '@material-ui/icons/MoveToInbox';
-import MailIcon from '@material-ui/icons/Mail'; 
-import MenuIcon from '@material-ui/icons/Menu';
 
-import '../stylesheets/sidebar.sass'
+import Drawer from '@material-ui/core/Drawer'
+import MenuIcon from '@material-ui/icons/Menu'
+import IconButton from '@material-ui/core/IconButton'
+import CloseIcon from '@material-ui/icons/Close'
+import Grid from '@material-ui/core/Grid'
 
-export default function Sidebar(){
+import brandplh from '../images/brandplh.png'
+
+export default function Sidebar({ activeTab }) {
     const [openVar, setOpen] = React.useState(false)
 
-    const displaySide = () =>(
-        <div
-            role="presentation"
-            onClick={() => setOpen(false)}
-            onKeyDown={() => setOpen(false)}
-        >
-            <List>
-            {['Inbox', 'Starred', 'Send email', 'Drafts'].map((text, index) => (
-                <ListItem button key={text}>
-                <ListItemIcon>{index % 2 === 0 ? <InboxIcon /> : <MailIcon />}</ListItemIcon>
-                <ListItemText primary={text} />
-                </ListItem>
-            ))}
-            </List>
-            <Divider />
-            <List>
-            {['All mail', 'Trash', 'Spam'].map((text, index) => (
-                <ListItem button key={text}>
-                <ListItemIcon>{index % 2 === 0 ? <InboxIcon /> : <MailIcon />}</ListItemIcon>
-                <ListItemText primary={text} />
-                </ListItem>
-            ))}
-            </List>
-        </div>
-        );
-     
     return (
-    <div>
-        <div>
-            <Button onClick={() => setOpen(true)}>
-                <MenuIcon className='menu'></MenuIcon>
-            </Button>
-            </div>
+        <React.Fragment key={'bar'}>
+            <IconButton onClick={() => setOpen(true)} style={{ color: 'white' }}><MenuIcon /></IconButton>
             <Drawer anchor={'left'} open={openVar} onClick={() => setOpen(false)} onClose={() => setOpen(false)}>
-            {displaySide()}
+                <div
+                    style={{ width: 341 }}
+                    onClick={() => setOpen(false)}
+                >
+                    <Grid container style={{width: "100%"}}>
+                        <Grid item xs={12}><IconButton onClick={() => setOpen(false)} style={{ color: '#4DCCBD' }}><CloseIcon /></IconButton></Grid>
+                        <Grid item xs={12} justify="center"><img src={brandplh} /></Grid>
+                        <Grid item xs={12}>Home</Grid>
+                        <Grid item xs={12}>Gallery</Grid>
+                        <Grid item xs={12}>My Purchases</Grid>
+                        <Grid item xs={12}>About Me</Grid>
+                    </Grid>
+
+                </div>
             </Drawer>
-    </div>
+        </React.Fragment>
     );
 }
