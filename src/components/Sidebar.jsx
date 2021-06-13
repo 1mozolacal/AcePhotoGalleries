@@ -1,5 +1,4 @@
 import React from 'react';
-import { makeStyles } from '@material-ui/core/styles';
 import Drawer from '@material-ui/core/Drawer';
 import Button from '@material-ui/core/Button';
 import List from '@material-ui/core/List';
@@ -13,17 +12,11 @@ import MailIcon from '@material-ui/icons/Mail';
 export default function Sidebar(){
     const [openVar, setOpen] = React.useState(false)
 
-    const toggleBar = (activeStatus) => (event)=> {
-        if (event.type === 'keydown' && (event.key === 'Tab' || event.key === 'Shift')) {
-            return;
-        }
-        setOpen(activeStatus)
-    }
     const displaySide = () =>(
         <div
             role="presentation"
-            onClick={toggleBar('open', false)}
-            onKeyDown={toggleBar('open', false)}
+            onClick={() => setOpen(false)}
+            onKeyDown={() => setOpen(false)}
         >
             <List>
             {['Inbox', 'Starred', 'Send email', 'Drafts'].map((text, index) => (
@@ -48,8 +41,8 @@ export default function Sidebar(){
     return (
     <div>
         <React.Fragment key={'bar'}>
-            <Button onClick={toggleBar('open', true)}>{'open me'}</Button>
-            <Drawer anchor={'open'} open={openVar} onClose={toggleBar('open', false)}>
+            <Button onClick={() => setOpen(true)}>{'open me'}</Button>
+            <Drawer anchor={'left'} open={openVar} onClick={() => setOpen(false)} onClose={() => setOpen(false)}>
             {displaySide()}
             </Drawer>
         </React.Fragment>
