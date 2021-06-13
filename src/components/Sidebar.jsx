@@ -8,21 +8,22 @@ import ListItem from '@material-ui/core/ListItem';
 import ListItemIcon from '@material-ui/core/ListItemIcon';
 import ListItemText from '@material-ui/core/ListItemText';
 import InboxIcon from '@material-ui/icons/MoveToInbox';
-import MailIcon from '@material-ui/icons/Mail';
+import MailIcon from '@material-ui/icons/Mail'; 
 
 export default function Sidebar(){
+    const [openVar, setOpen] = React.useState(false)
 
     const toggleBar = (activeStatus) => (event)=> {
         if (event.type === 'keydown' && (event.key === 'Tab' || event.key === 'Shift')) {
             return;
         }
-        setState({open:activeStatus})
+        setOpen(activeStatus)
     }
     const displaySide = () =>(
         <div
             role="presentation"
-            onClick={toggleDrawer('open', false)}
-            onKeyDown={toggleDrawer('open', false)}
+            onClick={toggleBar('open', false)}
+            onKeyDown={toggleBar('open', false)}
         >
             <List>
             {['Inbox', 'Starred', 'Send email', 'Drafts'].map((text, index) => (
@@ -43,16 +44,15 @@ export default function Sidebar(){
             </List>
         </div>
         );
-            
+     
     return (
     <div>
         <React.Fragment key={'bar'}>
-            <Button onClick={toggleDrawer('open', true)}>{'open me'}</Button>
-            <Drawer anchor={'open'} open={state['open']} onClose={toggleDrawer('open', false)}>
+            <Button onClick={toggleBar('open', true)}>{'open me'}</Button>
+            <Drawer anchor={'open'} open={openVar} onClose={toggleBar('open', false)}>
             {displaySide()}
             </Drawer>
         </React.Fragment>
     </div>
     );
-
 }
