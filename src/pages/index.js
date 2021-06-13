@@ -6,7 +6,7 @@ import '../stylesheets/index.sass'
 const IndexPage = () => {
   return (
     <main>
-      Your homepage goes here <Sidebar></Sidebar>
+      <Sidebar />
     </main>
   );
 };
