@@ -15,6 +15,10 @@ import '../stylesheets/sidebar.sass'
 export default function Sidebar({ activeTab }) {
     const [openVar, setOpen] = React.useState(false)
 
+    const createButton = (text, to) => {
+        return(<Link to={to}><button className='linkButton'>{text}</button></Link>)
+    }
+
     return (
         <React.Fragment key={'bar'}>
             <IconButton onClick={() => setOpen(true)} style={{ color: 'white' }}><MenuIcon /></IconButton>
@@ -26,9 +30,9 @@ export default function Sidebar({ activeTab }) {
                     <Grid container style={{width: "100%"}}>
                         <Grid item xs={12}><IconButton onClick={() => setOpen(false)} style={{ color: '#4DCCBD' }}><CloseIcon /></IconButton></Grid>
                         <Grid item xs={12}><img src={brandplh} /></Grid>
-                        <Grid item xs={12}><Link to='/'>Home</Link></Grid>
-                        <Grid item xs={12}><Link to='/gallery'>Gallery</Link> </Grid>
-                        <Grid item xs={12}><Link to='/bio'>Bio</Link> </Grid>
+                        <Grid item xs={12}>{createButton('Home','/')}</Grid>
+                        <Grid item xs={12}>{createButton('Bio','/bio')}</Grid>
+                        <Grid item xs={12}>{createButton('Gallery','/gallery')}</Grid>
                     </Grid>
 
                 </div>
