@@ -1,10 +1,11 @@
 import * as React from "react";
+import Sidebar from "../components/Sidebar";
 
 // markup
 const IndexPage = () => {
   return (
     <main>
-      Your homepage goes here
+      Your homepage goes here <Sidebar></Sidebar>
     </main>
   );
 };
