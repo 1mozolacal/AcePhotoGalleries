@@ -5,7 +5,7 @@ import Sidebar from "../components/Sidebar";
 const BioPage = () => {
   return (
     <main>
-      <Sidebar />
+      <Sidebar activeTab={1}/>
     </main>
   );
 };
