@@ -20,8 +20,8 @@ export default function Sidebar({ activeTab }) {
         {path: '/gallery', text: 'Gallery'}
     ]
 
-    const createButton = (text, to, active) => {
-        return (<Link to={to} className='link-button'><span className={`${active? 'active': ''}`}>{text}</span></Link>)
+    const createButton = (text, to, active, tempClassName) => {
+        return (<Link to={to} className={tempClassName}><span className={`${active? 'active': ''}`}>{text}</span></Link>)
     }
 
     return (
@@ -36,7 +36,19 @@ export default function Sidebar({ activeTab }) {
                         <Grid item xs={12}><IconButton onClick={() => setOpen(false)} style={{ color: '#4DCCBD' }}><CloseIcon /></IconButton></Grid>
                         <Grid item xs={12} className="sidebar-grid-item"><img src={brandplh} /></Grid>
                         {
-                            mapData.map(({path, text}, index) => <Grid item xs={12} className="sidebar-grid-item">{createButton(text,path, index === activeTab)}</Grid>)
+                            mapData.map(({path, text}, index) => <Grid item xs={12} className="sidebar-grid-item">{createButton(text,path, index === activeTab,'link-button')}</Grid>)
+                        }
+                        <Grid item xs={12}><hr></hr></Grid>
+                        {
+                            mapData.map(({path, text}, index) => <Grid item xs={12} className="sidebar-grid-item">{createButton(text,path, index === activeTab,'link-button-1')}</Grid>)
+                        }
+                        <Grid item xs={12}><hr></hr></Grid>
+                        {
+                            mapData.map(({path, text}, index) => <Grid item xs={12} className="sidebar-grid-item">{createButton(text,path, index === activeTab,'link-button-2')}</Grid>)
+                        }
+                        <Grid item xs={12}><hr></hr></Grid>
+                        {
+                            mapData.map(({path, text}, index) => <Grid item xs={12} className="sidebar-grid-item">{createButton(text,path, index === activeTab,'link-button-3')}</Grid>)
                         }
                     </Grid>
 

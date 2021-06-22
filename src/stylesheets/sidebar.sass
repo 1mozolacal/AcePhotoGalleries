@@ -1,16 +1,98 @@
 @import "./meta"
 
-// Mix in from https://gist.github.com/himynameisdave/32e51f5ff4780ae2104d
-@mixin gradient-animation( $ends, $mid, $transTime )
-    background-size: 100%
-    background-image: linear-gradient($ends 45%, $mid, $ends 55%)
+$primary-color : $highlight
+$secondary-color : $nav-bg
+$transTime : 1s
+
+@mixin clip()
     position: relative
-    // clip-path: polygon(20% 0%, 80% 0%, 100% 20%, 100% 80%, 80% 100%, 20% 100%, 0% 80%, 0% 20%)
     clip-path: polygon(100% 50%, 95% 80%, 80% 100%, 20% 100%, 5% 80%, 0% 50%, 5% 30%, 20% 0%, 80% 0%, 95% 30%)
     padding-left: 15px
     padding-right: 15px
-    z-index: 100
     border-width: 0px
+
+@mixin mid-highlight()
+    &:after
+        background-image: linear-gradient($secondary-color 45%, $highlight, $secondary-color 55%)
+        content: ''
+        height: 100%
+        width: 100%
+        position: absolute
+        top: 0
+        left: 0
+        opacity: 1
+        z-index: -1
+        transition: opacity $transTime
+    &:hover::after
+        opacity: 0
+
+@mixin low-highlight()
+    &:after
+        background-image: linear-gradient($secondary-color 85%, $highlight)
+        content: ''
+        height: 100%
+        width: 100%
+        position: absolute
+        top: 0
+        left: 0
+        opacity: 1
+        z-index: -1
+        transition: opacity $transTime
+    &:hover::after
+        opacity: 0
+
+@mixin mid-select()
+    &:before
+        background-image: linear-gradient($secondary-color 30%, $highlight, $secondary-color 70%)
+        content: ''
+        height: 100%
+        position: absolute
+        top: 0
+        left: 0
+        opacity: 0
+        width: 100%
+        z-index: -1
+        transition: opacity $transTime
+    &:hover:before
+        opacity: 1
+    
+@mixin low-select()
+    &:before
+        background-image: linear-gradient($secondary-color 60%, $highlight)
+        content: ''
+        height: 100%
+        position: absolute
+        top: 0
+        left: 0
+        opacity: 0
+        width: 100%
+        z-index: -1
+        transition: opacity $transTime
+    &:hover:before
+        opacity: 1
+    
+        
+
+// Mix in from https://gist.github.com/himynameisdave/32e51f5ff4780ae2104d
+@mixin gradient-animation( $ends, $mid, $transTime )
+    position: relative
+    clip-path: polygon(100% 50%, 95% 80%, 80% 100%, 20% 100%, 5% 80%, 0% 50%, 5% 30%, 20% 0%, 80% 0%, 95% 30%)
+    padding-left: 15px
+    padding-right: 15px
+    border-width: 0px
+    &:after
+        background-image: linear-gradient($ends 45%, $mid, $ends 55%)
+        content: ''
+        height: 100%
+        width: 100%
+        position: absolute
+        top: 0
+        left: 0
+        opacity: 1
+        z-index: -1
+        transition: opacity $transTime
+    &:hover::after
+        opacity: 0
     &:before
         background-image: linear-gradient($ends 30%, $mid, $ends 70%)
         content: ''
@@ -20,7 +102,7 @@
         left: 0
         opacity: 0
         width: 100%
-        z-index: -100
+        z-index: -1
         transition: opacity $transTime
     &:hover:before
         opacity: 1
@@ -49,7 +131,71 @@
     @include gradient-animation( $nav-bg, $highlight, 0.85s)
 
 
+.link-button-1 span
+    width: 200px
+    @include clip()
+    @include low-select()
+
+.link-button-1 span.active
+    @include low-highlight()
+
+.link-button-2 span
+    width: 200px
+    @include clip()
+    @include low-select()
+
+.link-button-2 span.active
+    @include mid-highlight()
+
+.link-button-3 span
+    width: 200px
+    @include clip()
+    @include mid-select()
+
+.link-button-3 span.active
+    @include mid-highlight()
+
+
+
 .sidebar-grid-item
     display: grid
     place-items: center
     
+
+
+
+////-----TEMPORATY code for demo
+
+hr
+    border-top: 8px solid #0d0057
+    border-radius: 5px
+
+.link-button-1
+    align-items: center
+    font-size: 1.5em
+    width: 200px
+    text-decoration: none
+    color: black
+
+.link-button-1 span
+    width: 200px
+
+.link-button-2
+    align-items: center
+    font-size: 1.5em
+    width: 200px
+    text-decoration: none
+    color: black
+
+.link-button-2 span
+    width: 200px
+
+.link-button-3
+    align-items: center
+    font-size: 1.5em
+    width: 200px
+    text-decoration: none
+    color: black
+
+.link-button-3s span
+    width: 200px
