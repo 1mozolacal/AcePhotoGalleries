@@ -44,11 +44,15 @@ export default function Sidebar({ activeTab }) {
                         }
                         <Grid item xs={12}><hr></hr></Grid>
                         {
-                            mapData.map(({path, text}, index) => <Grid item xs={12} className="sidebar-grid-item">{createButton(text,path, index === activeTab,'link-button-2')}</Grid>)
+                            mapData.map(({path, text}, index) => <Grid item xs={12} className="sidebar-grid-item">{createButton(text,path, index === activeTab,'link-button-3')}</Grid>)
                         }
                         <Grid item xs={12}><hr></hr></Grid>
                         {
-                            mapData.map(({path, text}, index) => <Grid item xs={12} className="sidebar-grid-item">{createButton(text,path, index === activeTab,'link-button-3')}</Grid>)
+                            mapData.map(({path, text}, index) => <Grid item xs={12} className="sidebar-grid-item">{createButton(text,path, index === activeTab,'link-button-4')}</Grid>)
+                        }
+                        <Grid item xs={12}><hr></hr></Grid>
+                        {
+                            mapData.map(({path, text}, index) => <Grid item xs={12} className="sidebar-grid-item">{createButton(text,path, index === activeTab,'link-button-2')}</Grid>)
                         }
                     </Grid>
 

@@ -1,8 +1,8 @@
 @import "./meta"
 
-$primary-color : $highlight
-$secondary-color : $nav-bg
-$transTime : 1s
+$primary-color: $highlight
+$secondary-color: $nav-bg
+$transTime: 1s
 
 @mixin clip()
     position: relative
@@ -55,7 +55,7 @@ $transTime : 1s
         transition: opacity $transTime
     &:hover:before
         opacity: 1
-    
+
 @mixin low-select()
     &:before
         background-image: linear-gradient($secondary-color 60%, $highlight)
@@ -70,8 +70,6 @@ $transTime : 1s
         transition: opacity $transTime
     &:hover:before
         opacity: 1
-    
-        
 
 // Mix in from https://gist.github.com/himynameisdave/32e51f5ff4780ae2104d
 @mixin gradient-animation( $ends, $mid, $transTime )
@@ -130,7 +128,6 @@ $transTime : 1s
 .link-button span.active
     @include gradient-animation( $nav-bg, $highlight, 0.85s)
 
-
 .link-button-1 span
     width: 200px
     @include clip()
@@ -155,14 +152,17 @@ $transTime : 1s
 .link-button-3 span.active
     @include mid-highlight()
 
+.link-button-4 span
+    width: 200px
+    @include clip()
+    @include mid-select()
 
+.link-button-4 span.active
+    @include low-highlight()
 
 .sidebar-grid-item
     display: grid
     place-items: center
-    
-
-
 
 ////-----TEMPORATY code for demo
 
@@ -198,4 +198,14 @@ hr
     color: black
 
 .link-button-3s span
+    width: 200px
+
+.link-button-4
+    align-items: center
+    font-size: 1.5em
+    width: 200px
+    text-decoration: none
+    color: black
+
+.link-button-4s span
     width: 200px

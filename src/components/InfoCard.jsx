@@ -5,7 +5,8 @@ import CardMedia from '@material-ui/core/CardMedia';
 import Button from '@material-ui/core/Button';
 import Grid from '@material-ui/core/Grid';
 
-import placeholder from '../images/giphy.gif'
+// import placeholder from '../images/giphy.gif'
+import placeholder from '../images/mountaindawn.jpg'
 
 import '../stylesheets/infocard.sass'
 
