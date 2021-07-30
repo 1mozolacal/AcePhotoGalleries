@@ -18,18 +18,17 @@ const IndexPage = () => {
         <Grid item lg={1} />
         <Grid item lg={3}>
           <div className="home-context">
-            <div className="lg-text cyan-text bold-text">
-              MELANIE <br />
-              JANISSE-BARLOW{" "}
+            <div className="lg-text cyan-text bold-text">            
+              MICHAEL J. MAJOR
             </div>
             <div className="md-text blue-text bold-text">
-              Painting and projects
+              Professional Photographer 
             </div>
             <hr
               style={{ height: 3, backgroundColor: "#4DCCBD", border: "none" }}
             />
             <div className="lg-text light-cyan-text">
-              Lorem ipsum dolor sit amet, consectetur adipiscing elit.
+              Specializing primarily in nature and architecture.
             </div>
           </div>
         </Grid>
