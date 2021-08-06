@@ -2,19 +2,24 @@ import React, { useState } from "react";
 
 import InfoCard from "../components/InfoCard";
 import SideBar from "../components/Sidebar";
+import SpotLight from "../components/SpotLight";
 
 // Material ui
 import Grid from "@material-ui/core/Grid";
 import Button from "@material-ui/core/Button";
-import { Info } from "@material-ui/icons";
+
+import bacon from '../images/giphy.gif'
+//import { Info } from "@material-ui/icons";
 //import { PayPalButton } from "react-paypal-button-v2";
 
+// TODO need to add <tbody> in all table to supress error
 const buttonDictionary ={
 "beachfront restaurant in mexican riviera" : 
 (<form action="https://www.paypal.com/cgi-bin/webscr" method="post" target="_top">
 <input type="hidden" name="cmd" value="_s-xclick"/>
 <input type="hidden" name="hosted_button_id" value="JSW7NWPW662DJ"/>
 <table>
+<tbody>
 <tr><td><input type="hidden" name="on0" value="Sizes (inches)"/>Sizes (inches)</td></tr><tr><td><select name="os0">
 	<option value="8X10">8X10 $150.00 CAD</option>
 	<option value="11X14">11X14 $225.00 CAD</option>
@@ -22,6 +27,7 @@ const buttonDictionary ={
 	<option value="20X24">20X24 $350.00 CAD</option>
 	<option value="20X30">20X30 $415.00 CAD</option>
 </select> </td></tr>
+</tbody>
 </table>
 <input type="hidden" name="currency_code" value="CAD"/>
 <input type="image" src="https://www.paypalobjects.com/en_US/i/btn/btn_buynowCC_LG.gif" border="0" name="submit" alt="PayPal - The safer, easier way to pay online!"/>
@@ -1439,20 +1445,38 @@ const buttonDictionary ={
 ),
 }
 
-// (id,title,price,width,imageRef)
+// (id,title,price,width,imageRef,paybutton)
 
 const displaySettings = [
-	[1,"Bacon Pancake",20,6,undefined],
-	[2,"Bacon Pancake",20,6,undefined],
+	[1,"Beach front",150,6,bacon,buttonDictionary["beachfront restaurant in mexican riviera"]],
+	[2,"centoe",180,6,undefined,buttonDictionary["gorgeous cenote on the gulf of mexico"]],
+	[3,"full",20,12,undefined,buttonDictionary["gorgeous cenote on the gulf of mexico"]],
+	[4,"third 1",20,4,undefined,buttonDictionary["gorgeous cenote on the gulf of mexico"]],
+	[5,"thri",20,4,undefined,buttonDictionary["gorgeous cenote on the gulf of mexico"]],
+	[6,"third",20,4,undefined,buttonDictionary["gorgeous cenote on the gulf of mexico"]],
 ]
 
+
+
 const Gallery = () => {
-	const [imageCount,setImageCount] = useState(1)
+	const [showSpotLight,setShowSpotLight] = useState(false)
+	const [displayImage, setDisplayImage] = useState(undefined)
+	const [imageCount,setImageCount] = useState(2)
 	const [currentDisplay,setCurrentDisplay] = useState(displaySettings.slice(0,imageCount))
+
+	const viewImageCallBack = (image) => {
+		setDisplayImage(image)
+		setShowSpotLight(true)
+	}
+
   return (
     <>
       <SideBar activeTab={2} />
-
+	  <SpotLight 
+	  	selected={showSpotLight}
+		callback={() => { console.log("render"); setShowSpotLight(false)}}
+		image={displayImage}
+	  >hello</SpotLight>
       <div
         className="lg-text bold-text cyan-text"
         style={{ width: "100%", textAlign: "center" }}
@@ -1474,9 +1498,12 @@ const Gallery = () => {
 					md={x[3]}
 				>
 					<InfoCard 
-					image={x[4]} 
+					id={x[0]}
 					name={x[1]} 
 					price={x[2]}
+					image={x[4]}
+					paypal={x[5]}
+					viewCallBack={viewImageCallBack}
 					/>
 				</Grid>)
 		})}
@@ -1488,7 +1515,7 @@ const Gallery = () => {
             variant="contained"
             style={{ backgroundColor: "#D6FFF6", width: "100%" }}
 			onClick={() => {
-				let newImageCount = imageCount + 10
+				let newImageCount = imageCount + 2
 				setImageCount(newImageCount)
 				setCurrentDisplay(displaySettings.slice(0,newImageCount))
 			}}
