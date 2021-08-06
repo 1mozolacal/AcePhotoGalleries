@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 
 import InfoCard from "../components/InfoCard";
 import SideBar from "../components/Sidebar";
@@ -6,7 +6,8 @@ import SideBar from "../components/Sidebar";
 // Material ui
 import Grid from "@material-ui/core/Grid";
 import Button from "@material-ui/core/Button";
-import { PayPalButton } from "react-paypal-button-v2";
+import { Info } from "@material-ui/icons";
+//import { PayPalButton } from "react-paypal-button-v2";
 
 const buttonDictionary ={
 "beachfront restaurant in mexican riviera" : 
@@ -1438,46 +1439,19 @@ const buttonDictionary ={
 ),
 }
 
+// (id,title,price,width,imageRef)
 
-const gallery = () => {
+const displaySettings = [
+	[1,"Bacon Pancake",20,6,undefined],
+	[2,"Bacon Pancake",20,6,undefined],
+]
+
+const Gallery = () => {
+	const [imageCount,setImageCount] = useState(1)
+	const [currentDisplay,setCurrentDisplay] = useState(displaySettings.slice(0,imageCount))
   return (
     <>
       <SideBar activeTab={2} />
-      <PayPalButton
-        amount="0.01"
-        // shippingPreference="NO_SHIPPING" // default is "GET_FROM_FILE"
-        onSuccess={(details, data) => {
-          alert("Transaction completed by " + details.payer.name.given_name);
-        }}
-        options={{
-          clientId:
-            "AW9JHrE4PeIw0csa1oc3J6GZJJdWxPcQr8rNbjc4DqpXkn5E1IumPfVEGBhx9dCRK5T7UAt_G5dmhYP7",
-          currency: "CAD",
-        }}
-      />
-
-      <form
-        action="https://www.paypal.com/cgi-bin/webscr"
-        method="post"
-        target="_top"
-      >
-        <input type="hidden" name="cmd" value="_s-xclick" />
-        <input type="hidden" name="hosted_button_id" value="UGT65GGKJ2MS6" />
-        <input
-          type="image"
-          src="https://www.paypalobjects.com/en_US/i/btn/btn_buynowCC_LG.gif"
-          border="0"
-          name="submit"
-          alt="PayPal - The safer, easier way to pay online!"
-        />
-        <img
-          alt=""
-          border="0"
-          src="https://www.paypalobjects.com/en_US/i/scr/pixel.gif"
-          width="1"
-          height="1"
-        />
-      </form>
 
       <div
         className="lg-text bold-text cyan-text"
@@ -1486,28 +1460,38 @@ const gallery = () => {
         Gallery
       </div>
       <br />
-      {[0, 1, 2, 3].map((x) => (
-        <Grid
-          key={x}
+	  <Grid
           container
           spacing={4}
           justify="center"
           style={{ padding: "10px 20px" }}
         >
-          <Grid item xs={12} lg={x % 2 === 0 ? 4 : 6}>
-            <InfoCard />
-          </Grid>
-          <Grid item xs={12} lg={x % 2 === 0 ? 6 : 4}>
-            <InfoCard />
-          </Grid>
-        </Grid>
-      ))}
+			{ currentDisplay.map((x) => {
+				return (<Grid
+					item
+					key={x[0]}
+					xs={12}
+					md={x[3]}
+				>
+					<InfoCard 
+					image={x[4]} 
+					name={x[1]} 
+					price={x[2]}
+					/>
+				</Grid>)
+		})}
+		</Grid>
       <br />
       <Grid container justify="center">
         <Grid item xs={12} md={6}>
           <Button
             variant="contained"
             style={{ backgroundColor: "#D6FFF6", width: "100%" }}
+			onClick={() => {
+				let newImageCount = imageCount + 10
+				setImageCount(newImageCount)
+				setCurrentDisplay(displaySettings.slice(0,newImageCount))
+			}}
           >
             Load more
           </Button>
@@ -1517,7 +1501,7 @@ const gallery = () => {
   );
 };
 
-export default gallery;
+export default Gallery;
 
 
 
