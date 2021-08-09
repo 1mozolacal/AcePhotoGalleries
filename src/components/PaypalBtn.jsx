@@ -2,7 +2,7 @@ const PaypalBtn = ({}) => {
     return (
         <form action="https://www.paypal.com/cgi-bin/webscr" method="post" target="_top">
             <input type="hidden" name="cmd" value="_s-xclick" />
-            <input type="hidden" name="hosted_button_id" value="A5WUADFYUNFH8" />
+            <input type="hidden" name="hosted_button_id" value="A5WUADFYUNFH8" /> {/* THE  VALUE HERE IS IMPORTANT*/}
             <table>
                 <tr><td><input type="hidden" name="on0" value="Sizes (inches)" />Sizes (inches)</td></tr><tr><td><select name="os0">
                     <option value="8X10">8X10 $150.00 CAD</option>
