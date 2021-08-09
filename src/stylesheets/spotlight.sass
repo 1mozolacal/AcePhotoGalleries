@@ -7,6 +7,7 @@
     background-color: $highlight
     width: 90vw
     z-index: 1
+    border-radius: 25px
 
 .spot-light-holder
     @include spot-light-base()
@@ -15,7 +16,7 @@
 
 .spot-light-holder-show
     @include spot-light-base()
-    opacity: 1
+    opacity: 0.5
     pointer-events: auto
 
 .spot-image-boarder
@@ -28,3 +29,16 @@
 
 .spot-image
     width: 100%
+
+.spot-placeholder-text
+    position: absolute
+    top: 25%
+    width: 100%
+    text-align: center
+    font-size: 2em
+
+.spot-exit
+    font-weight: 900
+
+.spot-exit-holder
+    padding: 20px

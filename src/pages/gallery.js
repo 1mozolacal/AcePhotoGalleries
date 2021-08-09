@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 
 import InfoCard from "../components/InfoCard";
 import SideBar from "../components/Sidebar";
@@ -1454,29 +1454,50 @@ const displaySettings = [
 	[4,"third 1",20,4,undefined,buttonDictionary["gorgeous cenote on the gulf of mexico"]],
 	[5,"thri",20,4,undefined,buttonDictionary["gorgeous cenote on the gulf of mexico"]],
 	[6,"third",20,4,undefined,buttonDictionary["gorgeous cenote on the gulf of mexico"]],
+	[7,"full",20,12,undefined,buttonDictionary["gorgeous cenote on the gulf of mexico"]],
+	[8,"full",20,12,undefined,buttonDictionary["gorgeous cenote on the gulf of mexico"]],
+	[9,"full",20,12,undefined,buttonDictionary["gorgeous cenote on the gulf of mexico"]],
+	[10,"full",20,12,undefined,buttonDictionary["gorgeous cenote on the gulf of mexico"]],
+	[11,"full",20,12,undefined,buttonDictionary["gorgeous cenote on the gulf of mexico"]],
 ]
 
 
 
 const Gallery = () => {
-	const [showSpotLight,setShowSpotLight] = useState(false)
-	const [displayImage, setDisplayImage] = useState(undefined)
+	const [spotLightInfo, setSpotLightInfo] = useState([false,0,undefined,undefined]) // [show,yPos,title,image]
 	const [imageCount,setImageCount] = useState(2)
 	const [currentDisplay,setCurrentDisplay] = useState(displaySettings.slice(0,imageCount))
+	console.log(spotLightInfo)
+	const navBarShiftFactor = 48
+	useEffect(function mount(){
+		function onScroll(){
+			if(!spotLightInfo[0]){
+				const newInfo = [spotLightInfo[0],window.scrollY,spotLightInfo[2],spotLightInfo[3]]
+				setSpotLightInfo(newInfo)
+			}
+		}
+		window.addEventListener('scroll',onScroll);
+		return function unMount(){
+			window.removeEventListener('scroll',onScroll);
+		}
+	})
 
-	const viewImageCallBack = (image) => {
-		setDisplayImage(image)
-		setShowSpotLight(true)
+	const viewImageCallBack = (image,title) => {
+		console.log('call')
+		const newInfo = [true,spotLightInfo[1],title,image]
+		setSpotLightInfo(newInfo)
 	}
 
   return (
     <>
-      <SideBar activeTab={2} />
+      {!spotLightInfo[0] && <SideBar activeTab={2}/>}
 	  <SpotLight 
-	  	selected={showSpotLight}
-		callback={() => { console.log("render"); setShowSpotLight(false)}}
-		image={displayImage}
-	  >hello</SpotLight>
+	  	selected={spotLightInfo[0]}
+		callback={() => { const newInfo = [false,spotLightInfo[1],spotLightInfo[2],spotLightInfo[3]]; setSpotLightInfo(newInfo)}}
+		image={spotLightInfo[3]}
+		offSet={spotLightInfo[1]}
+	  />
+	  <div style={ spotLightInfo[0] ? {position:"fixed",top:-(spotLightInfo[1]-navBarShiftFactor)} : undefined}>
       <div
         className="lg-text bold-text cyan-text"
         style={{ width: "100%", textAlign: "center" }}
@@ -1524,6 +1545,7 @@ const Gallery = () => {
           </Button>
         </Grid>
       </Grid>
+	  </div>
     </>
   );
 };

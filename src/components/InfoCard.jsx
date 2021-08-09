@@ -34,12 +34,12 @@ const InfoCard = ({ image, name, price, id, paypal, viewCallBack}) => {
                 <CardContent>
                     <div className="md-text blue-text">{name || 'Bacon pancake!'}</div>
                     <br/>
-                    <div className="md-text">{`${price || '--'}$`}</div>
+                    <div className="md-text">{`$${price || '--'}`}</div>
                 </CardContent>
                 <Grid container spacing={2}>
                     <Grid item style={{width: '100%'}}>
                         {id && 
-                        <Button variant="contained" className="grid-button" onClick={() => { viewCallBack(image)}}>
+                        <Button variant="contained" className="grid-button" onClick={() => { viewCallBack(image,name)}}>
                             View image
                         </Button>}
                     </Grid>
