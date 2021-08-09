@@ -1483,7 +1483,6 @@ const Gallery = () => {
 			>
 				Gallery
 			</div>
-			<br />
 			<Grid
 				container
 				spacing={4}
