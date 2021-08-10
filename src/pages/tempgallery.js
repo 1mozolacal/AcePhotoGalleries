@@ -31,7 +31,7 @@ const TempGallery = () => {
     useEffect(() => {
         let tempData = []
         for(let i = 0; i < 6; i++) {
-            tempData.push([i+1, `Something ${i}`, 100, 6, undefined, <PaypalBtn value={imagesData[i].value} price={imagesData[i].price}/>])
+            tempData.push([i+1, `Something ${i}`, 100, 6, undefined, <PaypalBtn value={imagesData[i].value} prices={imagesData[i].data}/>])
         }
         setDisplaySettings(tempData)
         setCurrentDisplay(tempData.slice(0, imageCount))
