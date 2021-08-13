@@ -52,6 +52,32 @@ import ocean_freighter_under_the_ambassador_bridge from '../images/gallery/WINDI
 import agawa_waterfall_with_special_filter from '../images/gallery/AGAWA CANYON MOUNTAINSIDE WATERFALL IN NORTHERN ONTARIO with Special Filter.jpg'
 import french_capitol_building from '../images/gallery/FRENCH GOVERNMENT MAIN PARLIAMENT BUILDING IN PARIS FRANCE WITH SPECIAL NIGHT FILTER.jpg'
 import fallen_tree_in_the_lake from '../images/gallery/GLORIOUS PICTURE OF FALLEN TREE IN SWAMP WITH SPECIAL FILTER.jpg'
+//SECOND BATCH
+import hiram_walkers_head_office_building from '../images/gallery/HIRAM WALKERS CANADIAN CLUB HISTORICAL HEAD OFFICE BUILDING IN WINDSOR ONTARIO.jpg'
+import mexican_oasis_and_gardens from '../images/gallery/Mexican OASIS AND GARDENS.jpg'
+import agawa_mountainside_waterfall from '../images/gallery/MOUNTAINSIDE WATERFALL IN NORTHERN ONTARIO.jpg'
+import mill_destroyed_on_the_grand from '../images/gallery/OLD MILL REMNANTS ON GRAND RIVER IN BACKGROUND.jpg'
+import old_fishing_camp_on_the_river from '../images/gallery/REMNANTS OF OLD FISHING CAMP ALONG RIVER IN PRESTON ONTARIO.jpg'
+import mill_destroyed from '../images/gallery/REMNANTS OF OLD MILL ON GRAND RIVER.jpg'
+import leviathan_at_versailles from '../images/gallery/SHRUBBERY LEVIATHAN IN FRONT OF ONE OF THE PALACES IN VERSAILLES FRANCE.jpg'
+import black_and_white_river_view from '../images/gallery/SPECIAL FILTER VIEW OF GRAND RIVER AND FOREGROUND FOLIAGE (2).jpg'
+import louis_the_14th_statue_in_paris_france from '../images/gallery/STUNNING STATUE OF LOUIS THE XIV IN FRENCH PARLIAMENT SQUARE.jpg'
+import mayan_tiki_huts from '../images/gallery/TIKI SHADE HUTS AND LAKE IN PLAYA DEL CARMEN MEXICO.jpg'
+import winter_wonderland from '../images/gallery/WINTER WONDERLAND TRAIL IN NORTHERN NATIONAL PARK.jpg'
+import canadian_house_of_commons_historic_architecture from '../images/gallery/ATRIUM ARCHITECTURE IN CANADIAN PARLIAMENT BUILDINGS.jpg'
+import b_w_of_underbelly_of_ambassdor_bridge from '../images/gallery/BLACK AND WHITE SHOT OF AMBASSADOR BRIDGE LOOKING TOWARD UNIVERSITY OF WINDSOR.jpg'
+import estuary_at_singing_sands_beach from '../images/gallery/ESTUARY FROM GEORGIAN BAY LEADING INLAND TO PROVINCIAL PARK.jpg'
+import majestic_ceiling_of_louvre_museum from '../images/gallery/GORGEOUS PAINTED CEILING AND CHANDELIERS IN ONE OF THE MANY PALACES IN VERSAILLES FRANCE.jpg'
+import extraordinary_stained_glass_in_house_of_commons from '../images/gallery/HISTORIC STAINED GLASS WINDOWS IN CANADIAN HOUSE OF COMMONS IN OTTAWA.jpg'
+import light_tunnel from '../images/gallery/Light Tunnel.jpg'
+import trail_along_the_shore from '../images/gallery/LUSH TREE PARTIALLY OBSTRUCTED VIEW OF RAIL BRIDGE OVER GRAND RIVER.jpg'
+import central_park_in_autumn from '../images/gallery/NY CENTRAL PARK IN SPRING TIME.jpg'
+import rustic_barn from '../images/gallery/OLD BARN IN ABANDONED BACKYARD.jpg'
+import rocky_shoreline_of_bruce_peninsula from '../images/gallery/ROCKY LAKESHORE BEACH ON GEORGIAN BAY.jpg'
+import pagoda_plantation_in_beijing_china from '../images/gallery/WATERLILLIES WITH CHINESE PAGODA IN BACKDROP IN SHANGHAI CHINA.jpg'
+import paris_france_boulevard from '../images/gallery/PARIS FRANCE STREET VIEW AND AMAZING ARCHITECTURE.jpg'
+import gorgeous_cenote_on_the_gulf_of_mexico from '../images/gallery/GORGEOUS CENOTE ON THE GULF OF MEXICO.jpg'
+
 
 
 const tires = {
@@ -446,9 +472,243 @@ const buttonDictionaryMinified = {
 		  "1,100.00"
 	   ],
 	   "paypalID":"TVCYKY5KDX9V8"
-	}
+	},
+	// SECOND BATCH
+	"hiram walkers head office building":{
+	   "prices":[
+		  "150.00",
+		  "300.00",
+		  "550.00",
+		  "725.00",
+		  "900.00"
+	   ],
+	   "paypalID":"CQJRRZ5RJVK6J"
+	},
+	"mexican oasis and gardens":{
+	   "prices":[
+		  "150.00",
+		  "300.00",
+		  "475.00",
+		  "680.00",
+		  "840.00"
+	   ],
+	   "paypalID":"YF8HF5BDPV43Q"
+	},
+	"agawa mountainside waterfall":{
+	   "prices":[
+		  "75.00",
+		  "150.00",
+		  "475.00",
+		  "650.00",
+		  "825.00"
+	   ],
+	   "paypalID":"4PLMCJSR5JQGW"
+	},
+	"mill destroyed on the grand":{
+	   "prices":[
+		  "75.00",
+		  "150.00",
+		  "475.00",
+		  "650.00",
+		  "825.00"
+	   ],
+	   "paypalID":"K4646AXB3V3Q2"
+	},
+	"old fishing camp on the river":{
+	   "prices":[
+		  "150.00",
+		  "300.00",
+		  "550.00",
+		  "725.00",
+		  "900.00"
+	   ],
+	   "paypalID":"Z2F9M9BZXSHRW"
+	},
+	"mill destroyed":{
+	   "prices":[
+		  "75.00",
+		  "150.00",
+		  "475.00",
+		  "650.00",
+		  "825.00"
+	   ],
+	   "paypalID":"6F6HRHCJR3E9J"
+	},
+	"leviathan at versailles":{
+	   "prices":[
+		  "150.00",
+		  "300.00",
+		  "550.00",
+		  "725.00",
+		  "900.00"
+	   ],
+	   "paypalID":"3DJB6D8P8KXD4"
+	},
+	"black and white river view":{
+	   "prices":[
+		  "150.00",
+		  "300.00",
+		  "550.00",
+		  "725.00",
+		  "900.00"
+	   ],
+	   "paypalID":"GKZUL7F924XAA"
+	},
+	"louis the 14th statue in paris france":{
+	   "prices":[
+		  "150.00",
+		  "300.00",
+		  "550.00",
+		  "725.00",
+		  "900.00"
+	   ],
+	   "paypalID":"ZMXTGZ5XNQ3SQ"
+	},
+	"mayan tiki huts":{
+	   "prices":[
+		  "150.00",
+		  "300.00",
+		  "550.00",
+		  "725.00",
+		  "900.00"
+	   ],
+	   "paypalID":"8WEGEGS24H4BJ"
+	},
+	"winter wonderland":{
+	   "prices":[
+		  "75.00",
+		  "150.00",
+		  "475.00",
+		  "650.00",
+		  "825.00"
+	   ],
+	   "paypalID":"WJET2EDTYQA7Y"
+	},
+	"canadian house of commons historic architecture":{
+	   "prices":[
+		  "350.00",
+		  "500.00",
+		  "750.00",
+		  "925.00",
+		  "1,100.00"
+	   ],
+	   "paypalID":"W22YTB2GMSF2G"
+	},
+	"b w of underbelly of ambassdor bridge":{
+	   "prices":[
+		  "150.00",
+		  "300.00",
+		  "550.00",
+		  "725.00",
+		  "900.00"
+	   ],
+	   "paypalID":"AGSK4TPV3UVJC"
+	},
+	"estuary at singing sands beach":{
+	   "prices":[
+		  "150.00",
+		  "300.00",
+		  "475.00",
+		  "680.00",
+		  "840.00"
+	   ],
+	   "paypalID":"HJQ77XE3DQB24"
+	},
+	"majestic ceiling of louvre museum":{
+	   "prices":[
+		  "350.00",
+		  "500.00",
+		  "750.00",
+		  "925.00",
+		  "1,100.00"
+	   ],
+	   "paypalID":"BAY78W4PUJRJA"
+	},
+	"extraordinary stained glass in house of commons":{
+	   "prices":[
+		  "350.00",
+		  "500.00",
+		  "750.00",
+		  "925.00",
+		  "1,100.00"
+	   ],
+	   "paypalID":"CJ77YWBMMNSA8"
+	},
+	"light tunnel":{
+	   "prices":[
+		  "75.00",
+		  "150.00",
+		  "475.00",
+		  "650.00",
+		  "825.00"
+	   ],
+	   "paypalID":"EE6HGZV5F39U8"
+	},
+	"trail along the shore":{
+	   "prices":[
+		  "150.00",
+		  "300.00",
+		  "550.00",
+		  "725.00",
+		  "900.00"
+	   ],
+	   "paypalID":"7DERQUBBMMLE2"
+	},
+	"central park in autumn":{
+	   "prices":[
+		  "150.00",
+		  "300.00",
+		  "550.00",
+		  "725.00",
+		  "900.00"
+	   ],
+	   "paypalID":"YLCKY9CTSQZF6"
+	},
+	"rustic barn":{
+	   "prices":[
+		  "150.00",
+		  "300.00",
+		  "475.00",
+		  "680.00",
+		  "840.00"
+	   ],
+	   "paypalID":"NYPM6QJ4NZPTA"
+	},
+	"rocky shoreline of bruce peninsula":{
+	   "prices":[
+		  "150.00",
+		  "300.00",
+		  "550.00",
+		  "725.00",
+		  "900.00"
+	   ],
+	   "paypalID":"CXS4FJVXS2GAU"
+	},
+	"pagoda plantation in beijing china":{
+	   "prices":[
+		  "150.00",
+		  "300.00",
+		  "550.00",
+		  "725.00",
+		  "900.00"
+	   ],
+	   "paypalID":"Y3YDPRDA86HSE"
+	},
+	"paris france boulevard":{
+	   "prices":[
+		  "150.00",
+		  "300.00",
+		  "550.00",
+		  "725.00",
+		  "900.00"
+	   ],
+	   "paypalID":"PUDGDLS6QVY8G"
+	},
+	"gorgeous cenote on the gulf of mexico": {"prices": ["150.00", "300.00", "550.00", "725.00", "900.00"], "paypalID": "N2973YMXK7YU8"},
  }
 
+
+ 
 // dictionary for referenceName : picture import
 const imageDictionary = {
 	"beautiful yellow flowers":beautiful_yellow_flowers,
@@ -489,6 +749,31 @@ const imageDictionary = {
 	"agawa waterfall with special filter":agawa_waterfall_with_special_filter,
 	"french capitol building":french_capitol_building,
 	"fallen tree in the lake":fallen_tree_in_the_lake,
+	//SECOND BATCH
+	"hiram_walkers_head_office_building":hiram_walkers_head_office_building,
+	"mexican_oasis_and_gardens":mexican_oasis_and_gardens,
+	"agawa_mountainside_waterfall":agawa_mountainside_waterfall,
+	"mill_destroyed_on_the_grand":mill_destroyed_on_the_grand,
+	"old_fishing_camp_on_the_river":old_fishing_camp_on_the_river,
+	"mill_destroyed":mill_destroyed,
+	"leviathan_at_versailles":leviathan_at_versailles,
+	"black_and_white_river_view":black_and_white_river_view,
+	"louis_the_14th_statue_in_paris_france":louis_the_14th_statue_in_paris_france,
+	"mayan_tiki_huts":mayan_tiki_huts,
+	"winter_wonderland":winter_wonderland,
+	"canadian_house_of_commons_historic_architecture":canadian_house_of_commons_historic_architecture,
+	"b_w_of_underbelly_of_ambassdor_bridge":b_w_of_underbelly_of_ambassdor_bridge,
+	"estuary_at_singing_sands_beach":estuary_at_singing_sands_beach,
+	"majestic_ceiling_of_louvre_museum":majestic_ceiling_of_louvre_museum,
+	"extraordinary_stained_glass_in_house_of_commons":extraordinary_stained_glass_in_house_of_commons,
+	"light_tunnel":light_tunnel,
+	"trail_along_the_shore":trail_along_the_shore,
+	"central_park_in_autumn":central_park_in_autumn,
+	"rustic_barn":rustic_barn,
+	"rocky_shoreline_of_bruce_peninsula":rocky_shoreline_of_bruce_peninsula,
+	"pagoda_plantation_in_beijing_china":pagoda_plantation_in_beijing_china,
+	"paris_france_boulevard":paris_france_boulevard,
+	"gorgeous cenote on the gulf of mexico":gorgeous_cenote_on_the_gulf_of_mexico,
  }
 
 // (refname,width,title)
