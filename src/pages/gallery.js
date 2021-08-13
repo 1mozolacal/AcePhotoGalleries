@@ -491,24 +491,8 @@ const imageDictionary = {
 	"fallen tree in the lake":fallen_tree_in_the_lake,
  }
 
-// (id,title,price,width,imageRef,paybutton)
-// new (title,width,refName)
-const displaySettings = [
-	[1,"Beach front",150,6,bacon,buttonDictionary["beachfront restaurant in mexican riviera"]],
-	[2,"centoe",180,6,undefined,buttonDictionary["gorgeous cenote on the gulf of mexico"]],
-	[3,"full",20,12,undefined,buttonDictionary["gorgeous cenote on the gulf of mexico"]],
-	[4,"third 1",20,4,undefined,buttonDictionary["gorgeous cenote on the gulf of mexico"]],
-	[5,"thri",20,4,undefined,buttonDictionary["gorgeous cenote on the gulf of mexico"]],
-	[6,"third",20,4,undefined,buttonDictionary["gorgeous cenote on the gulf of mexico"]],
-	[7,"full",20,12,undefined,buttonDictionary["gorgeous cenote on the gulf of mexico"]],
-	[8,"full",20,12,undefined,buttonDictionary["gorgeous cenote on the gulf of mexico"]],
-	[9,"full",20,12,undefined,buttonDictionary["gorgeous cenote on the gulf of mexico"]],
-	[10,"full",20,12,undefined,buttonDictionary["gorgeous cenote on the gulf of mexico"]],
-	[11,"full",20,12,undefined,buttonDictionary["gorgeous cenote on the gulf of mexico"]],
-]
-
 // (refname,width,title)
-const displaySettings2 =[
+const displaySettings =[
 	["beautiful yellow flowers",6, "Beautiful Spring Yellow Flowers"],
 	["canadian geese waddling",6, "Canada Geese Being Canada Geese in Preston Park"],
 	["canadian geese",6, "Canada Geese Galore in Preston Park Along River"],
@@ -553,7 +537,7 @@ const displaySettings2 =[
 ]
 
 // (id,title,width,minPrice,maxPrice,imageRef,paybutton)
-const displaySettingsVerbose = displaySettings2.map( (ele,index) => {
+const displaySettingsVerbose = displaySettings.map( (ele,index) => {
 	const ref = ele[0]
 	const buttonInfo = buttonDictionaryMinified[ref]
 	if (buttonInfo == undefined){
@@ -566,15 +550,6 @@ const displaySettingsVerbose = displaySettings2.map( (ele,index) => {
 	const maxPrice = buttonInfo["prices"][4]
 	return [index,ele[2],ele[1],minPrice,maxPrice,displayImage,buttonRender]
 })
-
-console.log(displaySettingsVerbose)
-
-// const displaySettingsVerboseClean = []
-// for(let i =0; i< displaySettingsVerbose.length; i++){
-// 	if(displaySettingsVerbose[i] != undefined){
-// 		displaySettingsVerboseClean.push(displaySettingsVerbose[i])
-// 	}
-// }
 
 const Gallery = () => {
 	const [spotLightInfo, setSpotLightInfo] = useState([false,0,undefined,undefined]) // [show,yPos,title,image]

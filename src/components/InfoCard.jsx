@@ -15,7 +15,6 @@ import '../stylesheets/infocard.sass'
 
 
 const InfoCard = ({ image, name, minPrice, maxPrice, id, paypal, viewCallBack}) => {
-    console.log({ image, name, minPrice, maxPrice, id, paypal, viewCallBack})
     const [paymentButton,setPaymentButton] = useState()
     
     const prettyPayButton = (
