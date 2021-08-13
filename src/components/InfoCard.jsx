@@ -15,7 +15,7 @@ import '../stylesheets/infocard.sass'
 
 
 const InfoCard = ({ image, name, minPrice, maxPrice, id, paypal, viewCallBack}) => {
-
+    console.log({ image, name, minPrice, maxPrice, id, paypal, viewCallBack})
     const [paymentButton,setPaymentButton] = useState()
     
     const prettyPayButton = (
@@ -38,7 +38,7 @@ const InfoCard = ({ image, name, minPrice, maxPrice, id, paypal, viewCallBack}) 
                 </CardContent>
                 <Grid container spacing={2}>
                     <Grid item style={{width: '100%'}}>
-                        {id && 
+                        {image && 
                         <Button variant="contained" className="grid-button" onClick={() => { viewCallBack(image,name)}}>
                             View image
                         </Button>}
