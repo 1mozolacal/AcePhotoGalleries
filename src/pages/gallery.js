@@ -3,6 +3,7 @@ import React, { useEffect, useState } from "react";
 import InfoCard from "../components/InfoCard";
 import SideBar from "../components/Sidebar";
 import SpotLight from "../components/SpotLight";
+import PaypalBtn from "../components/PaypalBtn";
 
 // Material ui
 import Grid from "@material-ui/core/Grid";
@@ -1445,8 +1446,16 @@ const buttonDictionary = {
 		),
 }
 
-// (id,title,price,width,imageRef,paybutton)
+const buttonDictionaryMinified = {
 
+}
+
+const imageDictionary = {
+
+}
+
+// (id,title,price,width,imageRef,paybutton)
+// new (title,width,refName)
 const displaySettings = [
 	[1,"Beach front",150,6,bacon,buttonDictionary["beachfront restaurant in mexican riviera"]],
 	[2,"centoe",180,6,undefined,buttonDictionary["gorgeous cenote on the gulf of mexico"]],
@@ -1460,6 +1469,15 @@ const displaySettings = [
 	[10,"full",20,12,undefined,buttonDictionary["gorgeous cenote on the gulf of mexico"]],
 	[11,"full",20,12,undefined,buttonDictionary["gorgeous cenote on the gulf of mexico"]],
 ]
+
+// (id,title,width,minPrice,maxPrice,imageRef,paybutton)
+const displaySettingVerbose = displaySettings.map( (ele,index) => {
+	const ref = ele[2]
+	const buttonInfo = buttonDictionaryMinified[ref]
+	const buttonRender = (<PaypalBtn {...buttonInfo} />)
+	const displayImage = imageDictionary[ref]
+	return [index,ele[0],ele[1],]
+})
 
 
 
@@ -1521,7 +1539,8 @@ const Gallery = () => {
 					<InfoCard 
 					id={x[0]}
 					name={x[1]} 
-					price={x[2]}
+					minPrice={x[2]}
+					maxPrice={x[2]}
 					image={x[4]}
 					paypal={x[5]}
 					viewCallBack={viewImageCallBack}

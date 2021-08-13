@@ -14,7 +14,7 @@ import '../stylesheets/infocard.sass'
 
 
 
-const InfoCard = ({ image, name, price, id, paypal, viewCallBack}) => {
+const InfoCard = ({ image, name, minPrice, maxPrice, id, paypal, viewCallBack}) => {
 
     const [paymentButton,setPaymentButton] = useState()
     
@@ -34,7 +34,7 @@ const InfoCard = ({ image, name, price, id, paypal, viewCallBack}) => {
                 <CardContent>
                     <div className="md-text blue-text">{name || 'Bacon pancake!'}</div>
                     <br/>
-                    <div className="md-text">{`$${price || '--'}`}</div>
+                    <div className="md-text">{`$${(minPrice && maxPrice && (minPrice + " to $" + maxPrice) )|| '--'}`}</div>
                 </CardContent>
                 <Grid container spacing={2}>
                     <Grid item style={{width: '100%'}}>

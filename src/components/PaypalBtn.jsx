@@ -8,11 +8,11 @@ const sizes = [
     "20X30"
 ]
 
-const PaypalBtn = ({ value, prices = [] }) => {
+const PaypalBtn = ({ paypalID, prices = [] }) => {
     return (
         <form action="https://www.paypal.com/cgi-bin/webscr" method="post" target="_top">
             <input type="hidden" name="cmd" value="_s-xclick" />
-            <input type="hidden" name="hosted_button_id" value={value} />
+            <input type="hidden" name="hosted_button_id" value={paypalID} />
             <table>
                 <tr>
                     <td>
