@@ -12,11 +12,7 @@ const PaypalBtn = ({ value, prices = [] }) => {
     return (
         <form action="https://www.paypal.com/cgi-bin/webscr" method="post" target="_top">
             <input type="hidden" name="cmd" value="_s-xclick" />
-<<<<<<< HEAD
-            <input type="hidden" name="hosted_button_id" value="A5WUADFYUNFH8" /> {/* THE  VALUE HERE IS IMPORTANT*/}
-=======
             <input type="hidden" name="hosted_button_id" value={value} />
->>>>>>> paypal-btn-fix
             <table>
                 <tr>
                     <td>

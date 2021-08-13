@@ -8,6 +8,7 @@ import CloseIcon from '@material-ui/icons/Close'
 import Grid from '@material-ui/core/Grid'
 
 import brandplh from '../images/brandplh.png'
+import tempLogo from '../images/tempLogo.png'
 
 import '../stylesheets/sidebar.sass'
 
@@ -34,7 +35,7 @@ export default function Sidebar({ activeTab }) {
                 >
                     <Grid container style={{ width: "100%" }}>
                         <Grid item xs={12}><IconButton onClick={() => setOpen(false)} style={{ color: '#4DCCBD' }}><CloseIcon /></IconButton></Grid>
-                        <Grid item xs={12} className="sidebar-grid-item"><img src={brandplh} /></Grid>
+                        <Grid item xs={12} className="sidebar-grid-item"><img className="sidebar-logo" src={tempLogo} /></Grid>
                         {
                             mapData.map(({path, text}, index) => <Grid item xs={12} key={index} className="sidebar-grid-item">{createButton(text,path, index === activeTab,'link-button-1')}</Grid>)
                         }
