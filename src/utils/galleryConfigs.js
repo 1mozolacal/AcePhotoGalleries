@@ -157,7 +157,9 @@ export const imageDictionary = {
 	["awfully odd sign in downtown paris",6, "Funny Sign in Paris France"],
 	["ambassador bridge",6, "Longshot of Ambassador Bridge from Windsor to Detroit WITH WINDSOR SCULTURE GARDEN IN FOREGROUND"],
 	["rail bridge and water lock",6, "Mini Waterfall with Rail Bridge in Background"],
-	["beachfront restaurant in mexican riviera",6, "Playa Del Carmen Oceanside Restaurant and Beach"],
+
+    // This line
+	//["beachfront restaurant in mexican riviera",6, "Playa Del Carmen Oceanside Restaurant and Beach"],
 	["rain dripping off a giant granite rock face",6, "RAIN DROPS DRIPPING OFF GIANT ROCK IN TROPICAL FOREST"],
 	["chinese river flowing under a bridge",6, "River Flowing Under Bridge in Shanghai China"],
 	["trickling stream in bruce peninsula park",6, "SINGING SANDS TRIBUATARY FROM GEORGIAN BAY - VERY COLD WATER!"],

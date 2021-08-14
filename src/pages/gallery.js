@@ -43,7 +43,7 @@ import { displaySettings, imageDictionary } from '../utils/galleryConfigs'
 const displaySettingsVerbose = displaySettings.map((ele, index) => {
 	const ref = ele[0]
 	const buttonInfo = buttonDictionaryMinified[ref]
-	if (buttonInfo == undefined) {
+	if (!buttonInfo) {
 		console.log("NOT FOUND IN REF: %s", ref)
 		return
 	}
@@ -58,7 +58,7 @@ const Gallery = () => {
 	const [spotLightInfo, setSpotLightInfo] = useState([false, 0, undefined, undefined]) // [show,yPos,title,image]
 	const [imageCount, setImageCount] = useState(10)
 	const [currentDisplay, setCurrentDisplay] = useState(displaySettingsVerbose.slice(0, imageCount))
-	console.log(spotLightInfo)
+	// console.log(spotLightInfo)
 	const navBarShiftFactor = 48
 	useEffect(function mount() {
 		function onScroll() {
@@ -95,12 +95,10 @@ const Gallery = () => {
 				>
 					Gallery
 				</div>
-				<br />
 				<Grid
 					container
-					spacing={4}
-					justify="center"
-					style={{ padding: "10px 20px" }}
+					spacing={2}
+					justifyContent="center"
 				>
 					{currentDisplay.map((x) => { //(id,title,width,minPrice,maxPrice,imageRef,paybutton)
 						return (<Grid
@@ -122,7 +120,7 @@ const Gallery = () => {
 					})}
 				</Grid>
 				<br />
-				<Grid container justify="center">
+				<Grid container justifyContent="center">
 					<Grid item xs={12} md={6}>
 						<Button
 							variant="contained"

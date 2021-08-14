@@ -19,7 +19,7 @@ const InfoCard = ({ image, name, minPrice, maxPrice, id, paypal, viewCallBack}) 
     
     const prettyPayButton = (
     <Button variant="contained" className="grid-button" onClick={ () => { setPaymentButton(paypal)} }>
-        Show Purchase Option
+        Purchase Options
     </Button>)
     
     return (
