@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React from 'react'
 import { Button } from '@material-ui/core';
 import placeholder from '../images/mountaindawn.jpg'
 import Grid from '@material-ui/core/Grid';
@@ -21,7 +21,7 @@ const SpotLight = ({ image, selected, callback, title, offSet }) => {
             </Grid>
             <div className="spot-image-boarder">
                 {!image && <p className="spot-placeholder-text">THIS IS A PLACEHOLDER IMAGE</p>}
-                <img className="spot-image" src={image || placeholder}></img>
+                <img className="spot-image" src={image || placeholder} alt="spotlight"/>
             </div>
         </div>
     )

@@ -43,10 +43,10 @@ import { displaySettings, imageDictionary } from '../utils/galleryConfigs'
 const displaySettingsVerbose = displaySettings.map((ele, index) => {
 	const ref = ele[0]
 	const buttonInfo = buttonDictionaryMinified[ref]
-	if (!buttonInfo) {
-		console.log("NOT FOUND IN REF: %s", ref)
-		return
-	}
+	// if (!buttonInfo) {
+	// 	console.log("NOT FOUND IN REF: %s", ref)
+	// 	return
+	// }
 	const buttonRender = (<PaypalBtn {...buttonInfo} />)
 	const displayImage = imageDictionary[ref]
 	const minPrice = buttonInfo["prices"][0]

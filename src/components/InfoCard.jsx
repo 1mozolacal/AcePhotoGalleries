@@ -4,7 +4,7 @@ import CardContent from '@material-ui/core/CardContent';
 import CardMedia from '@material-ui/core/CardMedia';
 import Button from '@material-ui/core/Button';
 import Grid from '@material-ui/core/Grid';
-import { Link } from 'gatsby';
+// import { Link } from 'gatsby';
 
 // import placeholder from '../images/giphy.gif'
 import placeholder from '../images/mountaindawn.jpg'
