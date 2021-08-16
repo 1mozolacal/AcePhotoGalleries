@@ -1,4 +1,25 @@
 {
+    "the famous moulin rouge": {
+        "prices": [
+            "350.00",
+            "500.00",
+            "750.00",
+            "925.00",
+            "1,100.00"
+        ],
+        "paypalID": "B5N8XW68CQPJ4"
+    },
+
+    "times square ny city": {
+        "prices": [
+            "350.00",
+            "500.00",
+            "750.00",
+            "925.00",
+            "1,100.00"
+        ],
+        "paypalID": "83FZ3WUK5C5V2"
+    },
     "beautiful yellow flowers": {
         "prices": [
             "75.00",

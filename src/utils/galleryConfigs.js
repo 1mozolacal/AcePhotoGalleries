@@ -62,6 +62,9 @@ import rocky_shoreline_of_bruce_peninsula from '../images/gallery/ROCKY LAKESHOR
 import pagoda_plantation_in_beijing_china from '../images/gallery/WATERLILLIES WITH CHINESE PAGODA IN BACKDROP IN SHANGHAI CHINA.jpg'
 import paris_france_boulevard from '../images/gallery/PARIS FRANCE STREET VIEW AND AMAZING ARCHITECTURE.jpg'
 import gorgeous_cenote_on_the_gulf_of_mexico from '../images/gallery/GORGEOUS CENOTE ON THE GULF OF MEXICO.jpg'
+import times_square_ny_city from '../images/gallery/TIMES SQUARE STREET SHOT.jpg'
+import the_famous_moulin_rouge from '../images/gallery/THE FAMOUS MOULIN ROUGE IN DOWNTOWN PARIS FRANCE UNREAL SITE.jpg'
+
 
 export const imageDictionary = {
 	"beautiful yellow flowers": beautiful_yellow_flowers,
@@ -127,10 +130,14 @@ export const imageDictionary = {
 	"pagoda_plantation_in_beijing_china": pagoda_plantation_in_beijing_china,
 	"paris_france_boulevard": paris_france_boulevard,
 	"gorgeous cenote on the gulf of mexico": gorgeous_cenote_on_the_gulf_of_mexico,
+	"times square ny city": times_square_ny_city,
+	"the famous moulin rouge": the_famous_moulin_rouge,
 }
 
 export const displaySettings = [
+	["times square ny city", 6, "Times Square Street Shot"],
 	["agave and cactus field", 6, "Agave and Cactus Field in Mexico Desert"],
+	["the famous moulin rouge", 6, "The Famous Moulin Rouge in Downtown Paris France"],
 	["beautiful yellow flowers", 6, "Beautiful Spring Yellow Flowers"],
 	["canadian geese waddling", 6, "Canada Geese Being Canada Geese in Preston Park"],
 	["canadian geese", 6, "Canada Geese Galore in Preston Park Along River"],
