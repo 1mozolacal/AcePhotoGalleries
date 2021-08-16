@@ -45,7 +45,7 @@ const BioPage = () => {
 								<p className="md-text light-cyan-text">
 								My name is Michael J. Major. I was raised in Windsor, ON and currently reside in Cambridge, ON, with my 
 								three adult sons. I am a Professionally Trained Photographer specializing in Nature, Architecture and the 
-								Outdoors. My training came from the obtainment of my Honours B.A. in Communications from The University as 
+								Outdoors. My training came from the obtainment of my Honours B.A. in Communications from University of Windsor as 
 								well as during my pursuit of my Masters of Journalism from the University of Western Ontario. I offer my 
 								prints in a variety of mediums such as silk paper, metal, acrylic and stretched canvas in a variety of sizes 
 								shipped directly to you. My pictures are an eclectic collection from around the world as I am a World traveller. 
