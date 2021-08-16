@@ -16,13 +16,12 @@ const IndexPage = () => {
   return (
     <main>
       <Sidebar activeTab={0} />
-      <Grid container spacing={2} alignItems="center" justify="center" direction="row-reverse">
-      <Grid item lg={8}>
-          <img className="featured" src={featuredImage} alt="Featured image"></img>
-        </Grid>
+      <Grid container spacing={2} alignItems="center" justify="center" direction="row">
         <Grid item lg={3}>
           <div className="home-context">
-            <img className="logo" src={logo}></img>
+            <div className="logo-holder">
+              <img className="logo" src={logo}></img>
+            </div>
             <div className="lg-text cyan-text bold-text">            
               MICHAEL J. MAJOR
             </div>
@@ -36,6 +35,10 @@ const IndexPage = () => {
               Specializing primarily in nature,architecture, and outdoor photography.
             </div>
           </div>
+        </Grid>
+        <Grid item lg={1}></Grid>
+        <Grid item lg={7}>
+          <img className="featured" src={featuredImage} alt="Featured image"></img>
         </Grid>
       </Grid>
     </main>
