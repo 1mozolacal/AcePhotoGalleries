@@ -4,6 +4,8 @@ import Sidebar from "../components/Sidebar";
 // Material ui import
 import Grid from "@material-ui/core/Grid";
 
+import featuredImage from '../images/gallery/THE FAMOUS MOULIN ROUGE IN DOWNTOWN PARIS FRANCE UNREAL SITE.jpg'
+import logo from '../images/tempLogo.png'
 // SVG
 import Photographer from "../images/photographer.svg";
 import Camera from "../images/camera.svg";
@@ -14,10 +16,13 @@ const IndexPage = () => {
   return (
     <main>
       <Sidebar activeTab={0} />
-      <Grid container spacing={1} alignItems="center" justify="center">
-        <Grid item lg={1} />
+      <Grid container spacing={2} alignItems="center" justify="center" direction="row-reverse">
+      <Grid item lg={8}>
+          <img className="featured" src={featuredImage} alt="Featured image"></img>
+        </Grid>
         <Grid item lg={3}>
           <div className="home-context">
+            <img className="logo" src={logo}></img>
             <div className="lg-text cyan-text bold-text">            
               MICHAEL J. MAJOR
             </div>
@@ -28,15 +33,10 @@ const IndexPage = () => {
               style={{ height: 3, backgroundColor: "#4DCCBD", border: "none" }}
             />
             <div className="lg-text light-cyan-text">
-              Specializing primarily in nature and architecture.
+              Specializing primarily in nature,architecture, and outdoor photography.
             </div>
           </div>
         </Grid>
-        <Grid item lg={7}>
-          <Photographer style={{ width: "100%" }} className="photographer" />
-          <Camera style={{ width: "100%" }} className="camera" />
-        </Grid>
-        <Grid item lg={1} />
       </Grid>
     </main>
   );
