@@ -10,6 +10,8 @@ import Container from "@material-ui/core/Container";
 import "../stylesheets/bio.sass";
 import "../stylesheets/index.sass";
 import "../stylesheets/home.sass";
+import { Button } from "@material-ui/core";
+import MailIcon from '@material-ui/icons/Mail';
 
 // markup
 
@@ -43,12 +45,16 @@ const BioPage = () => {
 								<p className="md-text light-cyan-text">
 								My name is Michael J. Major. I was raised in Windsor, ON and currently reside in Cambridge, ON, with my 
 								three adult sons. I am a Professionally Trained Photographer specializing in Nature, Architecture and the 
-								Outdoors. My training came from the obtainment of my Honours B.A. in Communications from The University as 
+								Outdoors. My training came from the obtainment of my Honours B.A. in Communications from University of Windsor as 
 								well as during my pursuit of my Masters of Journalism from the University of Western Ontario. I offer my 
 								prints in a variety of mediums such as silk paper, metal, acrylic and stretched canvas in a variety of sizes 
 								shipped directly to you. My pictures are an eclectic collection from around the world as I am a World traveller. 
-								I also do Customer orders, so please ask me. Stock is updated weekly! 
+								I also do custom orders, so please ask me. Stock is updated weekly! 
 								</p>
+
+								<Button variant="contained" className="grid-button" startIcon={ <MailIcon />} href="mailto:acephotogalleries@yahoo.com">
+									Contact me
+								</Button>
 							</div>
 						</Grid>
 					</Grid>
