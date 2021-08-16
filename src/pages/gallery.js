@@ -108,7 +108,7 @@ const Gallery = () => {
 				<br />
 				{!loaded ?
 					<Grid container justifyContent="center">
-						<Grid item xs={12} md={6}>
+						<Grid item xs={12} md={12}>
 							<Button
 								variant="contained"
 								style={{ backgroundColor: "#D6FFF6", width: "100%" }}
