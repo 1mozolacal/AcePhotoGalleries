@@ -142,7 +142,7 @@ export const displaySettings = [
 	["canadian geese waddling", 6, "Canada Geese Being Canada Geese in Preston Park"],
 	["canadian geese", 6, "Canada Geese Galore in Preston Park Along River"],
 	["9 kay street heritage", 6, "1867 Heritage Home In Galt Ontario"],
-	["abandoned mansion old spa", 6, "Abandoned Heritage Spa in Galt"],
+	["abandoned mansion old spa", 6, "Aband˜oned Heritage Spa in Galt"],
 	["rail tracks", 6, "Abandoned Rail Tracks to Nowhere as Sunset"],
 	["sunrise in agawa", 6, "AGAWA CANYON BEACH SUNSET WITH SPECIAL FILTER"],
 	["paris france s underground catacombs", 6, "Catacombs Under the Streets of Paris France Where Millions Buried in Unmarked Graves"],
