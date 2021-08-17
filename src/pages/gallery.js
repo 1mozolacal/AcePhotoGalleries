@@ -8,6 +8,7 @@ import PaypalBtn from "../components/PaypalBtn";
 // Material ui
 import Grid from "@material-ui/core/Grid";
 import Button from "@material-ui/core/Button";
+import Grow from '@material-ui/core/Grow'
 
 //import { Info } from "@material-ui/icons";
 //import { PayPalButton } from "react-paypal-button-v2";
@@ -34,7 +35,6 @@ const Gallery = () => {
 	const [currentDisplay, setCurrentDisplay] = useState(displaySettingsVerbose.slice(0, imageCount))
 	const [loaded, setLoaded] = useState(false)
 
-	
 	// const navBarShiftFactor = 48
 
 	// useEffect(function mount() {
@@ -85,22 +85,28 @@ const Gallery = () => {
 					spacing={2}
 					justifyContent="center"
 				>
-					{currentDisplay.map((x) => { //(id,title,width,minPrice,maxPrice,imageRef,paybutton)
+					{currentDisplay.map((x, index) => { //(id,title,width,minPrice,maxPrice,imageRef,paybutton)
 						return (<Grid
 							item
 							key={x[0]}
 							xs={12}
 							md={x[2]}
 						>
-							<InfoCard
-								id={x[0]}
-								name={x[1]}
-								minPrice={x[3]}
-								maxPrice={x[4]}
-								image={x[5]}
-								paypal={x[6]}
-								viewCallBack={viewImageCallBack}
-							/>
+							<Grow
+								in={true}
+								{...{ timeout: (index % 10) * 300 }}>
+								<div>
+									<InfoCard
+										id={x[0]}
+										name={x[1]}
+										minPrice={x[3]}
+										maxPrice={x[4]}
+										image={x[5]}
+										paypal={x[6]}
+										viewCallBack={viewImageCallBack}
+									/>
+								</div>
+							</Grow>
 						</Grid>)
 					})}
 				</Grid>
