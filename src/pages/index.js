@@ -37,7 +37,7 @@ const IndexPage = () => {
                   style={{ height: 3, backgroundColor: "#4DCCBD", border: "none" }}
                 />
                 <div className="lg-text light-cyan-text">
-                  Specializing primarily in nature,architecture, and outdoor photography.
+                  Specializing primarily in nature, architecture, and outdoor photography.
                 </div>
               </div>
             </Slide>

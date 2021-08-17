@@ -55,7 +55,7 @@ const BioPage = () => {
 										three adult sons. I am a Professionally Trained Photographer specializing in Nature, Architecture and the
 										Outdoors. My training came from the obtainment of my Honours B.A. in Communications from University of Windsor as
 										well as during my pursuit of my Masters of Journalism from the University of Western Ontario. I offer my
-										prints in a variety of mediums such as silk paper, metal, acrylic and stretched canvas in a variety of sizes
+										prints in a variety of mediums such as poster, metal, acrylic and stretched canvas in a variety of sizes
 										shipped directly to you. My pictures are an eclectic collection from around the world as I am a World traveller.
 										I also do custom orders, so please ask me. Stock is updated weekly!
 									</p>
