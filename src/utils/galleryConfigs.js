@@ -134,7 +134,7 @@ export const imageDictionary = {
 	"the famous moulin rouge": the_famous_moulin_rouge,
 }
 
-export const displaySettings = [
+export const displaySettingsInitial = [
 	["times square ny city", 6, "Times Square Street Shot"],
 	["agave and cactus field", 6, "Agave and Cactus Field in Mexico Desert"],
 	["the famous moulin rouge", 6, "The Famous Moulin Rouge in Downtown Paris France"],
@@ -181,3 +181,25 @@ export const displaySettings = [
 	["french capitol building", 6, "French Government Main Parliament Building in Paris France With Special Night Filter"],
 	["fallen tree in the lake", 6, "Glorious Picture of Fallen Tree in Swamp with Special Filter"],
 ]
+
+
+const capitalizeFirstLetter = function (word){
+	return word.charAt(0).toUpperCase() + word.slice(1)
+};
+
+console.log("TEST --%s",capitalizeFirstLetter("nott".toLowerCase()))
+
+
+export const displaySettings = displaySettingsInitial.map( ([id,wid,title], index) =>{
+	var titleParts = title.split(" ")
+	const excludes = ['not','and','a','with','to','as','in','of','the','like','at']
+	const newTitle = titleParts.map( (ele,index) => {
+		const fullyLower = ele.toLowerCase()
+		if(index == 0 || !excludes.includes(fullyLower) ){
+			return capitalizeFirstLetter(fullyLower)
+		}
+		return fullyLower
+	} ).join(' ')
+	return [id,wid,newTitle]
+} ) 
+
