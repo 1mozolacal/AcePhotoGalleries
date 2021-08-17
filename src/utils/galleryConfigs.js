@@ -187,8 +187,6 @@ const capitalizeFirstLetter = function (word){
 	return word.charAt(0).toUpperCase() + word.slice(1)
 };
 
-console.log("TEST --%s",capitalizeFirstLetter("nott".toLowerCase()))
-
 
 export const displaySettings = displaySettingsInitial.map( ([id,wid,title], index) =>{
 	var titleParts = title.split(" ")
