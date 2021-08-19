@@ -165,9 +165,41 @@ export const imageDictionary = {
 }
 
 export const displaySettingsInitial = [
-	["times square ny city", 6, "Times Square Street Shot"],
-	["agave and cactus field", 6, "Agave and Cactus Field in Mexico Desert"],
-	["the famous moulin rouge", 6, "The Famous Moulin Rouge in Downtown Paris France"],
+	//Mich picked
+	["times square ny city", 8, "Times Square Street Shot"],
+	["agave and cactus field", 4, "Agave and Cactus Field in Mexico Desert"],
+	["arc de triomphe",4,"Arc de Triomphe in Paris"],
+	["the famous moulin rouge", 8, "The Famous Moulin Rouge in Downtown Paris France"],
+	["old log dump side of the grotto",6,"The Other Side of the Grotto in Tobermory"],
+	["the grotto",6,"Entrance to Grotto Cave in Tobermory"],
+	["light tunnel",6,"Light Tunnel"],
+	["new york subway",6,"NY Subway Track 22"],
+	//end of micheal picked
+	//calvin picked
+	["winter wonderland",4,"Winter Wonderland Trail in Northern National Park"],
+	["chinese river flowing under a bridge", 8, "River Flowing Under Bridge in Shanghai China"],
+	["leviathan at versailles",8,"Shrubbery Leviathan in Front of On of the Palace"],
+	["louis the 14th statue in paris france",4,"Stunning Statue of Louis the XIV in French Parliament Square"],
+	["trickling stream in bruce peninsula park", 6, "SINGING SANDS TRIBUATARY FROM GEORGIAN BAY - VERY COLD WATER!"],
+	["rain dripping off a giant granite rock face", 6, "RAIN DROPS DRIPPING OFF GIANT ROCK IN TROPICAL FOREST"],
+	["busiest international bridge crossing", 6, "STREET LEVEL SHOT OF AMBASSADOR BRIDGE WITH TRUCK CROSSING IN WINDSOR ON"],
+	["ocean freighter under the ambassador bridge", 6, "WINDING SHOT OF AMBASSADOR BRIDGE WITH OCEAN FREIGHTER CROSSING UNDERNEATH"],
+	["agawa waterfall with special filter", 6, "Agawa Canyon Mountainside Waterfall in Northern Ontario with Special Filter"],
+	["french capitol building", 6, "French Government Main Parliament Building in Paris France With Special Night Filter"],
+	["mayan tiki huts",6,"Tiki Shade Huts and Lake in Playa Del Carmen Mexico"],
+
+	["long shot of rail bridge",6,"Long Shot View of Rail Bridge Over Grand River in Cambridge Ontario"],
+	["picturesque river through the trees",6,"SPECIAL FILTER FRAMED VIEW OF GRAND RIVER"],
+	["wooden bridge along water",6,"Amazing Wooden Walking Trail Along Grand River"],
+	["la louvre museum painted art ceiling",6,"INCREDIBLE SHOT OF PAINTED CEILING OF THE LOUVRE ART MUSEUM THAT HOUSES LA MONA LISA"],
+	["under the base of the famous eiffel tower in paris",6,"Shot up the Middle of the Eiffel Tower at Night in Paris"],
+	["rail bridge with train",6,"TRAIN CROSSING RAIL BRIDGE OVER GRAND RIVER"],
+	["the eiffel tower lit at night in paris france",6,"One of a Kind pictures of Paris France's Eiffel Tower Lighted at Night From Behind Security Barrier"],
+	["beachfront restaurant in mexican riviera",6,"Playa Del Carmen Oceanside Restaurant and Beach"],
+	["centuries old highschool two",6,"Hogwarts Lookalike GCI School with filter"],
+	["sunrise in agawa two",6,"Sunset in Agawa Canyon Beach"],
+	//end of calvin pick
+
 	["beautiful yellow flowers", 6, "Beautiful Spring Yellow Flowers"],
 	["canadian geese waddling", 6, "Canada Geese Being Canada Geese in Preston Park"],
 	["canadian geese", 6, "Canada Geese Galore in Preston Park Along River"],
@@ -195,17 +227,10 @@ export const displaySettingsInitial = [
 	["rail bridge and water lock", 6, "Mini Waterfall with Rail Bridge in Background"],
 
 	// This line
-	["rain dripping off a giant granite rock face", 6, "RAIN DROPS DRIPPING OFF GIANT ROCK IN TROPICAL FOREST"],
-	["chinese river flowing under a bridge", 6, "River Flowing Under Bridge in Shanghai China"],
-	["trickling stream in bruce peninsula park", 6, "SINGING SANDS TRIBUATARY FROM GEORGIAN BAY - VERY COLD WATER!"],
 	["resort spa ceiling", 6, "Spa Ceiling"],
-	["busiest international bridge crossing", 6, "STREET LEVEL SHOT OF AMBASSADOR BRIDGE WITH TRUCK CROSSING IN WINDSOR ON"],
 	["remnants of destroyed mill", 6, "TRIBUTE TO A MOTHER IN THE RUINS OF AN OLD MILL ALONG THE GRAND RIVER"],
 	["trout river at singing sands beach", 6, "Trout River at Singing Sands Beach Near Tobermory Ontario"],
 	["view from below the bridge", 6, "UNDERNEATH WINDING SHOT OF AMBASSADOR BRIDGE - BUSIEST INTRNATIONAL BORDER CROSSING IN THE WORLD!"],
-	["ocean freighter under the ambassador bridge", 6, "WINDING SHOT OF AMBASSADOR BRIDGE WITH OCEAN FREIGHTER CROSSING UNDERNEATH"],
-	["agawa waterfall with special filter", 6, "Agawa Canyon Mountainside Waterfall in Northern Ontario with Special Filter"],
-	["french capitol building", 6, "French Government Main Parliament Building in Paris France With Special Night Filter"],
 	["fallen tree in the lake", 6, "Glorious Picture of Fallen Tree in Swamp with Special Filter"],
 
 	["hiram walkers head office building",6,"Hiram Walkers Canadian Club HIstorical Head Office Building"],
@@ -214,17 +239,14 @@ export const displaySettingsInitial = [
 	["mill destroyed on the grand",6,"OLD MILL REMNANTS ON GRAND RIVER IN BACKGROUND"],
 	["old fishing camp on the river",6,"Remnants of Old Fishing Camp Along River in Preston Ontario"],
 	["mill destroyed",6,"REMNANTS OF OLD MILL ON GRAND RIVER"],
-	["leviathan at versailles",6,"Shrubbery Leviathan in Front of On of the Palace"],
+	
 	["black and white river view",6,"SPECIAL FILTER VIEW OF GRAND RIVER AND FOREGROUND FOLIAGE"],
-	["louis the 14th statue in paris france",6,"Stunning Statue of Louis the XIV in French Parliament Square"],
-	["mayan tiki huts",6,"Tiki Shade Huts and Lake in Playa Del Carmen Mexico"],
-	["winter wonderland",6,"Winter Wonderland Trail in Northern National Park"],
+	
 	["canadian house of commons historic architecture",6,"Atrium Architecture in Canadian Parliament Buildings"],
 	["b w of underbelly of ambassdor bridge",6,"Black and White Shot of Amassador BRIDGE"],
 	["estuary at singing sands beach",6,"Estuary From Georgian Bay Leading Inland to Provincial Park"],
 	["majestic ceiling of louvre museum",6,"GORGEOUS PAINTED CEILING AND CHANDELIERS IN ONE OF THE MANY PALACES IN VERSAILLES FRANCE"],
 	["extraordinary stained glass in house of commons",6,"Historic Stained Glass Windows in Canadian House of Commons"],
-	["light tunnel",6,"Light Tunnel"],
 	["trail along the shore",6,"LUSH TREE PARTIALLY OBSTRUCTED VIEW OF RAIL BRIDGE OVER GRAND RIVER"],
 	["central park in autumn",6,"NY Central Park in Spring Time"],
 	["rustic barn",6,"Old Barn in Abandoned Backyard"],
@@ -232,21 +254,6 @@ export const displaySettingsInitial = [
 	["pagoda plantation in beijing china",6,"WATERLILLIES WITH CHINESE PAGODA IN BACKDROP IN SHANGHAI CHINA"],
 	["paris france boulevard",6,"Paris France Street View and Amazing Architecture"],
 	["gorgeous cenote on the gulf of mexico",6,"GORGEOUS CENOTE ON THE GULF OF MEXICO"],
-
-	["long shot of rail bridge",6,"Long Shot View of Rail Bridge Over Grand River in Cambridge Ontario"],
-	["picturesque river through the trees",6,"SPECIAL FILTER FRAMED VIEW OF GRAND RIVER"],
-	["wooden bridge along water",6,"Amazing Wooden Walking Trail Along Grand River"],
-	["arc de triomphe",6,"Arc de Triomphe in Paris"],
-	["la louvre museum painted art ceiling",6,"INCREDIBLE SHOT OF PAINTED CEILING OF THE LOUVRE ART MUSEUM THAT HOUSES LA MONA LISA"],
-	["under the base of the famous eiffel tower in paris",6,"Shot up the Middle of the Eiffel Tower at Night in Paris"],
-	["the grotto",6,"Entrance to Grotto Cave in Tobermory"],
-	["new york subway",6,"NY Subway Track 22"],
-	["rail bridge with train",6,"TRAIN CROSSING RAIL BRIDGE OVER GRAND RIVER"],
-	["old log dump side of the grotto",6,"The Other Side of the Grotto in Tobermory"],
-	["the eiffel tower lit at night in paris france",6,"One of a Kind pictures of Paris France's Eiffel Tower Lighted at Night From Behind Security Barrier"],
-	["beachfront restaurant in mexican riviera",6,"Playa Del Carmen Oceanside Restaurant and Beach"],
-	["centuries old highschool two",6,"Hogwarts Lookalike GCI School with filter"],
-	["sunrise in agawa two",6,"Sunset in Agawa Canyon Beach"],
 ]
 
 
