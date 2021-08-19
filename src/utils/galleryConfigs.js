@@ -16,7 +16,7 @@ import lone_seagull from '../images/gallery/LONE SEAGULL ON RAILING WITH DETROIT
 import biodome_a_la_montreal from "../images/gallery/MONTREAL S BIODOME WONDER OF THE WORLD.jpg"
 import river_rapids from '../images/gallery/River Rapids.jpg'
 import mercury_filter_truck_approaching_sunset from '../images/gallery/SPECIAL FILTER SUNSET ON ROAD.jpg'
-import remarkable_colored_sun from '../images/gallery/SPECIAL FILTER SUNSET ON ROAD.jpg'
+import remarkable_colored_sun from '../images/gallery/STUNNING SUNSET IN PARIS ONTARIO WITH TREES IN FOREGROUND.jpg'
 import view_along_the_river from '../images/gallery/VIEW DOWN GRAND RIVER TOWARDS CENTURY OLD CHURCH.jpg'
 import willow_tree_in_waiting from '../images/gallery/Willow TREE IN WAITING.jpg'
 import agave_and_cactus_field from '../images/gallery/Agave and Cactus Field in Mexico Desert.jpg'
@@ -164,116 +164,105 @@ export const imageDictionary = {
 	"sunrise in agawa two":sunrise_in_agawa_two,
 }
 
-export const displaySettingsInitial = [
-	//Mich picked
+export const displaySettings = [
 	["times square ny city", 8, "Times Square Street Shot"],
 	["agave and cactus field", 4, "Agave and Cactus Field in Mexico Desert"],
-	["arc de triomphe",4,"Arc de Triomphe in Paris"],
+	["arc de triomphe", 4, "Arc De Triomphe in Paris"],
 	["the famous moulin rouge", 8, "The Famous Moulin Rouge in Downtown Paris France"],
-	["old log dump side of the grotto",6,"The Other Side of the Grotto in Tobermory"],
-	["the grotto",6,"Entrance to Grotto Cave in Tobermory"],
-	["light tunnel",6,"Light Tunnel"],
-	["new york subway",6,"NY Subway Track 22"],
-	//end of micheal picked
-	//calvin picked
-	["winter wonderland",4,"Winter Wonderland Trail in Northern National Park"],
+	["old log dump side of the grotto", 6, "The Other Side of the Grotto in Tobermory"],
+	["the grotto", 6, "Entrance to Grotto Cave in Tobermory"],
+	["light tunnel", 6, "Light Tunnel"],
+	["new york subway", 6, "NY Subway Track 22"],
+	["winter wonderland", 4, "Winter Wonderland Trail in Northern National Park"],
 	["chinese river flowing under a bridge", 8, "River Flowing Under Bridge in Shanghai China"],
-	["leviathan at versailles",8,"Shrubbery Leviathan in Front of On of the Palace"],
-	["louis the 14th statue in paris france",4,"Stunning Statue of Louis the XIV in French Parliament Square"],
-	["trickling stream in bruce peninsula park", 6, "SINGING SANDS TRIBUATARY FROM GEORGIAN BAY - VERY COLD WATER!"],
-	["rain dripping off a giant granite rock face", 6, "RAIN DROPS DRIPPING OFF GIANT ROCK IN TROPICAL FOREST"],
-	["busiest international bridge crossing", 6, "STREET LEVEL SHOT OF AMBASSADOR BRIDGE WITH TRUCK CROSSING IN WINDSOR ON"],
-	["ocean freighter under the ambassador bridge", 6, "WINDING SHOT OF AMBASSADOR BRIDGE WITH OCEAN FREIGHTER CROSSING UNDERNEATH"],
+	["leviathan at versailles", 8, "Shrubbery Leviathan in Front of the Palace"],
+	["louis the 14th statue in paris france", 4, "Stunning Statue of Louis the XIV in French Parliament Square"],
+	["trickling stream in bruce peninsula park", 6, "Singing Sands Tributary From Georgian Bay - Very Cold Water!"],
+	["rain dripping off a giant granite rock face", 6, "Rain Drops Dripping Off Giant Rock in Tropical Forest"],
+	["ocean freighter under the ambassador bridge", 6, "Winding Shot of Ambassador Bridge with Ocean Freighter Crossing Underneath"],
 	["agawa waterfall with special filter", 6, "Agawa Canyon Mountainside Waterfall in Northern Ontario with Special Filter"],
-	["french capitol building", 6, "French Government Main Parliament Building in Paris France With Special Night Filter"],
-	["mayan tiki huts",6,"Tiki Shade Huts and Lake in Playa Del Carmen Mexico"],
-
-	["long shot of rail bridge",6,"Long Shot View of Rail Bridge Over Grand River in Cambridge Ontario"],
-	["picturesque river through the trees",6,"SPECIAL FILTER FRAMED VIEW OF GRAND RIVER"],
-	["wooden bridge along water",6,"Amazing Wooden Walking Trail Along Grand River"],
-	["la louvre museum painted art ceiling",6,"INCREDIBLE SHOT OF PAINTED CEILING OF THE LOUVRE ART MUSEUM THAT HOUSES LA MONA LISA"],
-	["under the base of the famous eiffel tower in paris",6,"Shot up the Middle of the Eiffel Tower at Night in Paris"],
-	["rail bridge with train",6,"TRAIN CROSSING RAIL BRIDGE OVER GRAND RIVER"],
-	["the eiffel tower lit at night in paris france",6,"One of a Kind pictures of Paris France's Eiffel Tower Lighted at Night From Behind Security Barrier"],
-	["beachfront restaurant in mexican riviera",6,"Playa Del Carmen Oceanside Restaurant and Beach"],
-	["centuries old highschool two",6,"Hogwarts Lookalike GCI School with filter"],
-	["sunrise in agawa two",6,"Sunset in Agawa Canyon Beach"],
-	//end of calvin pick
-
+	["french capitol building", 6, "French Government Main Parliament Building in Paris France with Special Night Filter"],
+	["mayan tiki huts", 6, "Tiki Shade Huts and Lake in Playa Del Carmen Mexico"],
+	["long shot of rail bridge", 6, "Long Shot View of Rail Bridge Over Grand River in Cambridge Ontario"],
+	["picturesque river through the trees", 6, "Special Filter Framed View of Grand River"],
+	["wooden bridge along water", 6, "Amazing Wooden Walking Trail Along Grand River"],
+	["la louvre museum painted art ceiling", 6, "Incredible Shot of Painted Ceiling of the Louvre Art Museum That Houses La Mona Lisa"],
+	["under the base of the famous eiffel tower in paris", 6, "Shot Up the Middle of the Eiffel Tower at Night in Paris"],
+	["rail bridge with train", 6, "Train Crossing Rail Bridge Over Grand River"],
+	["the eiffel tower lit at night in paris france", 6, "One of a Kind Pictures of Paris France's Eiffel Tower Lighted at Night From Behind Security Barrier"],
+	["beachfront restaurant in mexican riviera", 6, "Playa Del Carmen Oceanside Restaurant and Beach"],
+	["centuries old highschool two", 6, "Hogwarts Lookalike GCI School with Filter"],
+	["sunrise in agawa two", 6, "Sunset in Agawa Canyon Beach"],
 	["beautiful yellow flowers", 6, "Beautiful Spring Yellow Flowers"],
-	["canadian geese waddling", 6, "Canada Geese Being Canada Geese in Preston Park"],
+	["busiest international bridge crossing", 6, "Street Level Shot of Ambassador Bridge with Truck Crossing in Windsor On"],
 	["canadian geese", 6, "Canada Geese Galore in Preston Park Along River"],
-	["9 kay street heritage", 6, "1867 Heritage Home In Galt Ontario"],
-	["abandoned mansion old spa", 6, "Aband˜oned Heritage Spa in Galt"],
-	["rail tracks", 6, "Abandoned Rail Tracks to Nowhere as Sunset"],
-	["sunrise in agawa", 6, "AGAWA CANYON BEACH SUNSET WITH SPECIAL FILTER"],
+	["9 kay street heritage", 6, "1867 Heritage Home in Galt Ontario"],
+	["abandoned mansion old spa", 6, "Abandoned Heritage Spa in Galt"],
+	["rail tracks", 6, "Rail Tracks to Nowhere at Sunset"],
+	["sunrise in agawa", 6, "Agawa Canyon Beach Sunset with Special Filter"],
 	["paris france s underground catacombs", 6, "Catacombs Under the Streets of Paris France Where Millions Buried in Unmarked Graves"],
-	["lazy river", 6, "FREE FLOWING SWAMPY RIVER IN PROVINCIAL PARK"],
-	["centuries old highschool", 6, "GCI School looking like Hogwarts"],
+	["lazy river", 6, "Free Flowing Swampy River in Provincial Park"],
+	["centuries old highschool", 6, "GCI School Looking like Hogwarts"],
 	["golden gates entrance to palais royale", 6, "Golden Gates to Government's Palais Royale in Paris France"],
-	["canada moose in lights", 6, "Light Show Canada  Moose"],
-	["merry christmas tree", 6, "LIGHTED CHRISTMAS TREE AT XMAS LIGHT SHOW"],
-	["lone seagull", 6, "Lone Seagull on Railing with Detroit River"],
+	["canadian geese waddling", 6, "Canada Geese Being Canada Geese in Preston Park"],
+	["merry christmas tree", 6, "Lighted Christmas Tree at Xmas Light Show"],
+	["lone seagull", 6, "Lone Seagull on Railing with Detroit River in Background"],
 	["biodome a la montreal", 6, "Montreal's Biodome - Wonder of the World"],
 	["river rapids", 6, "River Rapids"],
-	["mercury filter truck approaching sunset",6, "SPECIAL FILTER SUNSET ON ROAD"],
-	["remarkable colored sun", 6, "STUNNING SUNSET IN PARIS ONTARIO WITH TREES IN FOREGROUND"],
+	["mercury filter truck approaching sunset", 6, "Special Filter Sunset On Road"],
+	["remarkable colored sun", 6, "Stunning Sunset in Paris Ontario with Trees in Foreground"],
 	["view along the river", 6, "View Along the Grand River"],
-	["willow tree in waiting", 6, "willow tree in waiting"],
+	["willow tree in waiting", 6, "Willow Tree in Waiting"],
 	["walking trail deep in the forest", 6, "Black and White View of Deep Forest Walking Trail"],
-	["sunset", 6, "BLURRED SUNSET WHILE DRIVING"],
+	["sunset", 6, "Blurred Sunset While Driving"],
 	["awfully odd sign in downtown paris", 6, "Funny Sign in Paris France"],
-	["ambassador bridge", 6, "Longshot of Ambassador Bridge from Windsor to Detroit WITH WINDSOR SCULTURE GARDEN IN FOREGROUND"],
+	["ambassador bridge", 6, "Longshot of Ambassador Bridge From Windsor to Detroit with Windsor Sculture Garden in Foreground"],
 	["rail bridge and water lock", 6, "Mini Waterfall with Rail Bridge in Background"],
-
-	// This line
 	["resort spa ceiling", 6, "Spa Ceiling"],
-	["remnants of destroyed mill", 6, "TRIBUTE TO A MOTHER IN THE RUINS OF AN OLD MILL ALONG THE GRAND RIVER"],
+	["remnants of destroyed mill", 6, "Tribute to a Mother in the Ruins of An Old Mill Along the Grand River"],
 	["trout river at singing sands beach", 6, "Trout River at Singing Sands Beach Near Tobermory Ontario"],
-	["view from below the bridge", 6, "UNDERNEATH WINDING SHOT OF AMBASSADOR BRIDGE - BUSIEST INTRNATIONAL BORDER CROSSING IN THE WORLD!"],
+	["canada moose in lights", 6, "Light Show Canada  Moose"],
+	["view from below the bridge", 6, "Underneath Winding Shot of Ambassador Bridge - Busiest Intrnational Border Crossing in the World!"],
 	["fallen tree in the lake", 6, "Glorious Picture of Fallen Tree in Swamp with Special Filter"],
-
-	["hiram walkers head office building",6,"Hiram Walkers Canadian Club HIstorical Head Office Building"],
-	["mexican oasis and gardens",6,"mexican oasis and gardens"],
-	["agawa mountainside waterfall",6,"Mountainside Waterfall in Northern Ontario"],
-	["mill destroyed on the grand",6,"OLD MILL REMNANTS ON GRAND RIVER IN BACKGROUND"],
-	["old fishing camp on the river",6,"Remnants of Old Fishing Camp Along River in Preston Ontario"],
-	["mill destroyed",6,"REMNANTS OF OLD MILL ON GRAND RIVER"],
-	
-	["black and white river view",6,"SPECIAL FILTER VIEW OF GRAND RIVER AND FOREGROUND FOLIAGE"],
-	
-	["canadian house of commons historic architecture",6,"Atrium Architecture in Canadian Parliament Buildings"],
-	["b w of underbelly of ambassdor bridge",6,"Black and White Shot of Amassador BRIDGE"],
-	["estuary at singing sands beach",6,"Estuary From Georgian Bay Leading Inland to Provincial Park"],
-	["majestic ceiling of louvre museum",6,"GORGEOUS PAINTED CEILING AND CHANDELIERS IN ONE OF THE MANY PALACES IN VERSAILLES FRANCE"],
-	["extraordinary stained glass in house of commons",6,"Historic Stained Glass Windows in Canadian House of Commons"],
-	["trail along the shore",6,"LUSH TREE PARTIALLY OBSTRUCTED VIEW OF RAIL BRIDGE OVER GRAND RIVER"],
-	["central park in autumn",6,"NY Central Park in Spring Time"],
-	["rustic barn",6,"Old Barn in Abandoned Backyard"],
-	["rocky shoreline of bruce peninsula",6,"Rocky Shoreline Beach On Georgian Bay"],
-	["pagoda plantation in beijing china",6,"WATERLILLIES WITH CHINESE PAGODA IN BACKDROP IN SHANGHAI CHINA"],
-	["paris france boulevard",6,"Paris France Street View and Amazing Architecture"],
-	["gorgeous cenote on the gulf of mexico",6,"GORGEOUS CENOTE ON THE GULF OF MEXICO"],
+	["hiram walkers head office building", 6, "Hiram Walkers Canadian Club Historical Head Office Building"],
+	["mexican oasis and gardens", 6, "Mexican Oasis and Gardens"],
+	["agawa mountainside waterfall", 6, "Mountainside Waterfall in Northern Ontario"],
+	["mill destroyed on the grand", 6, "Old Mill Remnants On Grand River in Background"],
+	["old fishing camp on the river", 6, "Remnants of Old Fishing Camp Along River in Preston Ontario"],
+	["mill destroyed", 6, "Remnants of Old Mill On Grand River"],
+	["black and white river view", 6, "Special Filter View of Grand River and Foreground Foliage"],
+	["canadian house of commons historic architecture", 6, "Atrium Architecture in Canadian Parliament Buildings"],
+	["b w of underbelly of ambassdor bridge", 6, "Black and White Shot of Amassador Bridge"],
+	["estuary at singing sands beach", 6, "Estuary From Georgian Bay Leading Inland to Provincial Park"],
+	["majestic ceiling of louvre museum", 6, "Gorgeous Painted Ceiling and Chandeliers in One of the Many Palaces in Versailles France"],
+	["extraordinary stained glass in house of commons", 6, "Historic Stained Glass Windows in Canadian House of Commons"],
+	["trail along the shore", 6, "Lush Tree Partially Obstructed View of Rail Bridge Over Grand River"],
+	["central park in autumn", 6, "NY Central Park in Spring Time"],
+	["rustic barn", 6, "Old Barn in Abandoned Backyard"],
+	["rocky shoreline of bruce peninsula", 6, "Rocky Shoreline Beach On Georgian Bay"],
+	["pagoda plantation in beijing china", 6, "Waterlillies with Chinese Pagoda in Backdrop in Shanghai China"],
+	["paris france boulevard", 6, "Paris France Street View and Amazing Architecture"],
+	["gorgeous cenote on the gulf of mexico", 6, "Gorgeous Cenote On the Gulf of Mexico"],
 ]
 
 
-console.log("lenggadhlakdlj: %s",displaySettingsInitial.length)
-
-const capitalizeFirstLetter = function (word){
-	return word.charAt(0).toUpperCase() + word.slice(1)
-};
+// const capitalizeFirstLetter = function (word){
+// 	return word.charAt(0).toUpperCase() + word.slice(1)
+// };
 
 
-export const displaySettings = displaySettingsInitial.map( ([id,wid,title], index) =>{
-	var titleParts = title.split(" ")
-	const excludes = ['not','and','a','with','to','as','in','of','the','like','at']
-	const newTitle = titleParts.map( (ele,index) => {
-		const fullyLower = ele.toLowerCase()
-		if(index == 0 || !excludes.includes(fullyLower) ){
-			return capitalizeFirstLetter(fullyLower)
-		}
-		return fullyLower
-	} ).join(' ')
-	return [id,wid,newTitle]
-} ) 
+// export const displaySettings = displaySettingsInitial.map( ([id,wid,title], index) =>{
+// 	var titleParts = title.split(" ")
+// 	const excludes = ['not','and','a','with','to','as','in','of','the','like','at']
+// 	const newTitle = titleParts.map( (ele,index) => {
+// 		const fullyLower = ele.toLowerCase()
+// 		if(index == 0 || !excludes.includes(fullyLower) ){
+// 			return capitalizeFirstLetter(fullyLower)
+// 		}
+// 		return fullyLower
+// 	} ).join(' ')
+// 	return [id,wid,newTitle]
+// } ) 
+
+
 
