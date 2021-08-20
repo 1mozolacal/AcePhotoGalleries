@@ -117,7 +117,7 @@ const Gallery = () => {
 						<Grid item xs={12} md={12}>
 							<Button
 								variant="contained"
-								style={{ backgroundColor: "#D6FFF6", width: "100%" }}
+								style={{ backgroundColor: "#D6FFF6", width: "100%", height: "8vh" }}
 								onClick={() => {
 									let newImageCount = imageCount + 10
 									setImageCount(newImageCount)
