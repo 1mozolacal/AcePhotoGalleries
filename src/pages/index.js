@@ -14,6 +14,10 @@ import "../stylesheets/index.sass";
 import "../stylesheets/home.sass";
 import Button from "@material-ui/core/Button";
 import PhotoLibraryIcon from '@material-ui/icons/PhotoLibrary';
+
+
+import { Link } from 'gatsby';
+
 // markup
 const IndexPage = () => {
   return (
@@ -41,12 +45,12 @@ const IndexPage = () => {
                 <div className="lg-text light-cyan-text">
                   Specializing primarily in nature, architecture, and outdoor photography.
                 </div>
-
-                <Button variant="contained" className="grid-button" 
-                startIcon={<PhotoLibraryIcon />} 
-                href="mailto:acephotogalleries@yahoo.com">
-                  View my gallery
-                </Button>
+                
+                  <Button component={Link} to={"/gallery"} variant="contained" className="grid-button"
+                    startIcon={<PhotoLibraryIcon />}>
+                    View my gallery
+                  </Button>
+                
               </div>
             </Slide>
           </div>
