@@ -15,7 +15,6 @@
     "clean": "gatsby clean"
   },
   "dependencies": {
-    "@azure/identity": "^1.5.1",
     "@azure/storage-blob": "^12.7.0",
     "@material-ui/core": "^4.11.4",
     "@material-ui/icons": "^4.11.2",

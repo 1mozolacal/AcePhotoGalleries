@@ -1,4 +1,4 @@
-import * as React from "react";
+import React, { useEffect } from "react";
 import Sidebar from "../components/Sidebar";
 
 // Material ui import
@@ -17,13 +17,19 @@ import PhotoLibraryIcon from '@material-ui/icons/PhotoLibrary';
 
 
 import { Link } from 'gatsby';
+import { main } from '../utils/azureStorage'
 
 // markup
 const IndexPage = () => {
+  useEffect(() => {
+    main()
+  }, [])
+
+
   return (
     <main>
       <Sidebar activeTab={0} />
-      <Grid container spacing={2} alignItems="center" justify="center" direction="row">
+      <Grid container spacing={2} alignItems="center" justifyContent="center" direction="row">
         <Grid item lg={3}>
           <div className="home-context">
             <Slide in={true} timeout={1000}>
@@ -45,12 +51,12 @@ const IndexPage = () => {
                 <div className="lg-text light-cyan-text">
                   Specializing primarily in nature, architecture, and outdoor photography.
                 </div>
-                
-                  <Button component={Link} to={"/gallery"} variant="contained" className="grid-button"
-                    startIcon={<PhotoLibraryIcon />}>
-                    View my gallery
-                  </Button>
-                
+
+                <Button component={Link} to={"/gallery"} variant="contained" className="grid-button"
+                  startIcon={<PhotoLibraryIcon />}>
+                  View my gallery
+                </Button>
+
               </div>
             </Slide>
           </div>
