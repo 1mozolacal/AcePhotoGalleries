@@ -1,11 +1,10 @@
-import React, { useEffect } from "react";
+import React from "react";
 import Sidebar from "../components/Sidebar";
 
 // Material ui import
 import Grid from "@material-ui/core/Grid";
 import Grow from '@material-ui/core/Grow'
 import Slide from '@material-ui/core/Slide';
-
 
 import featuredImage from '../images/gallery/THE FAMOUS MOULIN ROUGE IN DOWNTOWN PARIS FRANCE UNREAL SITE.jpg'
 import logo from '../images/tempLogo.png'
@@ -17,14 +16,9 @@ import PhotoLibraryIcon from '@material-ui/icons/PhotoLibrary';
 
 
 import { Link } from 'gatsby';
-import { main } from '../utils/azureStorage'
 
 // markup
 const IndexPage = () => {
-  useEffect(() => {
-    main()
-  }, [])
-
 
   return (
     <main>

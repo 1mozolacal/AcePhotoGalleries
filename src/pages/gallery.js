@@ -60,18 +60,6 @@ const Gallery = () => {
 		setSpotLightInfo(newInfo)
 	}
 	
-	useEffect(() => {
-		console.log("doing and one time test")
-		// cow go moo
-		const { BlobServiceClient } = require("@azure/storage-blob");
-
-		const account = "mjmpictures";
-		const conString = "https://mjmpictures.blob.core.windows.net/?sv=2020-08-04&ss=bfqt&srt=sco&sp=rwdlacuptfx&se=2021-08-30T09:45:15Z&st=2021-08-27T01:45:15Z&spr=https,http&sig=nRWKzmENPe1DsxTWhNQsmtNV8wGMbegXG2b51RF6iHc%3D";
-
-		const blobServiceClient = new BlobServiceClient(conString);
-		main(blobServiceClient)
-
-	}, [])
 
 	return (
 		<>
@@ -150,23 +138,6 @@ const Gallery = () => {
 export default Gallery;
 
 // TESTING
-async function main(client) {
-	const containerClient = client.getContainerClient('pics');
-	const content = "Hello world!";
-	const blobName = "newblob" + new Date().getTime();
-	const blockBlobClient = containerClient.getBlockBlobClient(blobName);
-	const uploadBlobResponse = await blockBlobClient.upload(content, content.length);
-	console.log(`Upload block blob ${blobName} successfully`, uploadBlobResponse.requestId);
-	// let i = 1;
-	// let containers = client.listContainers();
-	// for await (const container of containers) {
-	//   console.log(`Container ${i++}: ${container.name}`);
-	// }
-  }
-
-
-
-
 
 // const tires = {
 // 	"1": [75,150,475,650,825],
