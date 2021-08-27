@@ -54,11 +54,22 @@ export const uploadFileToBlob = async (file) => {
 
     // upload file
     await createBlobInContainer(containerClient, file);
-
-    // get list of blobs in container
-    // return getBlobsInContainer(containerClient);
-
 };
+
+
+export const getAllContents = async (type = "pics") => {
+    // Get contents from blob storage
+    // Type: data, pics
+    const containerClient = blobServiceClient.getContainerClient(type);
+
+    if (!containerClient.exists())
+        await containerClient.createIfNotExists({
+            access: 'container',
+        });
+    // get list of blobs in container
+    return getBlobsInContainer(containerClient);
+}
+
 
 export const getBlobsInContainer = async (containerClient) => {
     const returnedBlobUrls = [];

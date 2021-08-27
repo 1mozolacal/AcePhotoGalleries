@@ -17,6 +17,8 @@ import buttonDictionaryMinified from '../data/images.json'
 
 import { displaySettings, imageDictionary } from '../utils/galleryConfigs'
 
+import { getAllContents } from '../utils/azureStorage'
+
 // Mapping data to follow format
 const displaySettingsVerbose = displaySettings.map((ele, index) => {
 	const ref = ele[0]
@@ -50,6 +52,11 @@ const Gallery = () => {
 	// 	}
 	// }, [])
 
+	useEffect(async () => { 
+		let data = await getAllContents()
+		console.log(data)
+	}, [])
+
 	useEffect(() => {
 		// console.log(currentDisplay)
 		if (currentDisplay.length === displaySettingsVerbose.length) setLoaded(true)
@@ -59,7 +66,7 @@ const Gallery = () => {
 		const newInfo = [true, spotLightInfo[1], title, image]
 		setSpotLightInfo(newInfo)
 	}
-	
+
 
 	return (
 		<>
