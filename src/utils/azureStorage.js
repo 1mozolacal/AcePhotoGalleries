@@ -10,12 +10,13 @@ const conString = `${baseUrl}/${token}`
 const blobServiceClient = new BlobServiceClient(conString);
 
 // Fetch JSON file for data
-export const getJSONData = async () => {
-    const url = `${baseUrl}/pics/images.json`;
-    let jsonData;
+export const getJSONData = async (filename,container='config') => {
+    const url = `${baseUrl}/${container}/${filename}`;
+    var jsonData;
     await fetch(url)
-        .then(response => response.json())
+        .then(response => response.json() )
         .then(data => jsonData = data)
+    console.log("func ret: %o", jsonData)
     return jsonData
 }
 
