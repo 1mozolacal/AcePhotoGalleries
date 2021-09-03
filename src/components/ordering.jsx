@@ -2,7 +2,7 @@ import React, { useState, useEffect } from "react";
 import Grid from "@material-ui/core/Grid";
 import { DragDropContext, Droppable, Draggable } from 'react-beautiful-dnd';
 import DragHandleIcon from '@material-ui/icons/DragHandle';
-
+import DragAndDrop from './dragableZone'
 
 
 const MapOutData = ({items}) => (
@@ -23,17 +23,24 @@ const MapOutData = ({items}) => (
             </Draggable>)
     }))
 const OrderDisplay = ({pictureData,callBack,boxID}) => {
-    console.log("The call %o",callBack)
     return (<>
-    {pictureData &&
-        (<DragDropContext onDragEnd={({ destination, source }) => callBack({ destination:destination, source:source })}>
+    {pictureData && 
+    <DragAndDrop 
+    pictureData={pictureData}
+    callBack={callBack}
+    boxID={boxID}
+    MapOutData={MapOutData}
+    Wrapper={(props)=>(<ul {...props.droppableProps} ref={props.innerRef}>{props.children}</ul>)}/>}
+    </>)
+}
+
+export default OrderDisplay;
+{/* 
+(<DragDropContext onDragEnd={({ destination, source }) => callBack({ destination:destination, source:source })}>
             <Droppable droppableId={boxID}>{(provided) => (
                 <ul {...provided.droppableProps} ref={provided.innerRef}>
                     <MapOutData items={pictureData} />
                     {provided.placeholder}
                 </ul>)}
             </Droppable>
-        </DragDropContext>)} </>)
-}
-
-export default OrderDisplay;
+        </DragDropContext>)} </>) */}

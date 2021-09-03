@@ -45,7 +45,7 @@ const Tuner = () => {
                     alignItems="flex-start"
                 >
                     {tunerHeader}
-                    <OrderDisplay pictureData={pictureData} callBack={handleOnDragEnd} />
+                    <OrderDisplay pictureData={pictureData} callBack={handleOnDragEnd} boxID="ordered"/>
                 </Grid>)
                 ||
                 <div>
