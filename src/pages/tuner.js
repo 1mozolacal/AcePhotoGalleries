@@ -6,6 +6,7 @@ import Grid from "@material-ui/core/Grid";
 import { uploadFileToBlob, getJSONData } from '../utils/azureStorage';
 import DragHandleIcon from '@material-ui/icons/DragHandle';
 import { DragDropContext, Droppable, Draggable } from 'react-beautiful-dnd';
+import OrderDisplay from '../components/ordering'
 
 import "../stylesheets/home.sass"
 
@@ -15,10 +16,11 @@ const Tuner = () => {
     const [pictureData, pictureDataSet] = useState()
 
     useEffect(async () => {
-        getJSONData("ordering (1).txt").then((data) => pictureDataSet(data))
+        getJSONData("orderingTop.txt").then((data) => pictureDataSet(data))
     }, [])
 
-    const handleOnDragEnd = ({destination,source}) => {
+    const handleOnDragEnd = ({ destination, source }) => {
+        if(!destination){return}
         const item = pictureData[source.index]
         const newOrder = pictureData
         newOrder.splice(source.index, 1);
@@ -27,55 +29,31 @@ const Tuner = () => {
     }
 
     const loadingDisplay = (<h1>Loading data... please wait</h1>)
-    const mapOutData = () => (
-        pictureData.map(([id, width, title], index) => {
-            return (
-                <Draggable key={id} draggableId={id} index={index}>
-                    {(provided) => (
-                        <li ref={provided.innerRef} {...provided.draggableProps} {...provided.dragHandleProps}>
-                            <Grid container style={{ fontSize: "2em" }} >
-                                <Grid item xs={1}>
-                                    <DragHandleIcon></DragHandleIcon>
-                                </Grid>
-                                <Grid item xs={11}>
-                                    {title}
-                                </Grid>
-                            </Grid>
-                        </li>)}
-                </Draggable>)
-        })
+    const tunerHeader = (
+        <Grid container alignItems="flex-end" justifyContent="space-between">
+            <Grid><h1>Tuner!</h1></Grid>
+            <Grid>add options (content mode vs order mode,...)</Grid>
+            <Grid>save buttons</Grid>
+        </Grid>
     )
-    const tunerDisplay = (
-        <>
-            <h1>Tuner...</h1>
-            {pictureData &&
-                (<DragDropContext onDragEnd={handleOnDragEnd}>
-                    <Droppable droppableId="basic">{
-                        (provided) => (
-                            <ul {...provided.droppableProps} ref={provided.innerRef}>
-
-                                {mapOutData()}
-
-                                {provided.placeholder}
-                            </ul>
-
-                        )
-                    }
-                    </Droppable>
-                </DragDropContext>)}
-        </>)
-
     return (
         <div>
-            {(pictureData && tunerDisplay) || loadingDisplay}
+            {(pictureData &&
+                <Grid
+                    container
+                    direction="column"
+                    alignItems="flex-start"
+                >
+                    {tunerHeader}
+                    <OrderDisplay pictureData={pictureData} callBack={handleOnDragEnd} />
+                </Grid>)
+                ||
+                <div>
+                    <h1>Loading data... please wait</h1>
+                    <h3>If this take more than a few seconds consult the dev team.</h3>
+                </div>}
         </div>
     );
 }
 
 export default Tuner;
-
-/**
- *         {pictureData.map( (item,index) => {
-            return (<div>{item}</div>)
-        }) }
- */
