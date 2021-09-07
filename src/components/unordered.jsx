@@ -29,7 +29,7 @@ const MapOutData = ({elements,context}) => (
             </Draggable>)
     }))
 const UnorderDisplay = ({items,itemInfo,callBack,buttonCallBack,boxID,title="grouping"}) => {
-    console.log("unorderd with %o",items)
+    // console.log("unorderd with %o",items)
     return (<div className="holder">
     <ArrowForwardIosIcon onClick={() => buttonCallBack(undefined,true)}/>
     <h3>Title:{title}</h3>
