@@ -6,6 +6,10 @@ import UnorderDisplay from '../components/unordered'
 import ArrowBackIosIcon from '@material-ui/icons/ArrowBackIos';
 import { DragDropContext } from 'react-beautiful-dnd';
 
+// import Sidebar from "../components/Sidebar"
+import { Button } from "@material-ui/core"
+import SaveIcon from '@material-ui/icons/Save'
+import VisibilityIcon from '@material-ui/icons/Visibility'
 import "../stylesheets/tuner.sass"
 
 
@@ -18,7 +22,7 @@ const Tuner = () => {
     const [columWidths, setColumnWidths] = useState([11, 1, [6, 6]])
 
     useEffect(() => {
-        async function makeFetch () {
+        async function makeFetch() {
             await getJSONData("display.json").then((data) => {
                 const extractData = data[1]
                 orderedDataSet(extractData['ordered'])
@@ -38,14 +42,14 @@ const Tuner = () => {
         if (source.droppableId === "ordered") {
             temp = [orderedData[source.index], orderedData, orderedDataSet]
         } else if (source.droppableId === "unordered") {
-            temp = [ [unorderedData[source.index], 6], unorderedData, unorderedDataSet]
+            temp = [[unorderedData[source.index], 6], unorderedData, unorderedDataSet]
         } else if (source.droppableId === "unlisted") {
-            temp = [ [unlistedData[source.index], 6], unlistedData, unlistedDataSet]
+            temp = [[unlistedData[source.index], 6], unlistedData, unlistedDataSet]
         } else {
             alert("ERROR: source from unknow droppable container. Report this to dev team.")
             return
         }
-        const [oldSourceData,oldSourceDataType,oldSourceDataSetter] = temp
+        const [oldSourceData, oldSourceDataType, oldSourceDataSetter] = temp
 
         const insertInto = (destinationData, destinationSetter, insertData) => {
             const newSource = oldSourceDataType
@@ -84,12 +88,23 @@ const Tuner = () => {
     }
 
     const tunerHeader = (
-        <Grid classes={{ root: "tuner-header" }} container alignItems="flex-end">
-            <Grid><h1>Tuner!</h1></Grid>
-            <Grid>add options (content mode vs order mode,...)</Grid>
-            <Grid>save buttons</Grid>
+        <Grid classes={{ root: "tuner-header" }} container alignItems="center" justifyContent="space-between">
+            <Grid item><h1>Tuner!</h1></Grid>
+            <Grid item>Add options (content mode vs order mode,...)</Grid>
+            <Grid item>
+                <Grid container alignItems="center" justifyContent="center" spacing={2}>
+                    <Grid item>
+                        <Button variant="contained" className="grid-button" startIcon={<VisibilityIcon />}>Preview</Button>
+                    </Grid>
+                    <Grid item>
+                        <Button variant="contained" className="grid-button" startIcon={<SaveIcon />}>Save</Button>
+                    </Grid>
+                </Grid>
+            </Grid>
+
         </Grid>
     )
+
     const mainDisplay = (
         <Grid
             container
@@ -106,11 +121,11 @@ const Tuner = () => {
                     <Grid item xs={columWidths[1]} classes={{ root: "max-height" }}>
                         <Grid container classes={{ root: "max-height" }}>
                             <Grid item xs={columWidths[2][0]} classes={{ root: "tuner-shelf" }}>
-                                { (columWidths[2][0] === 10 && <UnorderDisplay items={unorderedData} itemInfo={pictureInfo} buttonCallBack={handleShelfButton} callBack={handleOnDragEnd} boxID="unordered" />)
+                                {(columWidths[2][0] === 10 && <UnorderDisplay items={unorderedData} itemInfo={pictureInfo} buttonCallBack={handleShelfButton} callBack={handleOnDragEnd} boxID="unordered" />)
                                     || <ArrowBackIosIcon onClick={() => handleShelfButton(0, false)} />}
                             </Grid>
                             <Grid item xs={columWidths[2][1]} classes={{ root: "tuner-shelf" }}>
-                                { (columWidths[2][1] === 10 && <UnorderDisplay items={unlistedData} itemInfo={pictureInfo} buttonCallBack={handleShelfButton} callBack={handleOnDragEnd} boxID="unlisted" />)
+                                {(columWidths[2][1] === 10 && <UnorderDisplay items={unlistedData} itemInfo={pictureInfo} buttonCallBack={handleShelfButton} callBack={handleOnDragEnd} boxID="unlisted" />)
                                     || <ArrowBackIosIcon onClick={() => handleShelfButton(1, false)} />}
                             </Grid>
                         </Grid>
@@ -120,16 +135,19 @@ const Tuner = () => {
         </Grid>
     )
     return (
-        <div className="tuner-page">
-            {(
-                (pictureInfo && orderedData && unorderedData && unlistedData)
-                && mainDisplay)
-                ||
-                (<div>
-                    <h1>Loading data... please wait</h1>
-                    <h3>If this take more than a few seconds consult the dev team.</h3>
-                </div>)}
-        </div>
+        <>
+            {/* <Sidebar/> */}
+            <div className="tuner-page">
+                {(
+                    (pictureInfo && orderedData && unorderedData && unlistedData)
+                    && mainDisplay)
+                    ||
+                    (<div>
+                        <h1>Loading data... please wait</h1>
+                        <h3>If this take more than a few seconds consult the dev team.</h3>
+                    </div>)}
+            </div>
+        </>
     );
 }
 

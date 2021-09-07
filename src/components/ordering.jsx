@@ -1,20 +1,25 @@
 import React from "react";
 import Grid from "@material-ui/core/Grid";
-import {Draggable } from 'react-beautiful-dnd';
+import { Draggable } from 'react-beautiful-dnd';
 import DragHandleIcon from '@material-ui/icons/DragHandle';
-import {DragAndDropDroppable} from './dragableZone'
+import { DragAndDropDroppable } from './dragableZone'
 
 
-const MapOutData = ({elements,context}) => (
-    elements.map(( [id,width], index) => {
-        if (context[id] === undefined){
-            console.log("undefined here: %o",elements)
+const listStyle = {
+    listStyleType: 'none'
+}
+
+
+const MapOutData = ({ elements, context }) => (
+    elements.map(([id, width], index) => {
+        if (context[id] === undefined) {
+            console.log("undefined here: %o", elements)
         }
         return (
-            <Draggable key={id} draggableId={id} index={index}>
+            <Draggable key={id} draggableId={id} index={index} style={listStyle}>
                 {(provided) => (
-                    <li ref={provided.innerRef} {...provided.draggableProps} {...provided.dragHandleProps}>
-                        <Grid container>
+                    <div ref={provided.innerRef} {...provided.draggableProps} {...provided.dragHandleProps} >
+                        <Grid container justifyContent="center" alignContent="center">
                             <Grid item xs={1}>
                                 <DragHandleIcon></DragHandleIcon>
                             </Grid>
@@ -22,19 +27,19 @@ const MapOutData = ({elements,context}) => (
                                 T:{context[id]["title"]}
                             </Grid>
                         </Grid>
-                    </li>)}
+                    </div>)}
             </Draggable>)
     }))
-const OrderDisplay = ({items,itemInfo,callBack,boxID}) => {
+const OrderDisplay = ({ items, itemInfo, callBack, boxID }) => {
     return (<>
-    {items && 
-    <DragAndDropDroppable 
-    items={items}
-    itemInfo={itemInfo}
-    callBack={callBack}
-    boxID={boxID}
-    MapOutData={MapOutData}
-    Wrapper={(props)=>(<ul style={{minHeight:"200px"}} {...props.droppableProps} ref={props.innerRef}>{props.children}</ul>)}/>}
+        {items &&
+            <DragAndDropDroppable
+                items={items}
+                itemInfo={itemInfo}
+                callBack={callBack}
+                boxID={boxID}
+                MapOutData={MapOutData}
+                Wrapper={(props) => (<ul style={{ minHeight: "200px" }} {...props.droppableProps} ref={props.innerRef}>{props.children}</ul>)} />}
     </>)
 }
 
