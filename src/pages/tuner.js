@@ -5,6 +5,7 @@ import OrderDisplay from '../components/ordering'
 import UnorderDisplay from '../components/unordered'
 import ArrowBackIosIcon from '@material-ui/icons/ArrowBackIos';
 import { DragDropContext } from 'react-beautiful-dnd';
+import SidebarTuner from '../components/SidebarTuner'
 
 // import Sidebar from "../components/Sidebar"
 import { Button } from "@material-ui/core"
@@ -13,11 +14,43 @@ import VisibilityIcon from '@material-ui/icons/Visibility'
 import "../stylesheets/tuner.sass"
 
 
+import Tabs from '@material-ui/core/Tabs';
+import Tab from '@material-ui/core/Tab';
+
+
+
+function TabPanel(props) {
+    const { children, value, index, ...other } = props;
+
+    return (
+        <div
+            role="tabpanel"
+            hidden={value !== index}
+            id={index}
+            aria-labelledby={`simple-tab-${index}`}
+            {...other}
+        >
+            {value === index && (
+                <div>
+                    {children}
+                </div>
+            )}
+        </div>
+    );
+}
+
+
+
 const Tuner = () => {
     const [pictureInfo, pictureInfoSet] = useState()
     const [orderedData, orderedDataSet] = useState()
     const [unorderedData, unorderedDataSet] = useState()
     const [unlistedData, unlistedDataSet] = useState()
+    const [value, setValue] = React.useState(0);
+
+    const handleChange = (event, newValue) => {
+        setValue(newValue);
+    };
 
     const [columWidths, setColumnWidths] = useState([11, 1, [6, 6]])
 
@@ -89,10 +122,12 @@ const Tuner = () => {
 
     const tunerHeader = (
         <Grid classes={{ root: "tuner-header" }} container alignItems="center" justifyContent="space-between">
-            <Grid item><h1>Tuner!</h1></Grid>
-            <Grid item>Add options (content mode vs order mode,...)</Grid>
+
             <Grid item>
-                <Grid container alignItems="center" justifyContent="center" spacing={2}>
+                <Grid container alignItems="center" justifyContent="center" spacing={3}>
+                    <Grid item>
+                        <h1>Tuner!</h1>
+                    </Grid>
                     <Grid item>
                         <Button variant="contained" className="grid-button" startIcon={<VisibilityIcon />}>Preview</Button>
                     </Grid>
@@ -100,6 +135,33 @@ const Tuner = () => {
                         <Button variant="contained" className="grid-button" startIcon={<SaveIcon />}>Save</Button>
                     </Grid>
                 </Grid>
+            </Grid>
+
+            <Grid item>
+
+                <SidebarTuner>
+                    <Tabs
+                        value={value}
+                        onChange={handleChange}
+                        indicatorColor="primary"
+                        textColor="primary"
+                        centered
+                    >
+                        <Tab label="Ordered List" />
+                        <Tab label="Unordered List" />
+                    </Tabs>
+
+                    <TabPanel value={value} index={0}>
+
+                        {/* <UnorderDisplay items={unorderedData} itemInfo={pictureInfo} buttonCallBack={handleShelfButton} callBack={handleOnDragEnd} boxID="unordered" />) */}
+                        Something 1
+                    </TabPanel>
+                    <TabPanel value={value} index={1}>
+                        Something 2
+                        {/* <UnorderDisplay items={unlistedData} itemInfo={pictureInfo} buttonCallBack={handleShelfButton} callBack={handleOnDragEnd} boxID="unlisted" />Ï */}
+
+                    </TabPanel>
+                </SidebarTuner>
             </Grid>
 
         </Grid>
@@ -112,7 +174,6 @@ const Tuner = () => {
             alignItems="flex-start"
             classes={{ root: "max-height" }}
         >
-            {tunerHeader}
             <DragDropContext onDragEnd={(info) => handleOnDragEnd(info)}>
                 <Grid classes={{ root: "tuner-body" }} container direction="row" alignItems="flex-start">
                     <Grid xs={columWidths[0]} item >
@@ -121,11 +182,15 @@ const Tuner = () => {
                     <Grid item xs={columWidths[1]} classes={{ root: "max-height" }}>
                         <Grid container classes={{ root: "max-height" }}>
                             <Grid item xs={columWidths[2][0]} classes={{ root: "tuner-shelf" }}>
-                                {(columWidths[2][0] === 10 && <UnorderDisplay items={unorderedData} itemInfo={pictureInfo} buttonCallBack={handleShelfButton} callBack={handleOnDragEnd} boxID="unordered" />)
+                                {(columWidths[2][0] === 10 &&
+                                    <UnorderDisplay items={unorderedData} itemInfo={pictureInfo} buttonCallBack={handleShelfButton} callBack={handleOnDragEnd} boxID="unordered" />)
                                     || <ArrowBackIosIcon onClick={() => handleShelfButton(0, false)} />}
                             </Grid>
+
+
                             <Grid item xs={columWidths[2][1]} classes={{ root: "tuner-shelf" }}>
-                                {(columWidths[2][1] === 10 && <UnorderDisplay items={unlistedData} itemInfo={pictureInfo} buttonCallBack={handleShelfButton} callBack={handleOnDragEnd} boxID="unlisted" />)
+                                {(columWidths[2][1] === 10 &&
+                                    <UnorderDisplay items={unlistedData} itemInfo={pictureInfo} buttonCallBack={handleShelfButton} callBack={handleOnDragEnd} boxID="unlisted" />)
                                     || <ArrowBackIosIcon onClick={() => handleShelfButton(1, false)} />}
                             </Grid>
                         </Grid>
@@ -138,6 +203,8 @@ const Tuner = () => {
         <>
             {/* <Sidebar/> */}
             <div className="tuner-page">
+                {tunerHeader}
+
                 {(
                     (pictureInfo && orderedData && unorderedData && unlistedData)
                     && mainDisplay)
