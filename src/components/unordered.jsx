@@ -1,11 +1,9 @@
-import React, { useState } from "react";
+import React from "react";
 import Grid from "@material-ui/core/Grid";
 import { Draggable } from 'react-beautiful-dnd';
-import DragHandleIcon from '@material-ui/icons/DragHandle';
 import {DragAndDropDroppable} from './dragableZone'
 import ArrowForwardIosIcon from '@material-ui/icons/ArrowForwardIos';
 import placeHolder from '../images/mountaindawn.jpg'
-import Container from '@material-ui/core/Container';
 
 import '../stylesheets/tuner.sass'
 
@@ -29,7 +27,6 @@ const MapOutData = ({elements,context}) => (
             </Draggable>)
     }))
 const UnorderDisplay = ({items,itemInfo,callBack,buttonCallBack,boxID,title="grouping"}) => {
-    // console.log("unorderd with %o",items)
     return (<div className="holder">
     <ArrowForwardIosIcon onClick={() => buttonCallBack(undefined,true)}/>
     <h3>Title:{title}</h3>
@@ -39,7 +36,7 @@ const UnorderDisplay = ({items,itemInfo,callBack,buttonCallBack,boxID,title="gro
     callBack={callBack}
     boxID={boxID}
     MapOutData={MapOutData}
-    Wrapper={(props)=>(<Grid container direction="column" {...props.droppableProps} ref={props.innerRef}>{props.children}</Grid>)}/>}
+    Wrapper={(props)=>(<Grid style={{minHeight:"100%"}} container direction="column" {...props.droppableProps} ref={props.innerRef}>{props.children}</Grid>)}/>}
     </div>)
 }
 

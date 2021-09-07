@@ -11,7 +11,7 @@ const DragAndDrop = (props) => {
 
 const DragAndDropDroppable = ({ items,itemInfo, boxID, MapOutData, Wrapper }) => {
     return (
-            <Droppable style={{overflow: "scroll"}} droppableId={boxID}>{(provided) => (
+            <Droppable style={{overflow: "scroll",height:"100%"}} droppableId={boxID}>{(provided) => (
                 <Wrapper droppableProps={provided.droppableProps} innerRef={provided.innerRef}>
                     <MapOutData elements={items} context={itemInfo} />
                     {provided.placeholder}
