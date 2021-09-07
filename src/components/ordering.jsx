@@ -2,11 +2,12 @@ import React, { useState, useEffect } from "react";
 import Grid from "@material-ui/core/Grid";
 import { DragDropContext, Droppable, Draggable } from 'react-beautiful-dnd';
 import DragHandleIcon from '@material-ui/icons/DragHandle';
-import DragAndDrop from './dragableZone'
+import {DragAndDropDroppable} from './dragableZone'
 
 
-const MapOutData = ({items}) => (
-    items.map(([id, width, title], index) => {
+const MapOutData = ({elements,context}) => (
+    elements.map(( [id,width], index) => {
+        console.log("mapping here")
         return (
             <Draggable key={id} draggableId={id} index={index}>
                 {(provided) => (
@@ -16,17 +17,18 @@ const MapOutData = ({items}) => (
                                 <DragHandleIcon></DragHandleIcon>
                             </Grid>
                             <Grid item xs={11}>
-                                {title}
+                                T:{context[id]["title"]}
                             </Grid>
                         </Grid>
                     </li>)}
             </Draggable>)
     }))
-const OrderDisplay = ({pictureData,callBack,boxID}) => {
+const OrderDisplay = ({items,itemInfo,callBack,boxID}) => {
     return (<>
-    {pictureData && 
-    <DragAndDrop 
-    pictureData={pictureData}
+    {items && 
+    <DragAndDropDroppable 
+    items={items}
+    itemInfo={itemInfo}
     callBack={callBack}
     boxID={boxID}
     MapOutData={MapOutData}

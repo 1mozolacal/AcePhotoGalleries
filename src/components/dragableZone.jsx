@@ -1,19 +1,24 @@
-import React, { useState, useEffect } from "react";
-import Grid from "@material-ui/core/Grid";
-import { DragDropContext, Droppable, Draggable } from 'react-beautiful-dnd';
+import React from "react";
+import { DragDropContext, Droppable } from 'react-beautiful-dnd';
 
 
-const DragAndDrop = ({ pictureData, callBack, boxID, MapOutData, Wrapper }) => {
-    console.log("stuff: %o, %o, %o, %o",pictureData, boxID, Wrapper)
+const DragAndDrop = (props) => {
     return (
-        <DragDropContext onDragEnd={({ destination, source }) => callBack({ destination: destination, source: source })}>
-            <Droppable droppableId={boxID}>{(provided) => (
-                <Wrapper droppableProps={provided.droppableProps} innerRef={provided.innerRef}>
-                    <MapOutData items={pictureData} />
-                    {provided.placeholder}
-                </Wrapper>)}
-            </Droppable>
+        <DragDropContext onDragEnd={({ destination, source }) => props.callBack({ destination: destination, source: source })}>
+            <DragAndDropDroppable {...props} />
         </DragDropContext>)
 }
 
+const DragAndDropDroppable = ({ items,itemInfo, boxID, MapOutData, Wrapper }) => {
+    return (
+            <Droppable droppableId={boxID}>{(provided) => (
+                <Wrapper droppableProps={provided.droppableProps} innerRef={provided.innerRef}>
+                    <MapOutData elements={items} context={itemInfo} />
+                    {provided.placeholder}
+                </Wrapper>)}
+            </Droppable>
+    )
+};
+
 export default DragAndDrop;
+export {DragAndDropDroppable};

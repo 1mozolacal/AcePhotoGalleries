@@ -14,6 +14,36 @@ export const getJSONData = async (filename,container='config') => {
     const url = `${baseUrl}/${container}/${filename}`;
     var jsonData;
     await fetch(url)
+        .then(response => {
+            if (response.ok){
+                jsonData = [true,response.json()]
+            }
+            else {
+                jsonData = [false,response]
+            }
+        } )
+    if (jsonData[0]){
+        await jsonData[1].then( (data) => jsonData[1] = data)
+    }
+    console.log("func ret: %o", jsonData)
+    return jsonData
+}
+
+export const overWriteJSON = async (payload,filename,container='config') => {
+    var previous = await getJSONData(filename)
+    if(previous[0]){
+        var d = new Date(); 				  
+        var s = new String(); 				  
+        s = (d.getHours()+":"+d.getMinutes()+":"+d.getSeconds()+"  "+d.getDate()+"|"+(d.getMonth()+1)+"|"+d.getFullYear()).toString();
+        uploadNewJsonFile(previous[1],'backups/'+filename+"   "+s,container)
+    }
+    uploadNewJsonFile(payload,filename,container)
+}
+
+export const getJSONDataOLD = async (filename,container='config') => {
+    const url = `${baseUrl}/${container}/${filename}`;
+    var jsonData;
+    await fetch(url)
         .then(response => response.json() )
         .then(data => jsonData = data)
     console.log("func ret: %o", jsonData)
@@ -21,12 +51,14 @@ export const getJSONData = async (filename,container='config') => {
 }
 
 // Upload new content
-export const uploadNewJsonFile = async (content, blobName) => {
+export const uploadNewJsonFile = async (jsonData, blobName,container='config') => {
+    const strRep = JSON.stringify(jsonData)
     // 🐄 go moo 
-    const containerClient = blobServiceClient.getContainerClient('pics');
+    const containerClient = blobServiceClient.getContainerClient(container);
 
     const blockBlobClient = containerClient.getBlockBlobClient(blobName);
-    const uploadBlobResponse = await blockBlobClient.upload(content, content.length);
+    const uploadBlobResponse = await blockBlobClient.upload(strRep, strRep.length);
+    console.log("Upload respone: %o", uploadBlobResponse)
 }
 
 

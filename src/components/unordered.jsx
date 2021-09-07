@@ -1,48 +1,46 @@
-import React, { useState, useEffect } from "react";
+import React, { useState } from "react";
 import Grid from "@material-ui/core/Grid";
-import { DragDropContext, Droppable, Draggable } from 'react-beautiful-dnd';
+import { Draggable } from 'react-beautiful-dnd';
 import DragHandleIcon from '@material-ui/icons/DragHandle';
+import {DragAndDropDroppable} from './dragableZone'
+import ArrowForwardIosIcon from '@material-ui/icons/ArrowForwardIos';
+import placeHolder from '../images/mountaindawn.jpg'
+import Container from '@material-ui/core/Container';
 
+import '../stylesheets/tuner.sass'
 
-
-const MapOutData = ({items}) => (
-    items.map(([id, width, title], index) => {
+const MapOutData = ({elements,context}) => (
+    elements.map((id, index) => {
         return (
             <Draggable key={id} draggableId={id} index={index}>
                 {(provided) => (
-                    <li ref={provided.innerRef} {...provided.draggableProps} {...provided.dragHandleProps}>
+                    <Grid spacing={0} container ref={provided.innerRef} {...provided.draggableProps} {...provided.dragHandleProps} >
+                        <Grid item>
                         <Grid container>
-                            <Grid item xs={1}>
-                                <DragHandleIcon></DragHandleIcon>
+                            <Grid item xs={12}>
+                                <div style={{width:"100%"}} >{context[id]["title"]}</div>
                             </Grid>
-                            <Grid item xs={11}>
-                                {title}
+                            <Grid item xs={12}>
+                                <img style={{width:"100%"}}  src={placeHolder}/>
                             </Grid>
                         </Grid>
-                    </li>)}
+                        </Grid>
+                    </Grid>)}
             </Draggable>)
     }))
-const UnorderedDisplays = (props) => {
-
-    const handleOnDragEnd = ({ destination, source }) => {
-        if(!destination){return}
-        const item = props.pictureData[source.index]
-        const newOrder = props.pictureData
-        newOrder.splice(source.index, 1);
-        newOrder.splice(destination.index, 0, item);
-        props.pictureDataSet(newOrder)
-    }
-    console.log(props)
-    return (<>
-    {props.pictureData &&
-        (<DragDropContext onDragEnd={handleOnDragEnd}>
-            <Droppable droppableId="basic">{(provided) => (
-                <ul {...provided.droppableProps} ref={provided.innerRef}>
-                    <MapOutData items={props.pictureData} />
-                    {provided.placeholder}
-                </ul>)}
-            </Droppable>
-        </DragDropContext>)} </>)
+const UnorderDisplay = ({items,itemInfo,callBack,buttonCallBack,boxID,title="grouping"}) => {
+    console.log("unorderd with %o",items)
+    return (<div className="holder">
+    <ArrowForwardIosIcon onClick={() => buttonCallBack(undefined,true)}/>
+    <h3>Title:{title}</h3>
+    {<DragAndDropDroppable 
+    items={items}
+    itemInfo={itemInfo}
+    callBack={callBack}
+    boxID={boxID}
+    MapOutData={MapOutData}
+    Wrapper={(props)=>(<Grid container direction="column" {...props.droppableProps} ref={props.innerRef}>{props.children}</Grid>)}/>}
+    </div>)
 }
 
-export default UnorderedDisplays;
+export default UnorderDisplay;
