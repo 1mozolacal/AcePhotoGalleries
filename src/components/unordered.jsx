@@ -10,9 +10,8 @@ import placeHolder from '../images/mountaindawn.jpg'
 
 import '../stylesheets/tuner.sass'
 
-const MapOutData = ({ elements, context, dragSimulateCallBack }) => (
+const MapOutData = ({ elements, context }) => (
     elements.map((id, index) => {
-        console.log("rend el")
         return (
             <Draggable key={id} draggableId={id} index={index}>
                 {(provided) => (
@@ -31,7 +30,6 @@ const MapOutData = ({ elements, context, dragSimulateCallBack }) => (
                     <br/>
                     <div className="md-text">{`$${(context[id]['prices'] && (context[id]['prices'][0] + " to $" + context[id]['prices'][4]) )|| '--'}`}</div>
                 </CardContent>
-                <DeleteIcon onClick={() => {console.log("plea reender: %o",elements); dragSimulateCallBack({destination:{index:0,droppableId:"unlisted"},source:{index:index,droppableId:"unordered"},spoof:true}) } }/>
             </div>
         </Card>
 
@@ -41,13 +39,12 @@ const MapOutData = ({ elements, context, dragSimulateCallBack }) => (
                     </Grid>)}
             </Draggable>)
     }))
-const UnorderDisplay = ({ items, itemInfo, callBack, boxID }) => {
+const UnorderDisplay = ({ items, itemInfo, boxID }) => {
     console.log("rend hihg")
     return (<div className="holder">
         {<DragAndDropDroppable
             items={items}
             itemInfo={itemInfo}
-            callBack={callBack}
             boxID={boxID}
             MapOutData={MapOutData}
             Wrapper={(props) => (<Grid style={{ minHeight: "100%" }} container direction="column" {...props.droppableProps} ref={props.innerRef}>{props.children}</Grid>)} />}

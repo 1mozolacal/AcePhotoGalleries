@@ -3,8 +3,9 @@ import Grid from "@material-ui/core/Grid";
 import { getJSONData, getJSONDataOLD, uploadNewJsonFile, overWriteJSON } from '../utils/azureStorage';
 import OrderDisplay from '../components/ordering'
 import UnorderDisplay from '../components/unordered'
-import { DragDropContext } from 'react-beautiful-dnd';
+import { DragDropContext, Droppable, Draggable } from 'react-beautiful-dnd';
 import SidebarTuner from '../components/SidebarTuner'
+import {EmptyDroppable} from '../components/dragableZone'
 
 // import Sidebar from "../components/Sidebar"
 import { Button } from "@material-ui/core"
@@ -67,14 +68,21 @@ const Tuner = () => {
     }, [])
 
     const handleOnDragEnd = ({ destination, source }) => {
-        console.log("start")
+        var sourceDroppableId = source.droppableId
+        var destinationDroppableId = destination.droppableId
+        if(destinationDroppableId === "trash"){
+            destinationDroppableId = "unlisted"
+        }
+        if(destinationDroppableId == "recover"){
+            destinationDroppableId = "unordered"
+        }
         if (!destination) { return }
         var temp;
-        if (source.droppableId === "ordered") {
+        if (sourceDroppableId === "ordered") {
             temp = [orderedData[source.index], orderedData, orderedDataSet]
-        } else if (source.droppableId === "unordered") {
+        } else if (sourceDroppableId === "unordered") {
             temp = [[unorderedData[source.index], 6], unorderedData, unorderedDataSet]
-        } else if (source.droppableId === "unlisted") {
+        } else if (sourceDroppableId === "unlisted") {
             temp = [[unlistedData[source.index], 6], unlistedData, unlistedDataSet]
         } else {
             alert("ERROR: source from unknow droppable container. Report this to dev team.")
@@ -86,7 +94,7 @@ const Tuner = () => {
             const newSource = oldSourceDataType
             newSource.splice(source.index, 1)
             var newDest;
-            if (source.droppableId === destination.droppableId) {
+            if (sourceDroppableId === destinationDroppableId) {
                 newDest = newSource
             } else {
                 oldSourceDataSetter(newSource)
@@ -95,19 +103,19 @@ const Tuner = () => {
             newDest.splice(destination.index, 0, insertData);
             destinationSetter(newDest)
         }
-        if (destination.droppableId === "ordered") {
+        if (destinationDroppableId === "ordered") {
             insertInto(orderedData, orderedDataSet, oldSourceData)
-        } else if (destination.droppableId === "unordered") {
+        } else if (destinationDroppableId === "unordered") {
             insertInto(unorderedData, unorderedDataSet, oldSourceData[0])
-        } else if (destination.droppableId === "unlisted") {
+        } else if (destinationDroppableId === "unlisted") {
             insertInto(unlistedData, unlistedDataSet, oldSourceData[0])
         } else {
             alert("ERROR: destination to unknow droppable container. Report this to dev team.")
             return
         }
-        console.log("end")
     }
 
+    
     const tunerHeader = (
         <Grid classes={{ root: "tuner-header" }} container alignItems="center" justifyContent="space-between">
 
@@ -140,12 +148,14 @@ const Tuner = () => {
                     </Tabs>
 
                     <TabPanel value={value} index={0}>
-                        {unorderedData && pictureInfo && 
-                        <UnorderDisplay items={unorderedData} itemInfo={pictureInfo} callBack={handleOnDragEnd} boxID="unordered" />}
+                        <EmptyDroppable boxID="trash" holderStyle={{ position:'relative', backgroundColor: "red", height: "100px" }}/>
+                        {unorderedData && pictureInfo &&
+                            <UnorderDisplay items={unorderedData} itemInfo={pictureInfo} boxID="unordered" />}
                     </TabPanel>
                     <TabPanel value={value} index={1}>
-                        {unlistedData && pictureInfo && 
-                        <UnorderDisplay items={unlistedData} itemInfo={pictureInfo} callBack={handleOnDragEnd} boxID="unlisted" />}
+                        <EmptyDroppable boxID="recover" holderStyle={{ position:'relative', backgroundColor: "green", height: "100px" }}/>
+                        {unlistedData && pictureInfo &&
+                            <UnorderDisplay items={unlistedData} itemInfo={pictureInfo} boxID="unlisted" />}
                     </TabPanel>
                 </SidebarTuner>
             </Grid>
@@ -155,20 +165,20 @@ const Tuner = () => {
 
     const mainDisplay = (<OrderDisplay items={orderedData} itemInfo={pictureInfo} callBack={handleOnDragEnd} boxID="ordered" />)
     return (
-            <DragDropContext onDragEnd={(info) => handleOnDragEnd(info)}>
+        <DragDropContext onDragEnd={(info) => handleOnDragEnd(info)}>
             <div className="tuner-page">
                 {tunerHeader}
 
                 {(
                     (pictureInfo && orderedData && unorderedData && unlistedData)
-                    && mainDisplay)
+                    && <div style={{width:"50%"}}>{mainDisplay}</div>)
                     ||
                     (<div>
                         <h1>Loading data... please wait</h1>
                         <h3>If this take more than a few seconds consult the dev team.</h3>
                     </div>)}
             </div>
-            </DragDropContext>
+        </DragDropContext>
     );
 }
 

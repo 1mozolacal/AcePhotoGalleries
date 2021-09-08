@@ -9,16 +9,23 @@ const DragAndDrop = (props) => {
         </DragDropContext>)
 }
 
-const DragAndDropDroppable = ({ items,itemInfo, boxID, MapOutData, Wrapper, callBack }) => {
+const DragAndDropDroppable = ({ items, itemInfo, boxID, MapOutData, Wrapper }) => {
     return (
-            <Droppable style={{overflow: "scroll",height:"100%"}} droppableId={boxID}>{(provided) => (
-                <Wrapper droppableProps={provided.droppableProps} innerRef={provided.innerRef}>
-                    <MapOutData elements={items} context={itemInfo} dragSimulateCallBack={callBack}/>
-                    {provided.placeholder}
-                </Wrapper>)}
-            </Droppable>
+        <Droppable style={{ overflow: "scroll", height: "100%" }} droppableId={boxID}>{(provided) => (
+            <Wrapper droppableProps={provided.droppableProps} innerRef={provided.innerRef}>
+                <MapOutData elements={items} context={itemInfo} />
+                {provided.placeholder}
+            </Wrapper>)}
+        </Droppable>
     )
 };
+const EmptyDroppable = ({ boxID, holderStyle }) => (
+    <Droppable droppableId={boxID}>
+        {(provided) => (<div style={holderStyle} ref={provided.innerRef} {...provided.draggableProps} {...provided.dragHandleProps}>
+            {provided.placeholder}
+        </div>
+        )}
+    </Droppable>)
 
 export default DragAndDrop;
-export {DragAndDropDroppable};
+export { DragAndDropDroppable, EmptyDroppable };
