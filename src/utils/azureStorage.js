@@ -58,7 +58,6 @@ export const uploadNewJsonFile = async (jsonData, blobName,container='config') =
 
     const blockBlobClient = containerClient.getBlockBlobClient(blobName);
     const uploadBlobResponse = await blockBlobClient.upload(strRep, strRep.length);
-    console.log("Upload respone: %o", uploadBlobResponse)
 }
 
 
@@ -86,7 +85,8 @@ export const uploadFileToBlob = async (file) => {
         });
 
     // upload file
-    await createBlobInContainer(containerClient, file);
+    const result = await createBlobInContainer(containerClient, file);
+    console.log("upl res: %o >< %o",result, file)
 };
 
 
