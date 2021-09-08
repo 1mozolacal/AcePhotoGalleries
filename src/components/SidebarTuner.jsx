@@ -25,6 +25,7 @@ const SidebarTuner = ({children}) => {
                 variant="persistent"
                 anchor="right"
                 open={open}
+                classes={{paper:"half-screen"}}
             >
                 <div className="sidebar-tuner">
                     <IconButton onClick={() => setOpen(false)}>

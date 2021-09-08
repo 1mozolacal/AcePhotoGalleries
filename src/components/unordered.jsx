@@ -2,34 +2,46 @@ import React from "react";
 import Grid from "@material-ui/core/Grid";
 import { Draggable } from 'react-beautiful-dnd';
 import { DragAndDropDroppable } from './dragableZone'
-import ArrowForwardIosIcon from '@material-ui/icons/ArrowForwardIos';
+import DeleteIcon from '@material-ui/icons/Delete';
+import Card from '@material-ui/core/Card';
+import CardContent from '@material-ui/core/CardContent';
+import CardMedia from '@material-ui/core/CardMedia';
 import placeHolder from '../images/mountaindawn.jpg'
 
 import '../stylesheets/tuner.sass'
 
-const MapOutData = ({ elements, context }) => (
+const MapOutData = ({ elements, context, dragSimulateCallBack }) => (
     elements.map((id, index) => {
         return (
             <Draggable key={id} draggableId={id} index={index}>
                 {(provided) => (
                     <Grid spacing={0} container ref={provided.innerRef} {...provided.draggableProps} {...provided.dragHandleProps} >
-                        <Grid item>
-                            <Grid container>
-                                <Grid item xs={12}>
-                                    <div style={{ width: "100%" }} >{context[id]["title"]}</div>
-                                </Grid>
-                                <Grid item xs={12}>
-                                    <img style={{ width: "100%" }} src={placeHolder} />
-                                </Grid>
-                            </Grid>
+                        <Grid item xs={12}>
+                            
+        <Card className='card'>
+            <CardMedia
+                className='card-cover'
+                image={context[id]['URL'] || placeHolder}
+                title={context[id]['title'] || 'Coming soon....'}
+            />
+            <div className="card-details">
+                <CardContent>
+                    <div className="md-text blue-text">{context[id]['title'] || 'Bacon pancake!'}</div>
+                    <br/>
+                    <div className="md-text">{`$${(context[id]['prices'] && (context[id]['prices'][0] + " to $" + context[id]['prices'][4]) )|| '--'}`}</div>
+                </CardContent>
+                <DeleteIcon onClick={() => {console.log("plea reender"); dragSimulateCallBack({destination:{index:0,droppableId:"unlisted"},source:{index:index,droppableId:"unordered"},spoof:true}) } }/>
+            </div>
+        </Card>
+
+
+
                         </Grid>
                     </Grid>)}
             </Draggable>)
     }))
-const UnorderDisplay = ({ items, itemInfo, callBack, buttonCallBack, boxID, title = "grouping" }) => {
+const UnorderDisplay = ({ items, itemInfo, callBack, boxID, title = "grouping" }) => {
     return (<div className="holder">
-        <ArrowForwardIosIcon onClick={() => buttonCallBack(undefined, true)} />
-        <h3><span>Title: {title}</span></h3>
         {<DragAndDropDroppable
             items={items}
             itemInfo={itemInfo}
