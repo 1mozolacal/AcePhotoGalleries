@@ -5,7 +5,9 @@ import OrderDisplay from '../components/ordering'
 import UnorderDisplay from '../components/unordered'
 import { DragDropContext, Droppable, Draggable } from 'react-beautiful-dnd';
 import SidebarTuner from '../components/SidebarTuner'
-import {EmptyDroppable} from '../components/dragableZone'
+import { EmptyDroppable } from '../components/dragableZone'
+import PaypalBtn from '../components/PaypalBtn'
+import CardHolder from '../components/cardHolder'
 
 // import Sidebar from "../components/Sidebar"
 import { Button } from "@material-ui/core"
@@ -47,6 +49,7 @@ const Tuner = () => {
     const [unorderedData, unorderedDataSet] = useState()
     const [unlistedData, unlistedDataSet] = useState()
     const [value, setValue] = React.useState(0);
+    const [showPreview, setShowPreview] = useState(false)
 
     const handleChange = (event, newValue) => {
         setValue(newValue);
@@ -70,10 +73,10 @@ const Tuner = () => {
     const handleOnDragEnd = ({ destination, source }) => {
         var sourceDroppableId = source.droppableId
         var destinationDroppableId = destination.droppableId
-        if(destinationDroppableId === "trash"){
+        if (destinationDroppableId === "trash") {
             destinationDroppableId = "unlisted"
         }
-        if(destinationDroppableId == "recover"){
+        if (destinationDroppableId == "recover") {
             destinationDroppableId = "unordered"
         }
         if (!destination) { return }
@@ -115,7 +118,20 @@ const Tuner = () => {
         }
     }
 
-    
+    const saveOrdering = async function () {
+        const pushData = {
+            ordered: orderedData,
+            unordered: unorderedData,
+            unlisted: unlistedData
+        }
+        await overWriteJSON(pushData, "display.json")
+        alert("Changes Saved")
+    }
+    const togglePreview = () => {
+        console.log("preveiw %o", showPreview)
+        setShowPreview(!showPreview)
+    }
+
     const tunerHeader = (
         <Grid classes={{ root: "tuner-header" }} container alignItems="center" justifyContent="space-between">
 
@@ -125,10 +141,10 @@ const Tuner = () => {
                         <h1>Tuner!</h1>
                     </Grid>
                     <Grid item>
-                        <Button variant="contained" className="grid-button" startIcon={<VisibilityIcon />}>Preview</Button>
+                        <Button variant="contained" className="grid-button" onClick={togglePreview} startIcon={<VisibilityIcon />}>Preview</Button>
                     </Grid>
                     <Grid item>
-                        <Button variant="contained" className="grid-button" startIcon={<SaveIcon />}>Save</Button>
+                        <Button variant="contained" className="grid-button" onClick={saveOrdering} startIcon={<SaveIcon />}>Save</Button>
                     </Grid>
                 </Grid>
             </Grid>
@@ -148,12 +164,12 @@ const Tuner = () => {
                     </Tabs>
 
                     <TabPanel value={value} index={0}>
-                        <EmptyDroppable boxID="trash" holderStyle={{ position:'relative', backgroundColor: "red", height: "100px" }}/>
+                        <EmptyDroppable boxID="trash" holderStyle={{ position: 'relative', backgroundColor: "red", height: "100px" }} />
                         {unorderedData && pictureInfo &&
                             <UnorderDisplay items={unorderedData} itemInfo={pictureInfo} boxID="unordered" />}
                     </TabPanel>
                     <TabPanel value={value} index={1}>
-                        <EmptyDroppable boxID="recover" holderStyle={{ position:'relative', backgroundColor: "green", height: "100px" }}/>
+                        <EmptyDroppable boxID="recover" holderStyle={{ position: 'relative', backgroundColor: "green", height: "100px" }} />
                         {unlistedData && pictureInfo &&
                             <UnorderDisplay items={unlistedData} itemInfo={pictureInfo} boxID="unlisted" />}
                     </TabPanel>
@@ -162,8 +178,15 @@ const Tuner = () => {
 
         </Grid>
     )
-
-    const mainDisplay = (<OrderDisplay items={orderedData} itemInfo={pictureInfo} callBack={handleOnDragEnd} boxID="ordered" />)
+    const getGalleryData = () => {
+        const temp = orderedData.map((item, index) => {//(id,title,width,minPrice,maxPrice,imageRef,paybutton)
+            const picData = pictureInfo[item[0]]
+            return [item[0], picData["title"], item[1], picData["prices"][0], picData["prices"][4], picData["URL"], (<PaypalBtn paypalID="RANOM" prices={picData["prices"]} />)]
+        })
+        console.log("temp: %o",temp)
+        return temp
+    }
+    const mainDisplay = showPreview ? (<CardHolder items={getGalleryData()} />) : (<div style={{ width: "50%" }}><OrderDisplay items={orderedData} itemInfo={pictureInfo} callBack={handleOnDragEnd} boxID="ordered" /></div>)
     return (
         <DragDropContext onDragEnd={(info) => handleOnDragEnd(info)}>
             <div className="tuner-page">
@@ -171,7 +194,7 @@ const Tuner = () => {
 
                 {(
                     (pictureInfo && orderedData && unorderedData && unlistedData)
-                    && <div style={{width:"50%"}}>{mainDisplay}</div>)
+                    && mainDisplay)
                     ||
                     (<div>
                         <h1>Loading data... please wait</h1>

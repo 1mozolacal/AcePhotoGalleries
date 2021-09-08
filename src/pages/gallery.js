@@ -4,6 +4,7 @@ import InfoCard from "../components/InfoCard";
 import SideBar from "../components/Sidebar";
 import SpotLight from "../components/SpotLight";
 import PaypalBtn from "../components/PaypalBtn";
+import CardHolder from "../components/cardHolder";
 
 // Material ui
 import Grid from "@material-ui/core/Grid";
@@ -88,36 +89,7 @@ const Gallery = () => {
 					Gallery
 				</div>
 				<br />
-				<Grid
-					container
-					spacing={2}
-					justifyContent="center"
-				>
-					{currentDisplay.map((x, index) => { //(id,title,width,minPrice,maxPrice,imageRef,paybutton)
-						return (<Grid
-							item
-							key={x[0]}
-							xs={12}
-							md={x[2]}
-						>
-							<Grow
-								in={true}
-								{...{ timeout: (index % 10) * 300 }}>
-								<div>
-									<InfoCard
-										id={x[0]}
-										name={x[1]}
-										minPrice={x[3]}
-										maxPrice={x[4]}
-										image={x[5]}
-										paypal={x[6]}
-										viewCallBack={viewImageCallBack}
-									/>
-								</div>
-							</Grow>
-						</Grid>)
-					})}
-				</Grid>
+				<CardHolder items={currentDisplay} viewImageCallBack={viewImageCallBack}/>
 
 				<br />
 				{!loaded ?

@@ -34,7 +34,7 @@ export const overWriteJSON = async (payload,filename,container='config') => {
     if(previous[0]){
         var d = new Date(); 				  
         var s = new String(); 				  
-        s = (d.getHours()+":"+d.getMinutes()+":"+d.getSeconds()+"  "+d.getDate()+"|"+(d.getMonth()+1)+"|"+d.getFullYear()).toString();
+        s = (d.getFullYear()+"|"+ (d.getMonth()+1)+"|"+d.getDate()+"  "+d.getSeconds()+":"+d.getMinutes()+":"+d.getHours()).toString();
         uploadNewJsonFile(previous[1],'backups/'+filename+"   "+s,container)
     }
     uploadNewJsonFile(payload,filename,container)
@@ -58,6 +58,7 @@ export const uploadNewJsonFile = async (jsonData, blobName,container='config') =
 
     const blockBlobClient = containerClient.getBlockBlobClient(blobName);
     const uploadBlobResponse = await blockBlobClient.upload(strRep, strRep.length);
+    console.log("Written with response of: %o",uploadBlobResponse)
 }
 
 
