@@ -12,6 +12,7 @@ import '../stylesheets/tuner.sass'
 
 const MapOutData = ({ elements, context, dragSimulateCallBack }) => (
     elements.map((id, index) => {
+        console.log("rend el")
         return (
             <Draggable key={id} draggableId={id} index={index}>
                 {(provided) => (
@@ -30,7 +31,7 @@ const MapOutData = ({ elements, context, dragSimulateCallBack }) => (
                     <br/>
                     <div className="md-text">{`$${(context[id]['prices'] && (context[id]['prices'][0] + " to $" + context[id]['prices'][4]) )|| '--'}`}</div>
                 </CardContent>
-                <DeleteIcon onClick={() => {console.log("plea reender"); dragSimulateCallBack({destination:{index:0,droppableId:"unlisted"},source:{index:index,droppableId:"unordered"},spoof:true}) } }/>
+                <DeleteIcon onClick={() => {console.log("plea reender: %o",elements); dragSimulateCallBack({destination:{index:0,droppableId:"unlisted"},source:{index:index,droppableId:"unordered"},spoof:true}) } }/>
             </div>
         </Card>
 
@@ -40,7 +41,8 @@ const MapOutData = ({ elements, context, dragSimulateCallBack }) => (
                     </Grid>)}
             </Draggable>)
     }))
-const UnorderDisplay = ({ items, itemInfo, callBack, boxID, title = "grouping" }) => {
+const UnorderDisplay = ({ items, itemInfo, callBack, boxID }) => {
+    console.log("rend hihg")
     return (<div className="holder">
         {<DragAndDropDroppable
             items={items}

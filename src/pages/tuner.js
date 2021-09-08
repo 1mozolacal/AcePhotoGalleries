@@ -67,6 +67,7 @@ const Tuner = () => {
     }, [])
 
     const handleOnDragEnd = ({ destination, source }) => {
+        console.log("start")
         if (!destination) { return }
         var temp;
         if (source.droppableId === "ordered") {
@@ -85,7 +86,7 @@ const Tuner = () => {
             const newSource = oldSourceDataType
             newSource.splice(source.index, 1)
             var newDest;
-            if (destinationSetter === oldSourceDataSetter) {
+            if (source.droppableId === destination.droppableId) {
                 newDest = newSource
             } else {
                 oldSourceDataSetter(newSource)
@@ -104,7 +105,7 @@ const Tuner = () => {
             alert("ERROR: destination to unknow droppable container. Report this to dev team.")
             return
         }
-
+        console.log("end")
     }
 
     const tunerHeader = (
