@@ -28,7 +28,7 @@ const IndexPage = () => {
           <div className="home-context">
             <Slide in={true} timeout={1000}>
               <div className="logo-holder">
-                <img className="logo" src={logo}></img>
+                <img alt="logo" className="logo" src={logo}></img>
               </div>
             </Slide>
             <Slide in={true} direction="right" timeout={1000}>
@@ -59,7 +59,7 @@ const IndexPage = () => {
         <Grid item lg={7}>
           <Grow in={true} timeout={1000}>
             <div>
-              <img className="featured" src={featuredImage} alt="Featured image"></img>
+              <img className="featured" src={featuredImage} alt="Featured item"></img>
             </div>
           </Grow>
         </Grid>

@@ -1,6 +1,5 @@
 import React, { useEffect, useState } from "react";
 
-import InfoCard from "../components/InfoCard";
 import SideBar from "../components/Sidebar";
 import SpotLight from "../components/SpotLight";
 import PaypalBtn from "../components/PaypalBtn";
@@ -9,59 +8,42 @@ import CardHolder from "../components/cardHolder";
 // Material ui
 import Grid from "@material-ui/core/Grid";
 import Button from "@material-ui/core/Button";
-import Grow from '@material-ui/core/Grow'
 
-//import { Info } from "@material-ui/icons";
-//import { PayPalButton } from "react-paypal-button-v2";
-
-import buttonDictionaryMinified from '../data/images.json'
-
-import { displaySettings, imageDictionary } from '../utils/galleryConfigs'
-
-import { getAllContents } from '../utils/azureStorage'
-
-// Mapping data to follow format
-const displaySettingsVerbose = displaySettings.map((ele, index) => {
-	const ref = ele[0]
-	const buttonInfo = buttonDictionaryMinified[ref]
-	const buttonRender = (<PaypalBtn {...buttonInfo} />)
-	const displayImage = imageDictionary[ref]
-	const minPrice = buttonInfo["prices"][0]
-	const maxPrice = buttonInfo["prices"][4]
-	return [index, ele[2], ele[1], minPrice, maxPrice, displayImage, buttonRender]
-})
-
+import { getJSONData } from '../utils/azureStorage'
 
 const Gallery = () => {
+	const [displayPicture, setDisplayPicture] = useState()
 	const [spotLightInfo, setSpotLightInfo] = useState([false, 0, undefined, undefined]) // [show,yPos,title,image]
 	const [imageCount, setImageCount] = useState(10)
-	const [currentDisplay, setCurrentDisplay] = useState(displaySettingsVerbose.slice(0, imageCount))
-	const [loaded, setLoaded] = useState(false)
 
 	// const navBarShiftFactor = 48
 
-	// useEffect(function mount() {
-	// 	function onScroll() {
-	// 		if (!spotLightInfo[0]) {
-	// 			const newInfo = [spotLightInfo[0], window.scrollY, spotLightInfo[2], spotLightInfo[3]]
-	// 			setSpotLightInfo(newInfo)
-	// 		}
-	// 	}
-	// 	window.addEventListener('scroll', onScroll);
-	// 	return function unMount() {
-	// 		window.removeEventListener('scroll', onScroll);
-	// 	}
-	// }, [])
-
-	useEffect(async () => { 
-		let data = await getAllContents()
-		console.log(data)
-	}, [])
-
 	useEffect(() => {
-		// console.log(currentDisplay)
-		if (currentDisplay.length === displaySettingsVerbose.length) setLoaded(true)
-	}, [currentDisplay])
+		async function makeFetch() {
+			const list = await getJSONData("display.json").then((data) => {
+				var allImage = data[1]['ordered']
+				const unorderedMapping = data[1]['unordered'].map( (item,index) => {
+					const mapping = [4,8,8,4]
+
+					return [item,mapping[index%4]]
+				})
+				allImage.push(...unorderedMapping)
+				return allImage
+				//returns [id,width]
+				
+			})
+			const data = await getJSONData("rawData.json").then((data) => {
+				return data[1]
+			})
+			const fullListData = list.map( ([id,width],index) =>{
+				const buttonRender = (<PaypalBtn prices={data[id]['prices']} paypalID={data[id]['paypalID']} />)
+				return [id,data[id]['title'],width,data[id]['prices'][0],data[id]['prices'][4],data[id]['URL'],buttonRender]
+				// return [id, title, width, minPrice, maxPrice, displayImage, buttonRender]
+			})
+			setDisplayPicture(fullListData)
+		}
+		makeFetch()
+	}, [])
 
 	const viewImageCallBack = (image, title) => {
 		const newInfo = [true, spotLightInfo[1], title, image]
@@ -72,44 +54,44 @@ const Gallery = () => {
 	return (
 		<>
 			<SideBar activeTab={2} />
-			{/* {!spotLightInfo[0] && } */}
-			<SpotLight
-				selected={spotLightInfo[0]}
-				callback={() => { const newInfo = [false, spotLightInfo[1], spotLightInfo[2], spotLightInfo[3]]; setSpotLightInfo(newInfo) }}
-				image={spotLightInfo[3]}
-				offSet={spotLightInfo[1]}
-			/>
-
-			{/* <div style={spotLightInfo[0] ? { position: "fixed", top: -(spotLightInfo[1] - navBarShiftFactor) } : undefined}> */}
-			<div>
-				<div
-					className="lg-text bold-text cyan-text"
-					style={{ width: "100%", textAlign: "center" }}
-				>
-					Gallery
-				</div>
-				<br />
-				<CardHolder items={currentDisplay} viewImageCallBack={viewImageCallBack}/>
-
-				<br />
-				{!loaded ?
-					<Grid container justifyContent="center">
-						<Grid item xs={12} md={12}>
-							<Button
-								variant="contained"
-								style={{ backgroundColor: "#D6FFF6", width: "100%", height: "8vh" }}
-								onClick={() => {
-									let newImageCount = imageCount + 10
-									setImageCount(newImageCount)
-									setCurrentDisplay(displaySettingsVerbose.slice(0, newImageCount))
-								}}
+			{displayPicture &&
+				(<>
+						<SpotLight
+							selected={spotLightInfo[0]}
+							callback={() => { const newInfo = [false, spotLightInfo[1], spotLightInfo[2], spotLightInfo[3]]; setSpotLightInfo(newInfo) }}
+							image={spotLightInfo[3]}
+							offSet={spotLightInfo[1]}
+						/>
+						<div>
+							<div
+								className="lg-text bold-text cyan-text"
+								style={{ width: "100%", textAlign: "center" }}
 							>
-								Load more
-							</Button>
-						</Grid>
-					</Grid>
-					: null}
-			</div>
+								Gallery
+							</div>
+							<br />
+							<CardHolder items={displayPicture.slice(0, imageCount)} viewImageCallBack={viewImageCallBack} />
+
+							<br />
+							{displayPicture.length >= imageCount ?
+								<Grid container justifyContent="center">
+									<Grid item xs={12} md={12}>
+										<Button
+											variant="contained"
+											style={{ backgroundColor: "#D6FFF6", width: "100%", height: "8vh" }}
+											onClick={() => {
+												let newImageCount = imageCount + 10
+												setImageCount(newImageCount)
+											}}
+										>
+											Load more
+										</Button>
+									</Grid>
+								</Grid>
+								: null}
+						</div>
+					</>)}
+					{!displayPicture && <div>Loading gallery...</div>}
 		</>
 	);
 };

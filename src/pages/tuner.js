@@ -1,9 +1,9 @@
 import React, { useState, useEffect } from "react";
 import Grid from "@material-ui/core/Grid";
-import { getJSONData, getJSONDataOLD, uploadNewJsonFile, overWriteJSON } from '../utils/azureStorage';
+import { getJSONData, overWriteJSON } from '../utils/azureStorage';
 import OrderDisplay from '../components/ordering'
 import UnorderDisplay from '../components/unordered'
-import { DragDropContext, Droppable, Draggable } from 'react-beautiful-dnd';
+import { DragDropContext} from 'react-beautiful-dnd';
 import SidebarTuner from '../components/SidebarTuner'
 import { EmptyDroppable } from '../components/dragableZone'
 import PaypalBtn from '../components/PaypalBtn'
@@ -76,7 +76,7 @@ const Tuner = () => {
         if (destinationDroppableId === "trash") {
             destinationDroppableId = "unlisted"
         }
-        if (destinationDroppableId == "recover") {
+        if (destinationDroppableId === "recover") {
             destinationDroppableId = "unordered"
         }
         if (!destination) { return }

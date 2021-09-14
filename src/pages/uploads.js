@@ -9,10 +9,8 @@ import imageCompression from 'browser-image-compression';
 
 import "../stylesheets/home.sass"
 import { Grid } from "@material-ui/core";
-import watermarkLogo from '../images/waterMark.png'
-import mergeImages from 'merge-images';
-
-
+// import watermarkLogo from '../images/waterMark.png'
+// import mergeImages from 'merge-images';
 
 const Uploads = () => {
     const style = {
@@ -126,7 +124,7 @@ const Uploads = () => {
                 setErrorsWrapper('button',[true, 'Error: button already in use'])
                 return
             }
-            if (tempPrice.length != 5) {
+            if (tempPrice.length !== 5) {
                 setErrorsWrapper('button',[true, 'Error: Need exactly 5 prices'])
                 return
             }
@@ -233,7 +231,7 @@ const Uploads = () => {
                     fullWidth />
                 </Grid>
                 <Grid>
-                {fileSelected && <img style={{width:"150px"}} src={URL.createObjectURL(fileSelected)}></img>}
+                {fileSelected && <img alt="preview of upload" style={{width:"150px"}} src={URL.createObjectURL(fileSelected)}></img>}
                 </Grid>
 
             </Grid>
