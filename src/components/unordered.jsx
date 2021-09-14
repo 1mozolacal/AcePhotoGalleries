@@ -40,7 +40,6 @@ const MapOutData = ({ elements, context }) => (
             </Draggable>)
     }))
 const UnorderDisplay = ({ items, itemInfo, boxID }) => {
-    console.log("rend hihg")
     return (<div className="holder">
         {<DragAndDropDroppable
             items={items}

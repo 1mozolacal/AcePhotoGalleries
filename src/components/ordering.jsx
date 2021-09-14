@@ -12,9 +12,6 @@ const listStyle = {
 
 const MapOutData = ({ elements, context }) => (
     elements.map(([id, width], index) => {
-        if (context[id] === undefined) {
-            console.log("undefined here: %o", elements)
-        }
         return (
             <Draggable key={id} draggableId={id} index={index} style={listStyle}>
                 {(provided) => (

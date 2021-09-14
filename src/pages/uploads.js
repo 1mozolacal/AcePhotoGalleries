@@ -12,14 +12,17 @@ import { Grid } from "@material-ui/core";
 import watermarkLogo from '../images/waterMark.png'
 import mergeImages from 'merge-images';
 
+
+
 const Uploads = () => {
     const style = {
         color: "white"
     }
 
     const [fileSelected, setFileSelected] = useState()
-    const [picName, setPicName] = useState()
-    const [paypalId, setPaypalId] = useState()
+    const [picName, setPicName] = useState('')
+    const [paypalId, setPaypalId] = useState('')
+    const [rawPaypalButton, setRawPaypalButton] = useState('')
     const [paypalButtonId, setPaypalButtonID] = useState()
     const [paypalPrics, setPaypalPrices] = useState()
     const [referenceData, setReferenceData] = useState()
@@ -29,6 +32,12 @@ const Uploads = () => {
         button: [false, ''],
         file: [false, '']
     })
+
+    const setErrorsWrapper = (type,value) =>{
+        var tmpErr = { ...errors }
+        tmpErr[type] = value
+        setErrors(tmpErr)
+    }
 
     useEffect(() => {
         async function makeFetch() {
@@ -55,7 +64,7 @@ const Uploads = () => {
             alert("failed to load data during overwrite process"); return
         }
         console.log("Return LIst: %o", returnListData)
-        returnListData['unordered'].push(paypalId)
+        returnListData['unordered'].unshift(paypalId)
         returnJSONData[paypalId] = {
             "title": "TEST--" + picName,
             "prices": paypalPrics,
@@ -67,35 +76,36 @@ const Uploads = () => {
         await overWriteJSON(returnJSONData, "rawData.json")
         await overWriteJSON(returnListData, "display.json")
         await uploadFileToBlob(fileSelected)
-        reset()
         await getJSONData("rawData.json").then(data => {
             if (data[0]) { setReferenceData(data[1]) }
         })
 
-    }
-
-
-    const reset = () => {
+        setErrors({
+            name: [false, ''],
+            id: [false, ''],
+            button: [false, ''],
+            file: [false, '']
+        })
         setFileSelected(null)
-        setPaypalId(null)
-        setPicName(null)
+        setPaypalId('')
+        setPicName('')
+        setRawPaypalButton('')
     }
+
 
     const picNameEvent = (e) => {
-        const newName = e.target.value.trim()
-        if (!newName) {
-            var tmpErr = { ...errors }
-            tmpErr['name'] = [true, 'Name can not be blank']
-            setErrors(tmpErr)
-            return
+        if (!e.target.value) {
+            setErrorsWrapper('name',[true, 'Name can not be blank'])
+        } else if (e.target.value.trim() !== e.target.value ){
+            setErrorsWrapper('name',[true, 'Need to trim off whitespace'])
+        } else {
+            setErrorsWrapper('name',[false, 'Valid'])
         }
-        setPicName(newName)
-        var tmpErr = { ...errors }
-        tmpErr['name'] = [false, 'Valid']
-        setErrors(tmpErr)
+        setPicName(e.target.value)
     }
 
     const paypalButtonEvent = (e) => {
+        setRawPaypalButton(e.target.value)
         try {
             const data = e.target.value
             var tempPrice = data.split('\n')
@@ -112,43 +122,34 @@ const Uploads = () => {
             });
             tempID = tempID[0].split("value=")[1]
             tempID = tempID.split('"')[1]
+            if(Object.keys(referenceData).map((item,index)=> (referenceData[item]['paypalID'])).includes(tempID)){
+                setErrorsWrapper('button',[true, 'Error: button already in use'])
+                return
+            }
             if (tempPrice.length != 5) {
-                var tmpErr = { ...errors }
-                tmpErr['button'] = [true, 'Error: Need exactly 5 prices']
-                setErrors(tmpErr)
+                setErrorsWrapper('button',[true, 'Error: Need exactly 5 prices'])
                 return
             }
             setPaypalButtonID(tempID)
             setPaypalPrices(tempPrice)
         } catch (err) {
-            var tmpErr = { ...errors }
-            tmpErr['button'] = [true, 'Error when trying to parse button info' + err.message]
-            setErrors(tmpErr)
+            setErrorsWrapper('button',[true, 'Error when trying to parse button info' + err.message])
             return
         }
-        var tmpErr = { ...errors }
-        tmpErr['button'] = [false, 'Valid button input']
-        setErrors(tmpErr)
+        setErrorsWrapper('button',[false, 'Valid button input'])
     }
 
     const paypalIDEvent = (e) => {
-        const newID = e.target.value.trim()
-        if (!newID) {
-            var tmpErr = { ...errors }
-            tmpErr['id'] = [true, 'Error: Can not be blank']
-            setErrors(tmpErr)
-            return
+        setPaypalId(e.target.value)
+        if (!e.target.value) {
+            setErrorsWrapper('id',[true, 'Error: Can not be blank'])
+        } else if (e.target.value in referenceData) {
+            setErrorsWrapper('id',[true, 'Error: Id already exists in database'])
+        } else if(e.target.value.trim() !== e.target.value){
+            setErrorsWrapper('id',[true,'Error: Need to remove whitespace'])
+        } else {
+            setErrorsWrapper('id',[false,'Valid'])
         }
-        if (newID in referenceData) {
-            var tmpErr = { ...errors }
-            tmpErr['id'] = [true, 'Error: Id already exists in database']
-            setErrors(tmpErr)
-            return
-        }
-        setPaypalId(newID)
-        var tmpErr = { ...errors }
-        tmpErr['id'] = [false, 'Valid']
-        setErrors(tmpErr)
     }
     const imageEvent = async (e) => {
         // function getBase64(file) {
@@ -165,23 +166,25 @@ const Uploads = () => {
         // mergeImages([watermarkLogo, e.target.files[0]])
         //     .then(b64 => console.log(b64));
         const imageFile = e.target.files[0];
+        if (imageFile === undefined){
+            console.log("IMAGE IS UNDEFINED on change")
+        }
+        console.log(imageFile.size / 1024 / 1024)
         const options = {
             maxSizeMB: 1,
-            maxWidthOrHeight: 960
+            maxWidthOrHeight: (1920/4)
         }
         try {
             const compressedFile = await imageCompression(imageFile, options);
             setFileSelected(compressedFile)
-            var tmpErr = { ...errors }
-            tmpErr['file'] = [false, 'Compression successful']
-            setErrors(tmpErr)
+            setErrorsWrapper('file',[false, 'Compression successful'])
+            alert(`Successful compression. From ${(imageFile.size / 1024 / 1024).toFixed(4)} MB to ${(compressedFile.size / 1024 / 1024).toFixed(4)} MB`)
         } catch (error) {
             console.log(error);
-            var tmpErr = { ...errors }
-            tmpErr['file'] = [true, 'Failed to compress file']
-            setErrors(tmpErr)
-            return
+            setErrorsWrapper('file',[true, 'Failed Compression'])
+            alert('Failed Compression')
         }
+        
     }
     return (
         referenceData &&
@@ -196,6 +199,7 @@ const Uploads = () => {
                         fullWidth
                         error={errors['name'][0]}
                         helperText={errors['name'][1]}
+                        value={picName}
                         onChange={picNameEvent} />
                 </Grid>
 
@@ -206,6 +210,7 @@ const Uploads = () => {
                         fullWidth
                         error={errors['id'][0]}
                         helperText={errors['id'][1]}
+                        value={paypalId}
                         onChange={paypalIDEvent} />
                 </Grid>
                 <Grid item xs={12}>
@@ -215,16 +220,28 @@ const Uploads = () => {
                         fullWidth
                         error={errors['button'][0]}
                         helperText={errors['button'][1]}
+                        value={rawPaypalButton}
                         onChange={paypalButtonEvent} />
                 </Grid>
-                <Grid item xs={12}>
-                    <Input label="Update file here" type="file" onChange={imageEvent} style={style} fullWidth />
+                <Grid item xs={6}>
+                    <Input 
+                    label="Update file here" 
+                    type="file" 
+                    error={errors['file'][0]}
+                    onChange={imageEvent} 
+                    style={style} 
+                    fullWidth />
+                </Grid>
+                <Grid>
+                {fileSelected && <img style={{width:"150px"}} src={URL.createObjectURL(fileSelected)}></img>}
                 </Grid>
 
             </Grid>
             <br />
 
             <Button variant="contained" className="grid-button" type="submit" onClick={uploadFile}>Upload</Button>
+            <div></div>
+            
         </Container>)
     ) || (<div>Loading data...</div>)
 }

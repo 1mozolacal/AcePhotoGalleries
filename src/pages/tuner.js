@@ -131,51 +131,45 @@ const Tuner = () => {
         console.log("preveiw %o", showPreview)
         setShowPreview(!showPreview)
     }
+    const sideBar = (
+        <SidebarTuner>
+            <Tabs
+                value={value}
+                onChange={handleChange}
+                indicatorColor="primary"
+                textColor="primary"
+                centered
+            >
+                <Tab label="Unordered List" />
+                <Tab label="Unlisted List" />
+            </Tabs>
+
+            <TabPanel value={value} index={0}>
+                <EmptyDroppable boxID="trash" holderStyle={{ position: 'relative', backgroundColor: "red", height: "100px" }} />
+                {unorderedData && pictureInfo &&
+                    <UnorderDisplay items={unorderedData} itemInfo={pictureInfo} boxID="unordered" />}
+            </TabPanel>
+            <TabPanel value={value} index={1}>
+                <EmptyDroppable boxID="recover" holderStyle={{ position: 'relative', backgroundColor: "green", height: "100px" }} />
+                {unlistedData && pictureInfo &&
+                    <UnorderDisplay items={unlistedData} itemInfo={pictureInfo} boxID="unlisted" />}
+            </TabPanel>
+        </SidebarTuner>)
 
     const tunerHeader = (
-        <Grid classes={{ root: "tuner-header" }} container alignItems="center" justifyContent="space-between">
-
+        <Grid classes={{ root: "tuner-header" }} container direction='row' justifyContent="space-between" alignItems="center" spacing={2}>
             <Grid item>
-                <Grid container alignItems="center" justifyContent="center" spacing={3}>
-                    <Grid item>
-                        <h1>Tuner!</h1>
-                    </Grid>
-                    <Grid item>
-                        <Button variant="contained" className="grid-button" onClick={togglePreview} startIcon={<VisibilityIcon />}>Preview</Button>
-                    </Grid>
-                    <Grid item>
-                        <Button variant="contained" className="grid-button" onClick={saveOrdering} startIcon={<SaveIcon />}>Save</Button>
-                    </Grid>
-                </Grid>
+                <h1>Tuner!</h1>
             </Grid>
-
             <Grid item>
-
-                <SidebarTuner>
-                    <Tabs
-                        value={value}
-                        onChange={handleChange}
-                        indicatorColor="primary"
-                        textColor="primary"
-                        centered
-                    >
-                        <Tab label="Unordered List" />
-                        <Tab label="Unlisted List" />
-                    </Tabs>
-
-                    <TabPanel value={value} index={0}>
-                        <EmptyDroppable boxID="trash" holderStyle={{ position: 'relative', backgroundColor: "red", height: "100px" }} />
-                        {unorderedData && pictureInfo &&
-                            <UnorderDisplay items={unorderedData} itemInfo={pictureInfo} boxID="unordered" />}
-                    </TabPanel>
-                    <TabPanel value={value} index={1}>
-                        <EmptyDroppable boxID="recover" holderStyle={{ position: 'relative', backgroundColor: "green", height: "100px" }} />
-                        {unlistedData && pictureInfo &&
-                            <UnorderDisplay items={unlistedData} itemInfo={pictureInfo} boxID="unlisted" />}
-                    </TabPanel>
-                </SidebarTuner>
+                <Button variant="contained" className="grid-button" onClick={togglePreview} startIcon={<VisibilityIcon />}>Preview</Button>
             </Grid>
-
+            <Grid item>
+                <Button variant="contained" className="grid-button" onClick={saveOrdering} startIcon={<SaveIcon />}>Save</Button>
+            </Grid>
+            <Grid item>
+                {sideBar}
+            </Grid>
         </Grid>
     )
     const getGalleryData = () => {
@@ -183,7 +177,7 @@ const Tuner = () => {
             const picData = pictureInfo[item[0]]
             return [item[0], picData["title"], item[1], picData["prices"][0], picData["prices"][4], picData["URL"], (<PaypalBtn paypalID="RANOM" prices={picData["prices"]} />)]
         })
-        console.log("temp: %o",temp)
+        console.log("temp: %o", temp)
         return temp
     }
     const mainDisplay = showPreview ? (<CardHolder items={getGalleryData()} />) : (<div style={{ width: "50%" }}><OrderDisplay items={orderedData} itemInfo={pictureInfo} callBack={handleOnDragEnd} boxID="ordered" /></div>)
