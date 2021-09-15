@@ -3,7 +3,8 @@ import { BlobServiceClient } from '@azure/storage-blob'
 const baseUrl = "https://mjmpictures.blob.core.windows.net"
 
 // Make sure to hide token away
-const token = "?sv=2020-08-04&ss=bfqt&srt=sco&sp=rwdlacuptfx&se=2021-09-18T23:07:06Z&st=2021-09-11T15:07:06Z&spr=https&sig=kC4%2B%2FvnFVtEZd9W1GB5NRJyFtorxkmLWBLH8IZBKmZE%3D";
+const token = "?sv=2020-08-04&ss=bfqt&srt=sco&sp=rwdlacuptfx&se=2021-09-16T02:38:29Z&st=2021-09-15T18:38:29Z&spr=https&sig=QbGpmqpe25fLAnTo0ollnsTWWCQqUyKL19v1tKeqC%2BI%3D"
+// old =      "?sv=2020-08-04&ss=bfqt&srt=sco&sp=rwdlacuptfx&se=2021-09-18T23:07:06Z&st=2021-09-11T15:07:06Z&spr=https&sig=kC4%2B%2FvnFVtEZd9W1GB5NRJyFtorxkmLWBLH8IZBKmZE%3D";
 
 const conString = `${baseUrl}/${token}`
 

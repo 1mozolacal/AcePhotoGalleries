@@ -20,24 +20,41 @@ const Gallery = () => {
 
 	useEffect(() => {
 		async function makeFetch() {
-			const list = await getJSONData("display.json").then((data) => {
-				var allImage = data[1]['ordered']
-				const unorderedMapping = data[1]['unordered'].map( (item,index) => {
-					const mapping = [4,8,8,4]
-
-					return [item,mapping[index%4]]
+			const list = await fetch("https://mjmpictures.blob.core.windows.net/config/display.json")
+				.then(res => res.json())
+				.then((data) => {
+					var allImage = data['ordered']
+					const unorderedMapping = data['unordered'].map((item, index) => {
+						const mapping = [4, 8, 8, 4]
+						return [item, mapping[index % 4]]
+					})
+					allImage.push(...unorderedMapping)
+					return allImage
+					//returns [id,width]
 				})
-				allImage.push(...unorderedMapping)
-				return allImage
-				//returns [id,width]
-				
-			})
-			const data = await getJSONData("rawData.json").then((data) => {
+			// const list = await getJSONData("display.json").then((data) => {
+			// 	var allImage = data[1]['ordered']
+			// 	const unorderedMapping = data[1]['unordered'].map( (item,index) => {
+			// 		const mapping = [4,8,8,4]
+
+			// 		return [item,mapping[index%4]]
+			// 	})
+			// 	allImage.push(...unorderedMapping)
+			// 	return allImage
+			// 	//returns [id,width]
+			// })
+			const data2 = await getJSONData("rawData.json").then((data) => {
 				return data[1]
 			})
-			const fullListData = list.map( ([id,width],index) =>{
+			console.log(data2)
+			const data = await fetch("https://mjmpictures.blob.core.windows.net/config/rawData.json")
+				.then(res => res.json())
+				.then((data) => {
+					return data
+				})
+			const fullListData = list.map(([id, width], index) => {
 				const buttonRender = (<PaypalBtn prices={data[id]['prices']} paypalID={data[id]['paypalID']} />)
-				return [id,data[id]['title'],width,data[id]['prices'][0],data[id]['prices'][4],data[id]['URL'],buttonRender]
+				return [id, data[id]['title'], width, data[id]['prices'][0], data[id]['prices'][4], data[id]['URL'], buttonRender]
 				// return [id, title, width, minPrice, maxPrice, displayImage, buttonRender]
 			})
 			setDisplayPicture(fullListData)
@@ -56,42 +73,42 @@ const Gallery = () => {
 			<SideBar activeTab={2} />
 			{displayPicture &&
 				(<>
-						<SpotLight
-							selected={spotLightInfo[0]}
-							callback={() => { const newInfo = [false, spotLightInfo[1], spotLightInfo[2], spotLightInfo[3]]; setSpotLightInfo(newInfo) }}
-							image={spotLightInfo[3]}
-							offSet={spotLightInfo[1]}
-						/>
-						<div>
-							<div
-								className="lg-text bold-text cyan-text"
-								style={{ width: "100%", textAlign: "center" }}
-							>
-								Gallery
-							</div>
-							<br />
-							<CardHolder items={displayPicture.slice(0, imageCount)} viewImageCallBack={viewImageCallBack} />
-
-							<br />
-							{displayPicture.length >= imageCount ?
-								<Grid container justifyContent="center">
-									<Grid item xs={12} md={12}>
-										<Button
-											variant="contained"
-											style={{ backgroundColor: "#D6FFF6", width: "100%", height: "8vh" }}
-											onClick={() => {
-												let newImageCount = imageCount + 10
-												setImageCount(newImageCount)
-											}}
-										>
-											Load more
-										</Button>
-									</Grid>
-								</Grid>
-								: null}
+					<SpotLight
+						selected={spotLightInfo[0]}
+						callback={() => { const newInfo = [false, spotLightInfo[1], spotLightInfo[2], spotLightInfo[3]]; setSpotLightInfo(newInfo) }}
+						image={spotLightInfo[3]}
+						offSet={spotLightInfo[1]}
+					/>
+					<div>
+						<div
+							className="lg-text bold-text cyan-text"
+							style={{ width: "100%", textAlign: "center" }}
+						>
+							Gallery
 						</div>
-					</>)}
-					{!displayPicture && <div>Loading gallery...</div>}
+						<br />
+						<CardHolder items={displayPicture.slice(0, imageCount)} viewImageCallBack={viewImageCallBack} />
+
+						<br />
+						{displayPicture.length >= imageCount ?
+							<Grid container justifyContent="center">
+								<Grid item xs={12} md={12}>
+									<Button
+										variant="contained"
+										style={{ backgroundColor: "#D6FFF6", width: "100%", height: "8vh" }}
+										onClick={() => {
+											let newImageCount = imageCount + 10
+											setImageCount(newImageCount)
+										}}
+									>
+										Load more
+									</Button>
+								</Grid>
+							</Grid>
+							: null}
+					</div>
+				</>)}
+			{!displayPicture && <div>Loading gallery...</div>}
 		</>
 	);
 };
