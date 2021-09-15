@@ -64,7 +64,7 @@ const Uploads = () => {
         console.log("Return LIst: %o", returnListData)
         returnListData['unordered'].unshift(paypalId)
         returnJSONData[paypalId] = {
-            "title": "TEST--" + picName,
+            "title": picName,
             "prices": paypalPrics,
             "paypalID": paypalButtonId,
             "URL": "https://mjmpictures.blob.core.windows.net/pics/" + fileSelected.name
