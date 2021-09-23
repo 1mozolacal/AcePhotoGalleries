@@ -2,6 +2,7 @@ import React, { useState, useEffect } from "react";
 import Button from '@material-ui/core/Button';
 import "../stylesheets/home.sass"
 import { Grid } from "@material-ui/core";
+import AdminNavbar from "../components/AdminNavbar";
 // import watermarkLogo from '../images/waterMark.png'
 // import mergeImages from 'merge-images';
 
@@ -9,6 +10,7 @@ const Admin = () => {
     
     return (
         <>
+        <AdminNavbar/>
             <h1>Admin page</h1>
             <Grid
                 container

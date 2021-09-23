@@ -14,6 +14,7 @@ import { Button } from "@material-ui/core"
 import SaveIcon from '@material-ui/icons/Save'
 import VisibilityIcon from '@material-ui/icons/Visibility'
 import "../stylesheets/tuner.sass"
+import AdminNavbar from "../components/AdminNavbar";
 
 
 import Tabs from '@material-ui/core/Tabs';
@@ -182,6 +183,9 @@ const Tuner = () => {
     }
     const mainDisplay = showPreview ? (<CardHolder items={getGalleryData()} />) : (<div style={{ width: "50%" }}><OrderDisplay items={orderedData} itemInfo={pictureInfo} callBack={handleOnDragEnd} boxID="ordered" /></div>)
     return (
+        <>
+        <AdminNavbar />
+        <br/>
         <DragDropContext onDragEnd={(info) => handleOnDragEnd(info)}>
             <div className="tuner-page">
                 {tunerHeader}
@@ -196,6 +200,7 @@ const Tuner = () => {
                     </div>)}
             </div>
         </DragDropContext>
+        </>
     );
 }
 

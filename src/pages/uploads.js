@@ -6,6 +6,7 @@ import Button from '@material-ui/core/Button';
 import Container from '@material-ui/core/Container'
 import { uploadFileToBlob, getJSONData, overWriteJSON } from '../utils/azureStorage';
 import imageCompression from 'browser-image-compression';
+import AdminNavbar from "../components/AdminNavbar";
 
 import "../stylesheets/home.sass"
 import { Grid } from "@material-ui/core";
@@ -186,7 +187,9 @@ const Uploads = () => {
     }
     return (
         referenceData &&
-        (<Container>
+        (<>
+        <AdminNavbar />
+        <Container>
             <h1>Upload new photo</h1>
             <br />
             <Grid container className="upload-form" spacing={3}>
@@ -240,7 +243,8 @@ const Uploads = () => {
             <Button variant="contained" className="grid-button" type="submit" onClick={uploadFile}>Upload</Button>
             <div></div>
             
-        </Container>)
+        </Container>
+        </>)
     ) || (<div>Loading data...</div>)
 }
 
