@@ -3,7 +3,7 @@ import Grid from "@material-ui/core/Grid";
 import { getJSONData, overWriteJSON } from '../utils/azureStorage';
 import OrderDisplay from '../components/ordering'
 import UnorderDisplay from '../components/unordered'
-import { DragDropContext} from 'react-beautiful-dnd';
+import { DragDropContext } from 'react-beautiful-dnd';
 import SidebarTuner from '../components/SidebarTuner'
 import { EmptyDroppable } from '../components/dragableZone'
 import PaypalBtn from '../components/PaypalBtn'
@@ -70,6 +70,27 @@ const Tuner = () => {
         }
         makeFetch()
     }, [])
+
+    const selectItemFromOrderedList = (selector, data) =>{
+        var itemIndex = undefined
+        data.forEach( (item,index) =>{
+            if(item[0] == selector){
+                itemIndex = index
+            }
+        })
+        return itemIndex
+    }
+
+    const handleWidthChange = (id,newWidth) => {
+        const index = selectItemFromOrderedList(id,orderedData)
+        if(index !== undefined){
+            var newData = [...orderedData]
+            newData[index][1] = newWidth
+            orderedDataSet(newData)
+        } else {
+            console.error("Tried to change width of ID that does not exist: %o : in : %o",id,orderedData)
+        }
+    }
 
     const handleOnDragEnd = ({ destination, source }) => {
         var sourceDroppableId = source.droppableId
@@ -160,13 +181,26 @@ const Tuner = () => {
     const tunerHeader = (
         <Grid classes={{ root: "tuner-header" }} container direction='row' justifyContent="space-between" alignItems="center" spacing={2}>
             <Grid item>
-                <h1>Tuner!</h1>
+                <Grid
+                    container
+                    direction="row"
+                    justifyContent="flex-start"
+                    alignItems="center"
+                    spacing={4}
+                >
+                    <Grid item>
+                        <h1>Tuner!</h1>
+                    </Grid>
+                    <Grid item>
+                        <Button variant="contained" className="grid-button" onClick={togglePreview} startIcon={<VisibilityIcon />}>Preview</Button>
+                    </Grid>
+                    <Grid item>
+                        <Button variant="contained" className="grid-button" onClick={saveOrdering} startIcon={<SaveIcon />}>Save</Button>
+                    </Grid>
+                </Grid>
             </Grid>
             <Grid item>
-                <Button variant="contained" className="grid-button" onClick={togglePreview} startIcon={<VisibilityIcon />}>Preview</Button>
-            </Grid>
-            <Grid item>
-                <Button variant="contained" className="grid-button" onClick={saveOrdering} startIcon={<SaveIcon />}>Save</Button>
+
             </Grid>
             <Grid item>
                 {sideBar}
@@ -178,28 +212,27 @@ const Tuner = () => {
             const picData = pictureInfo[item[0]]
             return [item[0], picData["title"], item[1], picData["prices"][0], picData["prices"][4], picData["URL"], (<PaypalBtn paypalID="RANOM" prices={picData["prices"]} />)]
         })
-        console.log("temp: %o", temp)
         return temp
     }
-    const mainDisplay = showPreview ? (<CardHolder items={getGalleryData()} />) : (<div style={{ width: "50%" }}><OrderDisplay items={orderedData} itemInfo={pictureInfo} callBack={handleOnDragEnd} boxID="ordered" /></div>)
+    const mainDisplay = showPreview ? (<CardHolder items={getGalleryData()} />) : (<div style={{ width: "50%" }}><OrderDisplay items={(orderedData && orderedData.map(([id,width],index) => { return [id,width,handleWidthChange]}) )} itemInfo={pictureInfo} callBack={handleOnDragEnd} boxID="ordered" /></div>)
     return (
         <>
-        <AdminNavbar />
-        <br/>
-        <DragDropContext onDragEnd={(info) => handleOnDragEnd(info)}>
-            <div className="tuner-page">
-                {tunerHeader}
+            <AdminNavbar />
+            <br />
+            <DragDropContext onDragEnd={(info) => handleOnDragEnd(info)}>
+                <div className="tuner-page">
+                    {tunerHeader}
 
-                {(
-                    (pictureInfo && orderedData && unorderedData && unlistedData)
-                    && mainDisplay)
-                    ||
-                    (<div>
-                        <h1>Loading data... please wait</h1>
-                        <h3>If this take more than a few seconds consult the dev team.</h3>
-                    </div>)}
-            </div>
-        </DragDropContext>
+                    {(
+                        (pictureInfo && orderedData && unorderedData && unlistedData)
+                        && mainDisplay)
+                        ||
+                        (<div>
+                            <h1>Loading data... please wait</h1>
+                            <h3>If this take more than a few seconds consult the dev team.</h3>
+                        </div>)}
+                </div>
+            </DragDropContext>
         </>
     );
 }
