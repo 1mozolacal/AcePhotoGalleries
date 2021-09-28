@@ -70,7 +70,7 @@ const Tuner = () => {
         }
         makeFetch()
     }, [])
-
+    
     const selectItemFromOrderedList = (selector, data) =>{
         var itemIndex = undefined
         data.forEach( (item,index) =>{
@@ -150,7 +150,6 @@ const Tuner = () => {
         alert("Changes Saved")
     }
     const togglePreview = () => {
-        console.log("preveiw %o", showPreview)
         setShowPreview(!showPreview)
     }
     const sideBar = (
@@ -169,12 +168,12 @@ const Tuner = () => {
             <TabPanel value={value} index={0}>
                 <EmptyDroppable boxID="trash" holderStyle={{ position: 'relative', backgroundColor: "red", height: "100px" }} />
                 {unorderedData && pictureInfo &&
-                    <UnorderDisplay items={unorderedData} itemInfo={pictureInfo} boxID="unordered" />}
+                    <UnorderDisplay items={unorderedData.filter(ele => pictureInfo[ele]!==undefined)} itemInfo={pictureInfo} boxID="unordered" />}
             </TabPanel>
             <TabPanel value={value} index={1}>
                 <EmptyDroppable boxID="recover" holderStyle={{ position: 'relative', backgroundColor: "green", height: "100px" }} />
                 {unlistedData && pictureInfo &&
-                    <UnorderDisplay items={unlistedData} itemInfo={pictureInfo} boxID="unlisted" />}
+                    <UnorderDisplay items={unlistedData.filter(ele => pictureInfo[ele]!==undefined)} itemInfo={pictureInfo} boxID="unlisted" />}
             </TabPanel>
         </SidebarTuner>)
 

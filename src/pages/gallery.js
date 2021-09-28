@@ -53,6 +53,10 @@ const Gallery = () => {
 					return data
 				})
 			const fullListData = list.map(([id, width], index) => {
+				if(data[id] === undefined){
+					console.error("Can not find %o in Database: %o",id,data)
+					return undefined
+				}
 				const buttonRender = (<PaypalBtn prices={data[id]['prices']} paypalID={data[id]['paypalID']} />)
 				return [id, data[id]['title'], width, data[id]['prices'][0], data[id]['prices'][4], data[id]['URL'], buttonRender]
 				// return [id, title, width, minPrice, maxPrice, displayImage, buttonRender]

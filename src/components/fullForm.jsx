@@ -7,7 +7,7 @@ import { uploadFileToBlob, getJSONData, overWriteJSON } from '../utils/azureStor
 import imageCompression from 'browser-image-compression';
 import { Button } from "@material-ui/core";
 
-const TunerTwo = () => {
+const FullForm = ({title,prefilledData}) => {
     const [controllerData, setControllerData] = useState(() => () => console.error("controll data not set"))
     const [controllerErrors, setControllerErrors] = useState(() => () => console.error("control errors not set"))
     const [reset, setReset] = useState(0)
@@ -152,6 +152,8 @@ const TunerTwo = () => {
     }
 
     return (<div>
+        <h1>{title}</h1>
+        <br />
         <Form
             title="Uploads page"
             items={[
@@ -267,8 +269,4 @@ const Controller = ({ callBackData, callBackErros, callBackReset, referenceData,
 }
 
 
-
-
-
-
-export default TunerTwo
+export default FullForm

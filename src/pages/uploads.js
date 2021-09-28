@@ -25,6 +25,7 @@ const Uploads = () => {
     const [paypalButtonId, setPaypalButtonID] = useState()
     const [paypalPrics, setPaypalPrices] = useState()
     const [referenceData, setReferenceData] = useState()
+    const [listOfDatReference,setListOfDatReference] = useState()
     const [errors, setErrors] = useState({
         name: [false, ''],
         id: [false, ''],
@@ -43,6 +44,9 @@ const Uploads = () => {
             await getJSONData("rawData.json").then((data) => {
                 setReferenceData(data[1])
             })
+            await getJSONData("display.json").then(data => {
+                setListOfDatReference(data[1])
+            })
         }
         makeFetch()
     }, [])
@@ -55,14 +59,14 @@ const Uploads = () => {
         }
 
         var returnJSONData = { ...referenceData };
-        var returnListData;
-        await getJSONData("display.json").then(data => {
-            if (data[0]) { returnListData = data[1] }
-        })
+        var returnListData = {...listOfDatReference};
+        // await getJSONData("display.json").then(data => {
+        //     if (data[0]) { returnListData = data[1] }
+        // })
         if (returnJSONData === undefined || returnListData === undefined) {
-            alert("failed to load data during overwrite process"); return
+            alert("failed to load data during overwrite process. Contact dev team"); return
         }
-        console.log("Return LIst: %o", returnListData)
+        // console.log("Return LIst: %o", returnListData)
         returnListData['unordered'].unshift(paypalId)
         returnJSONData[paypalId] = {
             "title": picName,
@@ -75,9 +79,10 @@ const Uploads = () => {
         await overWriteJSON(returnJSONData, "rawData.json")
         await overWriteJSON(returnListData, "display.json")
         await uploadFileToBlob(fileSelected)
-        await getJSONData("rawData.json").then(data => {
-            if (data[0]) { setReferenceData(data[1]) }
-        })
+        // await getJSONData("rawData.json").then(data => {
+        //     if (data[0]) { setReferenceData(data[1]) }
+        // })
+        setReferenceData(returnJSONData)
 
         setErrors({
             name: [false, ''],
@@ -244,6 +249,17 @@ const Uploads = () => {
             <div></div>
             
         </Container>
+        <div>
+            <h3>Unordered list (top 5)</h3>
+            <ul>
+            {listOfDatReference && listOfDatReference['unordered'].map( (ele,index) =>{
+                if (index>=5){
+                    return undefined
+                }
+                return (<li>{ele}</li>)
+            })}
+            </ul>
+        </div>
         </>)
     ) || (<div>Loading data...</div>)
 }

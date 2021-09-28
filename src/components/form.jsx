@@ -9,8 +9,6 @@ import { Grid } from "@material-ui/core";
 const Form = (props) => {
 
     return (<Container>
-        <h1>{props.title}</h1>
-        <br />
         <Grid container className="upload-form" spacing={3}>
             {props.items && props.items.map((ele, index) => { return (<FormItem key={index} {...ele} />) })}
 
