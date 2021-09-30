@@ -12,11 +12,15 @@ const TunerTwo = () => {
     const [controllerErrors, setControllerErrors] = useState(() => () => console.error("control errors not set"))
     const [reset, setReset] = useState(0)
     const [referenceData, setReferenceData] = useState()
+    const [listOfDatReference,setListOfDatReference] = useState()
 
     useEffect(() => {
         async function makeFetch() {
             await getJSONData("rawData.json").then((data) => {
                 setReferenceData(data[1])
+            })
+            await getJSONData("display.json").then(data => {
+                setListOfDatReference(data[1])
             })
         }
         makeFetch()
@@ -171,7 +175,7 @@ const TunerTwo = () => {
 }
 
 
-const Controller = ({ callBackData, callBackErros, callBackReset, referenceData, callBackRefData }) => {
+const Controller = ({ callBackData, callBackErros, callBackReset, referenceData, callBackRefData, listRefData, callBackRefList }) => {
     const [fileSelected, setFileSelected] = useState()
     const [picName, setPicName] = useState('')
     const [paypalId, setPaypalId] = useState('')
@@ -229,10 +233,7 @@ const Controller = ({ callBackData, callBackErros, callBackReset, referenceData,
         }
 
         var returnJSONData = { ...referenceData };
-        var returnListData;
-        await getJSONData("display.json").then(data => {
-            if (data[0]) { returnListData = data[1] }
-        })
+        var returnListData = {...listRefData};
         if (returnJSONData === undefined || returnListData === undefined) {
             alert("failed to load data during overwrite process"); return
         }
@@ -244,13 +245,13 @@ const Controller = ({ callBackData, callBackErros, callBackReset, referenceData,
             "URL": "https://mjmpictures.blob.core.windows.net/pics/" + fileSelected.name
         }
 
-
         await overWriteJSON(returnJSONData, "rawData.json")
         await overWriteJSON(returnListData, "display.json")
         await uploadFileToBlob(fileSelected)
-        await getJSONData("rawData.json").then(data => {
-            if (data[0]) { callBackRefData(data[1]) }
-        })
+
+        callBackRefData(returnJSONData)
+        callBackRefList(returnListData)
+
         setErrors({
             name: 'not set',
             id: 'not set',
