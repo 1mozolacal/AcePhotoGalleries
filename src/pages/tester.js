@@ -1,53 +1,108 @@
 import React, { useState, useEffect } from "react";
-import { uploadFileToBlob, getJSONData, overWriteJSON } from '../utils/azureStorage';
-import Input from '@material-ui/core/Input';
-import TextField from '@material-ui/core/TextField';
+import Box from '@material-ui/core/Box'
+import { DragDropContext, Droppable, Draggable } from "react-beautiful-dnd";
 
-import Button from '@material-ui/core/Button';
+
+const staticData = [
+    { name: "User 1" },
+    { name: "User 2" },
+    { name: "User 3" },
+    { name: "User 4" },
+    { name: "User 5" },
+    { name: "User 6" },
+]
+
+
 
 const Tester = () => {
-    const [data, setData] = useState()
-    const [button, setButton] = useState()
 
-    useEffect(() => {
-        async function makeFetch() {
-            await getJSONData("number.json").then((data) => {
-                setData(data[1]['datum'])
-            })
-        }
-        makeFetch()
-    }, [])
+    const reorderHelper = (list = [], start, end) => {
+        const result = Array.from(list)
+        const [removed] = result.splice(start, 1)
+        result.splice(end, 0, removed)
 
-    const submit = async () =>{
-        var cal = undefined
-        // await getJSONData("number.json").then(data => {
-        //     if (data[0]) { cal =data[1]['datum'] ; console.log(data) }
-        // })
-        
-        await overWriteJSON({datum:data+button}, "number.json")
-
-        // await getJSONData("number.json").then(data => {
-        //     if (data[0]) { setData(data[1]['datum']); console.log(data) }
-        // })
-        setData(data+button)
-
-        setButton('')
+        return result
     }
 
+    const reorder = (dataMap, src, dest) => {
+        console.log("here")
+        const current = [...dataMap[src.droppableId]]
+        const next = [...dataMap[dest.droppableId]]
+        const target = current[src.index]
 
-    return (<div>
-       <h1>data:{data}</h1>
-       <TextField
-            label="Picture's name"
-            type="text"
-            fullWidth
-            value={button}
-            onChange={(e) => { setButton(e.target.value) }} />
-        <button onClick={submit}>submit</button>
-    </div>)
+        if(src.droppableId === dest.droppableId) {
+            const reordered = reorderHelper(current, src.index, dest.index)
+
+            console.log({
+                ...dataMap,
+                [src.droppableId]: reordered
+            })
+            return {
+                ...dataMap,
+                [src.droppableId]: reordered
+            }
+        }
+
+        current.splice(src.index, 1);
+        next.splice(dest.index, 0, target)
+        console.log({
+            ...dataMap,
+            [src.droppableId]: current, 
+            [src.droppableId]: next
+        })
+        return {
+            ...dataMap,
+            [src.droppableId]: current, 
+            [src.droppableId]: next
+        }
+
+    }
+
+    const [data, setData] = useState({
+        a: staticData,
+        b: [{ name: "User 7" }]
+    })
+
+
+
+    return (
+
+        <DragDropContext onDragEnd={({destination, source}) => {
+            if (!destination) return
+    
+            // Do reordering
+            setData(reorder(data, source, destination))
+        }}>
+            {Object.entries(data).map(([k, v]) => <Droppable
+                droppableId={k}
+                key={k}
+                direction="horizontal"
+                isCombineEnabled={false}>
+                {dropProvided => (<div {...dropProvided.droppableProps}>
+                    <div style={{ display: "flex" }} ref={dropProvided.innerRef}>
+                        {v.map(({ name }, vid) => <Draggable draggableId={name} index={vid} key={vid}>
+                            {
+                                (dragProvided) => (
+                                    < Box component="div"
+                                        {...dragProvided.dragHandleProps}
+                                        {...dragProvided.draggableProps}
+                                        ref={dragProvided.innerRef}>
+                                        {name}
+                                    </Box>
+                                )
+                            }
+                        </Draggable>
+                        )}
+                    </div>
+                    {dropProvided.placeholder}
+                </div>
+                )}
+            </Droppable>
+            )}
+        </DragDropContext>)
 }
 
 export default Tester
 
 
-{/*  */}
+{/*  */ }
