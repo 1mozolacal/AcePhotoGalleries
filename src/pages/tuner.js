@@ -46,10 +46,10 @@ function TabPanel(props) {
 
 const Tuner = () => {
     const [pictureInfo, pictureInfoSet] = useState()
-    const [orderedData, orderedDataSet] = useState()
-    const [unorderedData, unorderedDataSet] = useState()
-    const [unlistedData, unlistedDataSet] = useState()
-    const [value, setValue] = React.useState(0);
+    const [orderedData, orderedDataSet] = useState() //Array: ele => [id,width]
+    const [unorderedData, unorderedDataSet] = useState()//Array ele=> id
+    const [unlistedData, unlistedDataSet] = useState()//Array ele=> id
+    const [value, setValue] = useState(0);
     const [showPreview, setShowPreview] = useState(false)
 
     const handleChange = (event, newValue) => {
@@ -82,6 +82,7 @@ const Tuner = () => {
     }
 
     const handleWidthChange = (id,newWidth) => {
+        //For showing preview
         const index = selectItemFromOrderedList(id,orderedData)
         if(index !== undefined){
             var newData = [...orderedData]
