@@ -7,7 +7,7 @@ import { uploadFileToBlob, getJSONData, overWriteJSON } from '../utils/azureStor
 import imageCompression from 'browser-image-compression';
 import { Button } from "@material-ui/core";
 
-const FullForm = ({title,prefilledData}) => {
+const FullForm = ({title,preTitle,prePaypalID,preButton,prePic}) => {
     const [controllerData, setControllerData] = useState(() => () => console.error("controll data not set"))
     const [controllerErrors, setControllerErrors] = useState(() => () => console.error("control errors not set"))
     const [reset, setReset] = useState(0)
@@ -47,7 +47,8 @@ const FullForm = ({title,prefilledData}) => {
         Wrapper: defaultWrapper,
         name: "Picture Name",
         controlled: true,
-        reset: reset
+        reset: reset,
+        initalValue: preTitle
     }
     const paypalID = {
         validateFunc: (event, setValue, setError, setHelperText) => {
@@ -73,7 +74,8 @@ const FullForm = ({title,prefilledData}) => {
         Wrapper: defaultWrapper,
         name: "Paypal ID",
         controlled: true,
-        reset: reset
+        reset: reset,
+        initalValue: prePaypalID
     }
     const paypalButton = {
         validateFunc: (event, setValue, setError, setHelperText) => {
@@ -117,7 +119,8 @@ const FullForm = ({title,prefilledData}) => {
         name: "Paypal Button",
         controlled: true,
         reset: reset,
-        multiline: true
+        multiline: true,
+        initalValue: preButton
     }
     const pictureFile = {
         validateFunc: async (event, setValue, setError, setHelperText) => {
@@ -148,7 +151,8 @@ const FullForm = ({title,prefilledData}) => {
         name: "File",
         controlled: false,
         reset: reset,
-        UncontrolledDisplay: ({ item }) => (<Grid><img alt="preview of upload" style={{ width: "150px" }} src={URL.createObjectURL(item)} /></Grid>)
+        UncontrolledDisplay: ({ item }) => (<Grid><img alt="preview of upload" style={{ width: "150px" }} src={typeof item === 'object' ? URL.createObjectURL(item) : item} /></Grid>),
+        initalValue: prePic
     }
 
     return (<div>

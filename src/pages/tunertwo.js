@@ -170,7 +170,9 @@ const TunerTwo = () => {
             callBackErros={setControllerErrors}
             callBackReset={setReset}
             referenceData={referenceData}
-            callBackRefData={setReferenceData}/>
+            callBackRefData={setReferenceData}
+            listRefData={listOfDatReference}
+            callBackRefList={setListOfDatReference}/>
     </div>)
 }
 

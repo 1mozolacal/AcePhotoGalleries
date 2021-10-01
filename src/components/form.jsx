@@ -24,7 +24,7 @@ const FormItem = ({ validateFunc, type, width, Wrapper, name, controlled, inital
     const [helperText, setHelperText] = useState('')
     const [value, setValue] = useState(initalValue ? initalValue : '')
     const [firstRender, setFirstRender] = useState(true)
-
+    
     useEffect(() => {
         if (firstRender) {
             setFirstRender(false)
