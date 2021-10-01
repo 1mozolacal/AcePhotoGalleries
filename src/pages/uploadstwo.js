@@ -14,7 +14,10 @@ const Editor = (props) => {
         <div>
             {
             <FullForm
-            title="Uploadsw"/>
+            title="Uploadsw"
+            items={{id:true,button:true,pic:true,title:true}}
+            preData={{}}
+            />
             }
         </div>
     )

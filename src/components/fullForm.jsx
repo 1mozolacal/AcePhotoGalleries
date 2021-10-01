@@ -5,13 +5,14 @@ import TextField from '@material-ui/core/TextField';
 import Grid from "@material-ui/core/Grid";
 import { uploadFileToBlob, getJSONData, overWriteJSON } from '../utils/azureStorage';
 import imageCompression from 'browser-image-compression';
-import { Button } from "@material-ui/core";
+import { Button, FormLabel, FormControl, FormControlLabel, RadioGroup, Radio } from "@material-ui/core";
 
-const FullForm = ({title,preTitle,prePaypalID,preButton,prePic}) => {
+const FullForm = ({ title, items, preData, overrideError }) => {
     const [controllerData, setControllerData] = useState(() => () => console.error("controll data not set"))
     const [controllerErrors, setControllerErrors] = useState(() => () => console.error("control errors not set"))
     const [reset, setReset] = useState(0)
     const [referenceData, setReferenceData] = useState()
+    const [compressionFactor, setCompressionFactor] = useState("2")
 
     useEffect(() => {
         async function makeFetch() {
@@ -48,7 +49,7 @@ const FullForm = ({title,preTitle,prePaypalID,preButton,prePic}) => {
         name: "Picture Name",
         controlled: true,
         reset: reset,
-        initalValue: preTitle
+        initalValue: preData.title
     }
     const paypalID = {
         validateFunc: (event, setValue, setError, setHelperText) => {
@@ -75,7 +76,7 @@ const FullForm = ({title,preTitle,prePaypalID,preButton,prePic}) => {
         name: "Paypal ID",
         controlled: true,
         reset: reset,
-        initalValue: prePaypalID
+        initalValue: preData.id
     }
     const paypalButton = {
         validateFunc: (event, setValue, setError, setHelperText) => {
@@ -120,7 +121,7 @@ const FullForm = ({title,preTitle,prePaypalID,preButton,prePic}) => {
         controlled: true,
         reset: reset,
         multiline: true,
-        initalValue: preButton
+        initalValue: preData.button
     }
     const pictureFile = {
         validateFunc: async (event, setValue, setError, setHelperText) => {
@@ -128,9 +129,10 @@ const FullForm = ({title,preTitle,prePaypalID,preButton,prePic}) => {
             if (imageFile === undefined) {
                 console.error("IMAGE IS UNDEFINED on change")
             }
+
             const options = {
                 maxSizeMB: 1,
-                maxWidthOrHeight: (1920 / 4)
+                maxWidthOrHeight: (1920 / parseInt(compressionFactor))
             }
             try {
                 const compressedFile = await imageCompression(imageFile, options);
@@ -144,15 +146,64 @@ const FullForm = ({title,preTitle,prePaypalID,preButton,prePic}) => {
                 errorSetter(true, 'file', "failed compression", setError, setHelperText)
                 alert('Failed Compression')
             }
+            var imageAlreadyExisits = true
+            await fetch("https://mjmpictures.blob.core.windows.net/pics/" + imageFile.name)
+                .then( response => {
+                    if (response.status === 404) {
+                        imageAlreadyExisits = false
+                    }
+                })
+            if(imageAlreadyExisits){
+                errorSetter(true,'file',"Image Already exisits. Change file's name",setError,setHelperText)
+            }
         },
         type: "file",
-        width: 6,
+        width: 4,
         Wrapper: (props) => <Input {...props}>{props.children}</Input>,
         name: "File",
         controlled: false,
         reset: reset,
         UncontrolledDisplay: ({ item }) => (<Grid><img alt="preview of upload" style={{ width: "150px" }} src={typeof item === 'object' ? URL.createObjectURL(item) : item} /></Grid>),
-        initalValue: prePic
+        initalValue: preData.pic
+    }
+    const pictureWidth = {
+        validateFunc: (event, setValue, setError, setHelperText) => {
+            setCompressionFactor(event.target.value)
+        },
+        type: "radio",
+        width: 4,
+        name: "Pic Size",
+        controlled: false,
+        reset: reset,
+        Wrapper: ({ label, onChange }) => (
+            <FormControl component="fieldset" style={{ color: "black" }}>
+                <FormLabel component="legend">{label}</FormLabel>
+                <RadioGroup
+                    row
+                    aria-label="sizes"
+                    name="radio-buttons-group"
+                    value={compressionFactor}
+                    onChange={onChange}
+                >
+                    <FormControlLabel value="1" control={<Radio />} label="Large" />
+                    <FormControlLabel value="2" control={<Radio />} label="Medium" />
+                    <FormControlLabel value="4" control={<Radio />} label="Small" />
+                </RadioGroup>
+            </FormControl>
+        )
+    }
+
+    const itemsUsed = []
+
+    if (items.title)
+        itemsUsed.push(picNameItem)
+    if (items.id)
+        itemsUsed.push(paypalID)
+    if (items.button)
+        itemsUsed.push(paypalButton)
+    if (items.pic) {
+        itemsUsed.push(pictureWidth)
+        itemsUsed.push(pictureFile)
     }
 
     return (<div>
@@ -160,36 +211,44 @@ const FullForm = ({title,preTitle,prePaypalID,preButton,prePic}) => {
         <br />
         <Form
             title="Uploads page"
-            items={[
-                picNameItem,
-                paypalID,
-                paypalButton,
-                pictureFile
-            ]}
+            items={itemsUsed}
         ></Form>
         <Controller
             callBackData={setControllerData}
             callBackErros={setControllerErrors}
             callBackReset={setReset}
             referenceData={referenceData}
-            callBackRefData={setReferenceData}/>
+            callBackRefData={setReferenceData}
+            preData={preData} 
+            overrideError={overrideError}/>
     </div>)
 }
 
 
-const Controller = ({ callBackData, callBackErros, callBackReset, referenceData, callBackRefData }) => {
+const Controller = ({ callBackData, callBackErros, callBackReset, referenceData, callBackRefData, preData, overrideError }) => {
     const [fileSelected, setFileSelected] = useState()
     const [picName, setPicName] = useState('')
     const [paypalId, setPaypalId] = useState('')
     const [paypalButtonId, setPaypalButtonID] = useState()
     const [paypalPrics, setPaypalPrices] = useState()
 
-    const [errors, setErrors] = useState({
+    const [refListData, setRefListData] = useState()
+    var defaultErros = {
         name: 'not set',
         id: 'not set',
         button: 'not set',
         file: 'not set'
-    })//name,id,button,file
+    }
+    if (preData.title)
+        delete defaultErros.name
+    if (preData.id)
+        delete defaultErros.id
+    if (preData.button)
+        delete defaultErros.button
+    if (preData.pic)
+        delete defaultErros.file
+
+    const [errors, setErrors] = useState(defaultErros)//name,id,button,file
 
     useEffect(() => {
         callBackData(() => (type, value) => {
@@ -224,45 +283,47 @@ const Controller = ({ callBackData, callBackErros, callBackReset, referenceData,
                 return old
             })
         })
+        async function makeFetch() {
+            await getJSONData("display.json").then((data) => {
+                setRefListData(data[1])
+            })
+        }
+        makeFetch()
     }, [])
 
 
     const uploadFile = async () => {
-        if ((errors['name'] || errors['id'] || errors['button'] || errors['file'])) {
+        if ( !overrideError && (errors['name'] || errors['id'] || errors['button'] || errors['file'])) {
             alert("Fix errors or missing data before submitting")
             console.error("Tried to submit with erros: %o", errors)
             return
         }
 
         var returnJSONData = { ...referenceData };
-        var returnListData;
+        var returnListData = [...refListData];
         await getJSONData("display.json").then(data => {
             if (data[0]) { returnListData = data[1] }
         })
         if (returnJSONData === undefined || returnListData === undefined) {
             alert("failed to load data during overwrite process"); return
         }
-        returnListData['unordered'].unshift(paypalId)
+        if (preData.id !== undefined)
+            returnListData['unordered'].unshift(paypalId)
         returnJSONData[paypalId] = {
             "title": picName,
             "prices": paypalPrics,
             "paypalID": paypalButtonId,
-            "URL": "https://mjmpictures.blob.core.windows.net/pics/" + fileSelected.name
+            "URL": (preData.pic ? preData.pic : "https://mjmpictures.blob.core.windows.net/pics/" + fileSelected.name)
         }
 
 
         await overWriteJSON(returnJSONData, "rawData.json")
         await overWriteJSON(returnListData, "display.json")
-        await uploadFileToBlob(fileSelected)
-        await getJSONData("rawData.json").then(data => {
-            if (data[0]) { callBackRefData(data[1]) }
-        })
-        setErrors({
-            name: 'not set',
-            id: 'not set',
-            button: 'not set',
-            file: 'not set'
-        })
+        if (preData.pic === undefined)
+            await uploadFileToBlob(fileSelected)
+        callBackRefData(returnJSONData)
+        setRefListData(returnListData)
+        setErrors(defaultErros)
         callBackReset(pre => { return pre + 1 })
     }
 
