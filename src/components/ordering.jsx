@@ -12,8 +12,8 @@ const listStyle = {
 }
 
 
-const MapOutData = ({ elements, context }) => (
-    elements.map(([id, width,callback], index) => {
+const MapOutData = ({ elements, callBack, context }) => (
+    elements.map(([id, width], index) => {
         return (
             <Draggable key={id} draggableId={id} index={index} style={listStyle}>
                 {(provided) => (
@@ -45,11 +45,11 @@ const MapOutData = ({ elements, context }) => (
                                     </Grid>
                                     <Grid item>
                                         <ButtonGroup variant="text" className="grid-button">
-                                            <Button onClick={() => callback(id,3)} className={width==3 ? "button-dark-bg" : undefined}>25%</Button>
-                                            <Button onClick={() => callback(id,4)} className={width==4 ? "button-dark-bg" : undefined}>33%</Button>
-                                            <Button onClick={() => callback(id,6)} className={width==6 ? "button-dark-bg" : undefined}>50%</Button>
-                                            <Button onClick={() => callback(id,8)} className={width==8 ? "button-dark-bg" : undefined}>66%</Button>
-                                            <Button onClick={() => callback(id,9)} className={width==9 ? "button-dark-bg" : undefined}>75%</Button>
+                                            <Button onClick={() => callBack(id,3)} className={width==3 ? "button-dark-bg" : undefined}>25%</Button>
+                                            <Button onClick={() => callBack(id,4)} className={width==4 ? "button-dark-bg" : undefined}>33%</Button>
+                                            <Button onClick={() => callBack(id,6)} className={width==6 ? "button-dark-bg" : undefined}>50%</Button>
+                                            <Button onClick={() => callBack(id,8)} className={width==8 ? "button-dark-bg" : undefined}>66%</Button>
+                                            <Button onClick={() => callBack(id,9)} className={width==9 ? "button-dark-bg" : undefined}>75%</Button>
                                         </ButtonGroup>
                                     </Grid>
                                 </Grid>
@@ -58,11 +58,12 @@ const MapOutData = ({ elements, context }) => (
                     </div>)}
             </Draggable>)
     }))
-const OrderDisplay = ({ items, itemInfo, callBack, boxID }) => {
+const OrderDisplay = ({ items, itemCallBack, itemInfo, callBack, boxID }) => {
     return (<>
         {items &&
             <DragAndDropDroppable
                 items={items}
+                itemCallBack={itemCallBack}
                 itemInfo={itemInfo}
                 callBack={callBack}
                 boxID={boxID}

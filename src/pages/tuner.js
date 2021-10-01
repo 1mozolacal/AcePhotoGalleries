@@ -70,26 +70,26 @@ const Tuner = () => {
         }
         makeFetch()
     }, [])
-    
-    const selectItemFromOrderedList = (selector, data) =>{
+
+    const selectItemFromOrderedList = (selector, data) => {
         var itemIndex = undefined
-        data.forEach( (item,index) =>{
-            if(item[0] == selector){
+        data.forEach((item, index) => {
+            if (item[0] == selector) {
                 itemIndex = index
             }
         })
         return itemIndex
     }
 
-    const handleWidthChange = (id,newWidth) => {
+    const handleWidthChange = (id, newWidth) => {
         //For showing preview
-        const index = selectItemFromOrderedList(id,orderedData)
-        if(index !== undefined){
+        const index = selectItemFromOrderedList(id, orderedData)
+        if (index !== undefined) {
             var newData = [...orderedData]
             newData[index][1] = newWidth
             orderedDataSet(newData)
         } else {
-            console.error("Tried to change width of ID that does not exist: %o : in : %o",id,orderedData)
+            console.error("Tried to change width of ID that does not exist: %o : in : %o", id, orderedData)
         }
     }
 
@@ -169,12 +169,12 @@ const Tuner = () => {
             <TabPanel value={value} index={0}>
                 <EmptyDroppable boxID="trash" holderStyle={{ position: 'relative', backgroundColor: "red", height: "100px" }} />
                 {unorderedData && pictureInfo &&
-                    <UnorderDisplay items={unorderedData.filter(ele => pictureInfo[ele]!==undefined)} itemInfo={pictureInfo} boxID="unordered" />}
+                    <UnorderDisplay items={unorderedData.filter(ele => pictureInfo[ele] !== undefined)} itemInfo={pictureInfo} boxID="unordered" />}
             </TabPanel>
             <TabPanel value={value} index={1}>
                 <EmptyDroppable boxID="recover" holderStyle={{ position: 'relative', backgroundColor: "green", height: "100px" }} />
                 {unlistedData && pictureInfo &&
-                    <UnorderDisplay items={unlistedData.filter(ele => pictureInfo[ele]!==undefined)} itemInfo={pictureInfo} boxID="unlisted" />}
+                    <UnorderDisplay items={unlistedData.filter(ele => pictureInfo[ele] !== undefined)} itemInfo={pictureInfo} boxID="unlisted" />}
             </TabPanel>
         </SidebarTuner>)
 
@@ -214,7 +214,10 @@ const Tuner = () => {
         })
         return temp
     }
-    const mainDisplay = showPreview ? (<CardHolder items={getGalleryData()} />) : (<div style={{ width: "50%" }}><OrderDisplay items={(orderedData && orderedData.map(([id,width],index) => { return [id,width,handleWidthChange]}) )} itemInfo={pictureInfo} callBack={handleOnDragEnd} boxID="ordered" /></div>)
+    const mainDisplay = showPreview ? (<CardHolder items={getGalleryData()} />) :
+        (<div style={{ width: "50%" }}>
+            <OrderDisplay items={orderedData} itemCallBack={handleWidthChange} itemInfo={pictureInfo} callBack={handleOnDragEnd} boxID="ordered" />
+        </div>)
     return (
         <>
             <AdminNavbar />
