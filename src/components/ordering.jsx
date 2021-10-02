@@ -1,7 +1,6 @@
 import React from "react";
 import Grid from "@material-ui/core/Grid";
 import { Draggable } from 'react-beautiful-dnd';
-import DragHandleIcon from '@material-ui/icons/DragHandle';
 import { DragAndDropDroppable } from './dragableZone'
 
 import ButtonGroup from '@material-ui/core/ButtonGroup';
@@ -28,7 +27,7 @@ const MapOutData = ({ elements, callBack, context }) => (
                                     alignItems="flex-start"
                                 >
                                     <Grid item>{context[id]["title"]}</Grid>
-                                    <Grid item><img style={{ width: "100%" , maxHeight:"150px"}} src={context[id]["URL"]}></img></Grid>
+                                    <Grid item><img style={{ width: "100%" , maxHeight:"150px"}} src={context[id]["URL"]} alt="pics" /></Grid>
                                 </Grid>
                             </Grid>
                             <Grid item xs={4}>
@@ -45,11 +44,11 @@ const MapOutData = ({ elements, callBack, context }) => (
                                     </Grid>
                                     <Grid item>
                                         <ButtonGroup variant="text" className="grid-button">
-                                            <Button onClick={() => callBack(id,3)} className={width==3 ? "button-dark-bg" : undefined}>25%</Button>
-                                            <Button onClick={() => callBack(id,4)} className={width==4 ? "button-dark-bg" : undefined}>33%</Button>
-                                            <Button onClick={() => callBack(id,6)} className={width==6 ? "button-dark-bg" : undefined}>50%</Button>
-                                            <Button onClick={() => callBack(id,8)} className={width==8 ? "button-dark-bg" : undefined}>66%</Button>
-                                            <Button onClick={() => callBack(id,9)} className={width==9 ? "button-dark-bg" : undefined}>75%</Button>
+                                            <Button onClick={() => callBack(id,3)} className={width===3 ? "button-dark-bg" : undefined}>25%</Button>
+                                            <Button onClick={() => callBack(id,4)} className={width===4 ? "button-dark-bg" : undefined}>33%</Button>
+                                            <Button onClick={() => callBack(id,6)} className={width===6 ? "button-dark-bg" : undefined}>50%</Button>
+                                            <Button onClick={() => callBack(id,8)} className={width===8 ? "button-dark-bg" : undefined}>66%</Button>
+                                            <Button onClick={() => callBack(id,9)} className={width===9 ? "button-dark-bg" : undefined}>75%</Button>
                                         </ButtonGroup>
                                     </Grid>
                                 </Grid>

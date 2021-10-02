@@ -74,7 +74,7 @@ const Tuner = () => {
     const selectItemFromOrderedList = (selector, data) => {
         var itemIndex = undefined
         data.forEach((item, index) => {
-            if (item[0] == selector) {
+            if (item[0] === selector) {
                 itemIndex = index
             }
         })
