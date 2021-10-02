@@ -58,14 +58,21 @@ const Tuner = () => {
 
     useEffect(() => {
         async function makeFetch() {
-            await getJSONData("display.json").then((data) => {
+            await getJSONData("display.json").then(async (data) => {
                 const extractData = data[1]
-                orderedDataSet(extractData['ordered'])
-                unorderedDataSet(extractData['unordered'])
-                unlistedDataSet(extractData['unlisted'])
-            })
-            await getJSONData("rawData.json").then((data) => {
-                pictureInfoSet(data[1])
+                await getJSONData("rawData.json").then((info) => {
+                    let picsInfo = info[1]
+                    pictureInfoSet(picsInfo)
+                    let ordered = extractData['ordered'].filter(ele => picsInfo[ele[0]] !== undefined)
+                    let unordered = extractData['unordered'].filter(ele => picsInfo[ele] !== undefined)
+                    let unlisted = extractData['unlisted'].filter(ele => picsInfo[ele] !== undefined)
+
+                    // unorderedData.filter(ele => pictureInfo[ele] !== undefined)
+                    orderedDataSet(ordered)
+                    unorderedDataSet(unordered)
+                    unlistedDataSet(unlisted)
+                })
+
             })
         }
         makeFetch()
@@ -169,12 +176,12 @@ const Tuner = () => {
             <TabPanel value={value} index={0}>
                 <EmptyDroppable boxID="trash" holderStyle={{ position: 'relative', backgroundColor: "red", height: "100px" }} />
                 {unorderedData && pictureInfo &&
-                    <UnorderDisplay items={unorderedData.filter(ele => pictureInfo[ele] !== undefined)} itemInfo={pictureInfo} boxID="unordered" />}
+                    <UnorderDisplay items={unorderedData} itemInfo={pictureInfo} boxID="unordered" />}
             </TabPanel>
             <TabPanel value={value} index={1}>
                 <EmptyDroppable boxID="recover" holderStyle={{ position: 'relative', backgroundColor: "green", height: "100px" }} />
                 {unlistedData && pictureInfo &&
-                    <UnorderDisplay items={unlistedData.filter(ele => pictureInfo[ele] !== undefined)} itemInfo={pictureInfo} boxID="unlisted" />}
+                    <UnorderDisplay items={unlistedData} itemInfo={pictureInfo} boxID="unlisted" />}
             </TabPanel>
         </SidebarTuner>)
 
