@@ -215,16 +215,18 @@ const Tuner = () => {
         return temp
     }
     const mainDisplay = showPreview ? (<CardHolder items={getGalleryData()} />) :
-        (<div style={{ width: "50%" }}>
+        (<div className="main-display">
             <OrderDisplay items={orderedData} itemCallBack={handleWidthChange} itemInfo={pictureInfo} callBack={handleOnDragEnd} boxID="ordered" />
         </div>)
     return (
         <>
             <AdminNavbar />
             <br />
+            
             <DragDropContext onDragEnd={(info) => handleOnDragEnd(info)}>
                 <div className="tuner-page">
                     {tunerHeader}
+                    <br />
 
                     {(
                         (pictureInfo && orderedData && unorderedData && unlistedData)
