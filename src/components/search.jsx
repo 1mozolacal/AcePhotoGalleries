@@ -1,4 +1,4 @@
-import React, {useState,useEffect} from "react"
+import React, {useState} from "react"
 import { TextField, Grid, Button } from "@material-ui/core"
 
 
@@ -12,6 +12,7 @@ const Search = (props) => {
     const [results,setResults] = useState([])
 
     const handleChange = (e) => {
+        // New time square
         const searchValue = e.target.value.toLowerCase()
         setValue(e.target.value)
 
@@ -21,6 +22,7 @@ const Search = (props) => {
             if(key.toLowerCase().startsWith(searchValue)){
                 ordering = Math.max(ordering, searchValue.length)
             }
+
             if(paypalID.toLowerCase().startsWith(searchValue)){
                 ordering = Math.max(ordering, searchValue.length)
             }
@@ -41,8 +43,8 @@ const Search = (props) => {
     }
 
     return (
-        <Grid container>
-            <Grid>Sea</Grid>
+        <Grid container style={{background: "white", color: "black"}}>
+            <h1>Search</h1>
             <Grid item xs={12}>
                 <TextField
                     label="Search"

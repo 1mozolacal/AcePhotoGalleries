@@ -34,8 +34,7 @@ export const overWriteJSON = async (payload, filename, container = 'config') => 
     var previous = await getJSONData(filename)
     if (previous[0]) {
         var d = new Date();
-        var s = new String();
-        s = (d.getFullYear() + "|" + (d.getMonth() + 1) + "|" + d.getDate() + "  " + d.getSeconds() + ":" + d.getMinutes() + ":" + d.getHours()).toString();
+        var s = (d.getFullYear() + "|" + (d.getMonth() + 1) + "|" + d.getDate() + "  " + d.getHours() + ":" + d.getMinutes() + ":" + d.getSeconds()).toString();
         uploadNewJsonFile(previous[1], 'backups/' + filename + "   " + s, container)
     }
     uploadNewJsonFile(payload, filename, container)

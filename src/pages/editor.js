@@ -32,7 +32,7 @@ const Editor = (props) => {
 
     return (
         <div>
-            <div style={{position:'absolute',right:'0px'}}>
+            <div style={{position:'absolute',right:'0px', color: "black"}}>
                 Override:
             <Switch
                 checked={override}
