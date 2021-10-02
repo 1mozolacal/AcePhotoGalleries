@@ -98,16 +98,18 @@ const FullForm = ({ title, items, preData, overrideError }) => {
                 });
                 tempID = tempID[0].split("value=")[1]
                 tempID = tempID.split('"')[1]
-                if (Object.keys(referenceData).map((item, index) => (referenceData[item]['paypalID'])).includes(tempID)) {
-                    errorSetter(true, 'button', "Button already in use", setError, setHelperText)
-                    return
-                }
+                
                 if (tempPrice.length !== 5) {
                     errorSetter(true, 'button', "Need exactly 5 prices", setError, setHelperText)
                     return
                 }
                 controllerData('buttonID', tempID)
                 controllerData('buttonPrices', tempPrice)
+                if (Object.keys(referenceData).map((item, index) => (referenceData[item]['paypalID'])).includes(tempID)) {
+                    errorSetter(true, 'button', "Button already in use", setError, setHelperText)
+                    return
+                }
+                
             } catch (err) {
                 errorSetter(true, 'button', 'Error when trying to parse button info' + err.message, setError, setHelperText)
                 return
@@ -129,16 +131,18 @@ const FullForm = ({ title, items, preData, overrideError }) => {
             if (imageFile === undefined) {
                 console.error("IMAGE IS UNDEFINED on change")
             }
-
+            
+            var compressionText = ''
             const options = {
                 maxSizeMB: 1,
                 maxWidthOrHeight: (1920 / parseInt(compressionFactor))
             }
+            console.warn("COMPREESS: %o",(1920 / parseInt(compressionFactor)))
             try {
                 const compressedFile = await imageCompression(imageFile, options);
+                compressionText = `Compression successful  From ${(imageFile.size / 1024).toFixed(1)} KB to ${(compressedFile.size / 1024).toFixed(1)} KB`
                 controllerData('file', compressedFile)
-                errorSetter(false, 'file', `Compression successful  From ${(imageFile.size / 1024).toFixed(1)} KB to ${(compressedFile.size / 1024).toFixed(1)} KB`, setError, setHelperText)
-                //alert(`Successful compression. From ${(imageFile.size / 1024 / 1024).toFixed(4)} MB to ${(compressedFile.size / 1024 / 1024).toFixed(4)} MB`)
+                errorSetter(false, 'file', compressionText, setError, setHelperText)
                 setValue(compressedFile)
                 //set image value *** must add int
             } catch (error) {
@@ -154,7 +158,7 @@ const FullForm = ({ title, items, preData, overrideError }) => {
                     }
                 })
             if(imageAlreadyExisits){
-                errorSetter(true,'file',"Image Already exisits. Change file's name",setError,setHelperText)
+                errorSetter(true,'file',`Image Already exisits. Change file's name (${compressionText})`,setError,setHelperText)
             }
         },
         type: "file",
@@ -227,10 +231,10 @@ const FullForm = ({ title, items, preData, overrideError }) => {
 
 const Controller = ({ callBackData, callBackErros, callBackReset, referenceData, callBackRefData, preData, overrideError }) => {
     const [fileSelected, setFileSelected] = useState()
-    const [picName, setPicName] = useState('')
-    const [paypalId, setPaypalId] = useState('')
-    const [paypalButtonId, setPaypalButtonID] = useState()
-    const [paypalPrics, setPaypalPrices] = useState()
+    const [picName, setPicName] = useState(preData.title ? preData.title :'')
+    const [paypalId, setPaypalId] = useState(preData.id ? preData.id:'')
+    const [paypalButtonId, setPaypalButtonID] = useState(preData.paypalID)
+    const [paypalPrics, setPaypalPrices] = useState(preData.prices)
 
     const [refListData, setRefListData] = useState()
     var defaultErros = {
@@ -300,26 +304,27 @@ const Controller = ({ callBackData, callBackErros, callBackReset, referenceData,
         }
 
         var returnJSONData = { ...referenceData };
-        var returnListData = [...refListData];
+        var returnListData = {...refListData};
         await getJSONData("display.json").then(data => {
             if (data[0]) { returnListData = data[1] }
         })
         if (returnJSONData === undefined || returnListData === undefined) {
             alert("failed to load data during overwrite process"); return
         }
-        if (preData.id !== undefined)
+        if (!preData.id){
             returnListData['unordered'].unshift(paypalId)
+        }
+        
         returnJSONData[paypalId] = {
             "title": picName,
             "prices": paypalPrics,
             "paypalID": paypalButtonId,
-            "URL": (preData.pic ? preData.pic : "https://mjmpictures.blob.core.windows.net/pics/" + fileSelected.name)
+            "URL": (preData.pic && !fileSelected ? preData.pic : "https://mjmpictures.blob.core.windows.net/pics/" + fileSelected.name)
         }
-
 
         await overWriteJSON(returnJSONData, "rawData.json")
         await overWriteJSON(returnListData, "display.json")
-        if (preData.pic === undefined)
+        if (preData.pic === undefined || fileSelected)
             await uploadFileToBlob(fileSelected)
         callBackRefData(returnJSONData)
         setRefListData(returnListData)

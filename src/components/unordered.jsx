@@ -5,6 +5,7 @@ import { DragAndDropDroppable } from './dragableZone'
 import Card from '@material-ui/core/Card';
 import CardContent from '@material-ui/core/CardContent';
 import CardMedia from '@material-ui/core/CardMedia';
+import Button from '@material-ui/core/Button';
 import placeHolder from '../images/mountaindawn.jpg'
 
 import '../stylesheets/tuner.sass'
@@ -16,21 +17,23 @@ const MapOutData = ({ elements, context }) => (
                 {(provided) => (
                     <Grid spacing={0} container ref={provided.innerRef} {...provided.draggableProps} {...provided.dragHandleProps} >
                         <Grid item xs={12}>
-                            
-        <Card className='card'>
-            <CardMedia
-                className='card-cover'
-                image={context[id]['URL'] || placeHolder}
-                title={context[id]['title'] || 'Coming soon....'}
-            />
-            <div className="card-details">
-                <CardContent>
-                    <div className="md-text blue-text">{context[id]['title'] || 'Bacon pancake!'}</div>
-                    <br/>
-                    <div className="md-text">{`$${(context[id]['prices'] && (context[id]['prices'][0] + " to $" + context[id]['prices'][4]) )|| '--'}`}</div>
-                </CardContent>
-            </div>
-        </Card>
+
+                            <Card className='card'>
+                                <CardMedia
+                                    className='card-cover'
+                                    image={context[id]['URL'] || placeHolder}
+                                    title={context[id]['title'] || 'Coming soon....'}
+                                />
+                                <div className="card-details">
+                                    <CardContent>
+                                        <div className="md-text blue-text">{context[id]['title'] || 'Bacon pancake!'}</div>
+                                        <br />
+                                        <div className="md-text">{`$${(context[id]['prices'] && (context[id]['prices'][0] + " to $" + context[id]['prices'][4])) || '--'}`}</div>
+                                        <Button  className="grid-button" href={`/editor?id=${id}`}>Change Info</Button>
+                                    </CardContent>
+                                </div>
+                                
+                            </Card>
 
 
 

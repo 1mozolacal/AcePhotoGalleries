@@ -75,6 +75,16 @@ const createBlobInContainer = async (containerClient, file) => {
     await blobClient.uploadBrowserData(file, options);
 }
 
+// export const uploadFileToBlob = async (file) => {
+//     if (!file) return [];
+
+//     const containerClient = blobServiceClient.getContainerClient("pics");
+
+//     const blockBlobClient = containerClient.getBlockBlobClient(file.name);
+//     const uploadBlobResponse = await blockBlobClient.upload(file, file.size);
+//     console.log("Written with response of: %o", uploadBlobResponse)
+// };
+
 export const uploadFileToBlob = async (file) => {
     if (!file) return [];
 

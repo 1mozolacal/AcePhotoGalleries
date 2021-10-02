@@ -45,11 +45,13 @@ const Editor = (props) => {
                     <FullForm
                         title="Editor"
                         items={{ button: true, pic: true, title: true }}
-                        override={override}
+                        overrideError={override}
                         preData={{
                             title: referenceData[refID]['title'],
                             id: refID,
                             pic: referenceData[refID]['URL'],
+                            prices: referenceData[refID]['prices'],
+                            paypalID: referenceData[refID]['paypalID'],
                             button: createFullButton(referenceData[refID]['paypalID'], referenceData[refID]['prices'])
                         }}
                     />
@@ -69,11 +71,11 @@ const createFullButton = (id, prices) => {
 <input type="hidden" name="hosted_button_id" value="${id}">
 <table>
 <tr><td><input type="hidden" name="on0" value="Sizes (inches)">Sizes (inches)</td></tr><tr><td><select name="os0">
-	<option value="8X10">8X10 ${prices[0]} CAD</option>
-	<option value="11X14">11X14 ${prices[1]} CAD</option>
-	<option value="16X20">16X20 ${prices[2]} CAD</option>
-	<option value="20X24">20X24 ${prices[3]} CAD</option>
-	<option value="20X30">20X30 ${prices[4]} CAD</option>
+	<option value="8X10">8X10 $${prices[0]} CAD</option>
+	<option value="11X14">11X14 $${prices[1]} CAD</option>
+	<option value="16X20">16X20 $${prices[2]} CAD</option>
+	<option value="20X24">20X24 $${prices[3]} CAD</option>
+	<option value="20X30">20X30 $${prices[4]} CAD</option>
 </select> </td></tr></form>`
 }
 
