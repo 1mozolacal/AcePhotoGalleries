@@ -4,6 +4,7 @@ import { Switch } from "@material-ui/core";
 import { getJSONData } from '../utils/azureStorage';
 import FullForm from "../components/fullForm"
 import Search from "../components/search"
+import AdminNavbar from "../components/AdminNavbar";
 
 import "../stylesheets/home.sass"
 
@@ -37,7 +38,7 @@ const Editor = (props) => {
             />
         </div>)
 
-    const formRender = (<FullForm
+    const formRender = refID ? (<FullForm
         title="Editor"
         items={{ button: true, pic: true, title: true }}
         overrideError={override}
@@ -49,7 +50,7 @@ const Editor = (props) => {
             paypalID: referenceData[refID]['paypalID'],
             button: createFullButton(referenceData[refID]['paypalID'], referenceData[refID]['prices'])
         }}
-    />)
+    />) : undefined
 
     const searchRender = (<Search
         lookupAgainst={referenceData}
@@ -58,10 +59,11 @@ const Editor = (props) => {
     return (
         <div>
             {overrideRender}
+            <AdminNavbar/>
             {(referenceData &&
                 (
-                    (refID && { formRender })
-                    || { searchRender }
+                    formRender
+                    ||  searchRender 
                 )
             ) || <div>Loading data</div>}
         </div>

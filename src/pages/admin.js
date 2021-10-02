@@ -24,6 +24,12 @@ const Admin = () => {
                 <Grid item>
                     <Row buttonText='Go to uploader' buttonLink='/uploads' title='Uploader Page' desc='The uploader is for uploading new picture.'></Row>
                 </Grid>
+                <Grid item>
+                    <Row buttonText='Go to editor' buttonLink='/editor' title='Editor Page' desc='The editor is for make edits to existing uploaded item. Everything but the "PaypalID" can be changed).'></Row>
+                </Grid>
+                <Grid item>
+                    <Row buttonText='LEGACY uploader' buttonLink='/uploadsold' title='**LEGACY** Uploader' desc='OLD uploader page, only use this if the newer uploader is casuing issues.'></Row>
+                </Grid>
                 <Grid item></Grid>
             </Grid>
 

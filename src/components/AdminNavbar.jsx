@@ -12,6 +12,7 @@ const AdminNavbar = () => {
                 <Toolbar>
                     <Link to="/uploads"><Button><strong>Uploader</strong></Button></Link>
                     <Link to="/tuner"><Button><strong>Tuner</strong></Button></Link>
+                    <Link to="/editor"><Button><strong>Editor</strong></Button></Link>
                 </Toolbar>
             </AppBar>
         </Box>

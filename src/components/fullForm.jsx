@@ -7,7 +7,7 @@ import { uploadFileToBlob, getJSONData, overWriteJSON } from '../utils/azureStor
 import imageCompression from 'browser-image-compression';
 import { Button, FormLabel, FormControl, FormControlLabel, RadioGroup, Radio } from "@material-ui/core";
 
-const FullForm = ({ title, items, preData, overrideError }) => {
+const FullForm = ({ title, items, preData, overrideError, onSubmit }) => {
     const [controllerData, setControllerData] = useState(() => () => console.error("controll data not set"))
     const [controllerErrors, setControllerErrors] = useState(() => () => console.error("control errors not set"))
     const [reset, setReset] = useState(0)
@@ -223,12 +223,13 @@ const FullForm = ({ title, items, preData, overrideError }) => {
             referenceData={referenceData}
             callBackRefData={setReferenceData}
             preData={preData} 
-            overrideError={overrideError}/>
+            overrideError={overrideError}
+            onSubmit={onSubmit}/>
     </div>)
 }
 
 
-const Controller = ({ callBackData, callBackErros, callBackReset, referenceData, callBackRefData, preData, overrideError }) => {
+const Controller = ({ callBackData, callBackErros, callBackReset, referenceData, callBackRefData, preData, overrideError,onSubmit }) => {
     const [fileSelected, setFileSelected] = useState()
     const [picName, setPicName] = useState(preData.title ? preData.title :'')
     const [paypalId, setPaypalId] = useState(preData.id ? preData.id:'')
@@ -329,6 +330,9 @@ const Controller = ({ callBackData, callBackErros, callBackReset, referenceData,
         setRefListData(returnListData)
         setErrors(defaultErros)
         callBackReset(pre => { return pre + 1 })
+        onSubmit({
+            listData: returnListData
+        })
     }
 
     return (
