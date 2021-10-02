@@ -6,8 +6,6 @@ import { TextField, Grid, Button } from "@material-ui/core"
 const Search = (props) => {
     const { size, limit, lookupAgainst, callBack} = props
 
-    const [error,setError] = useState()
-    const [helperText,setHelperText] = useState()
     const [value,setValue] = useState('')
     const [results,setResults] = useState([])
 
@@ -50,8 +48,6 @@ const Search = (props) => {
                     label="Search"
                     type="text"
                     fullWidth
-                    error={error}
-                    helperText={helperText}
                     value={value}
                     onChange={handleChange} />
             </Grid> 

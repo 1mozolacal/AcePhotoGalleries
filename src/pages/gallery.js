@@ -9,8 +9,6 @@ import CardHolder from "../components/cardHolder";
 import Grid from "@material-ui/core/Grid";
 import Button from "@material-ui/core/Button";
 
-import { getJSONData } from '../utils/azureStorage'
-
 const Gallery = () => {
 	const [displayPicture, setDisplayPicture] = useState()
 	const [spotLightInfo, setSpotLightInfo] = useState([false, 0, undefined, undefined]) // [show,yPos,title,image]
@@ -32,21 +30,6 @@ const Gallery = () => {
 					return allImage
 					//returns [id,width]
 				})
-			// const list = await getJSONData("display.json").then((data) => {
-			// 	var allImage = data[1]['ordered']
-			// 	const unorderedMapping = data[1]['unordered'].map( (item,index) => {
-			// 		const mapping = [4,8,8,4]
-
-			// 		return [item,mapping[index%4]]
-			// 	})
-			// 	allImage.push(...unorderedMapping)
-			// 	return allImage
-			// 	//returns [id,width]
-			// })
-			const data2 = await getJSONData("rawData.json").then((data) => {
-				return data[1]
-			})
-			console.log(data2)
 			const data = await fetch("https://mjmpictures.blob.core.windows.net/config/rawData.json")
 				.then(res => res.json())
 				.then((data) => {

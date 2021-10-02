@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
-import { Grid, Switch } from "@material-ui/core";
+import { Switch } from "@material-ui/core";
 
-import { getJSONData, overWriteJSON } from '../utils/azureStorage';
+import { getJSONData } from '../utils/azureStorage';
 import FullForm from "../components/fullForm"
 import Search from "../components/search"
 
@@ -9,7 +9,6 @@ import "../stylesheets/home.sass"
 
 
 const Editor = (props) => {
-    const id = props.id
     var defaultID = undefined
     if (props.location.search !== '') {
         let searchParams = new URLSearchParams(props.location.search)
@@ -28,37 +27,43 @@ const Editor = (props) => {
         makeFetch()
     }, [])
 
-    // NNNEEEED to change the submit func of the fullform component (has to be different the uploads page)
-
-    return (
-        <div>
-            <div style={{position:'absolute',right:'0px', color: "black"}}>
-                Override:
+    const overrideRender = (
+        <div style={{ position: 'absolute', right: '0px', color: "black" }}>
+            Override:
             <Switch
                 checked={override}
                 onChange={() => setOverride(!override)}
                 inputProps={{ 'aria-label': 'controlled' }}
             />
-            </div>
-            {referenceData &&
-                (refID &&
-                    <FullForm
-                        title="Editor"
-                        items={{ button: true, pic: true, title: true }}
-                        overrideError={override}
-                        preData={{
-                            title: referenceData[refID]['title'],
-                            id: refID,
-                            pic: referenceData[refID]['URL'],
-                            prices: referenceData[refID]['prices'],
-                            paypalID: referenceData[refID]['paypalID'],
-                            button: createFullButton(referenceData[refID]['paypalID'], referenceData[refID]['prices'])
-                        }}
-                    />
-                    || <Search
-                        lookupAgainst={referenceData}
-                        callBack={(id) => setRefID(id)} />)
-                || <div>Loading data</div>}
+        </div>)
+
+    const formRender = (<FullForm
+        title="Editor"
+        items={{ button: true, pic: true, title: true }}
+        overrideError={override}
+        preData={{
+            title: referenceData[refID]['title'],
+            id: refID,
+            pic: referenceData[refID]['URL'],
+            prices: referenceData[refID]['prices'],
+            paypalID: referenceData[refID]['paypalID'],
+            button: createFullButton(referenceData[refID]['paypalID'], referenceData[refID]['prices'])
+        }}
+    />)
+
+    const searchRender = (<Search
+        lookupAgainst={referenceData}
+        callBack={(id) => setRefID(id)} />)
+
+    return (
+        <div>
+            {overrideRender}
+            {(referenceData &&
+                (
+                    (refID && { formRender })
+                    || { searchRender }
+                )
+            ) || <div>Loading data</div>}
         </div>
     )
 }

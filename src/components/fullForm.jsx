@@ -137,7 +137,6 @@ const FullForm = ({ title, items, preData, overrideError }) => {
                 maxSizeMB: 1,
                 maxWidthOrHeight: (1920 / parseInt(compressionFactor))
             }
-            console.warn("COMPREESS: %o",(1920 / parseInt(compressionFactor)))
             try {
                 const compressedFile = await imageCompression(imageFile, options);
                 compressionText = `Compression successful  From ${(imageFile.size / 1024).toFixed(1)} KB to ${(compressedFile.size / 1024).toFixed(1)} KB`
