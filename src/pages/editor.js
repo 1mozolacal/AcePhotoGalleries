@@ -29,7 +29,7 @@ const Editor = (props) => {
     }, [])
 
     const overrideRender = (
-        <div style={{ position: 'absolute', right: '0px', color: "black" }}>
+        <div style={{ zIndex: 10, position: 'absolute', right: '0px', color: "black" }}>
             Override:
             <Switch
                 checked={override}
@@ -42,6 +42,7 @@ const Editor = (props) => {
         title="Editor"
         items={{ button: true, pic: true, title: true }}
         overrideError={override}
+        onSubmit={(payload) => {setRefID(undefined)} }
         preData={{
             title: referenceData[refID]['title'],
             id: refID,

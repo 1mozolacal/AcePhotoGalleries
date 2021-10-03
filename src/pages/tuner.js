@@ -101,6 +101,10 @@ const Tuner = () => {
     }
 
     const handleOnDragEnd = ({ destination, source }) => {
+        if(destination === null){
+            console.error("Destination is null")
+            return
+        }
         var sourceDroppableId = source.droppableId
         var destinationDroppableId = destination.droppableId
         if (destinationDroppableId === "trash") {
