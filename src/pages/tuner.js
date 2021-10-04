@@ -178,12 +178,14 @@ const Tuner = () => {
             </Tabs>
 
             <TabPanel value={value} index={0}>
-                <EmptyDroppable boxID="trash" holderStyle={{ position: 'relative', backgroundColor: "red", height: "100px" }} />
+                <EmptyDroppable boxID="trash" holderStyle={{ position: 'relative', backgroundColor: "red", height: "30px" }} />
+                <div style={{background: "red", height: 70}}></div>
                 {unorderedData && pictureInfo &&
                     <UnorderDisplay items={unorderedData} itemInfo={pictureInfo} boxID="unordered" />}
             </TabPanel>
             <TabPanel value={value} index={1}>
-                <EmptyDroppable boxID="recover" holderStyle={{ position: 'relative', backgroundColor: "green", height: "100px" }} />
+                <EmptyDroppable boxID="recover" holderStyle={{ position: 'relative', backgroundColor: "green", height: "30px" }} />
+                <div style={{background: "green", height: 70}}></div>
                 {unlistedData && pictureInfo &&
                     <UnorderDisplay items={unlistedData} itemInfo={pictureInfo} boxID="unlisted" />}
             </TabPanel>
