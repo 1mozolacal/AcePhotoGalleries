@@ -8,7 +8,7 @@ import ChevronLeftIcon from '@material-ui/icons/ChevronLeft';
 import '../stylesheets/tuner.sass'
 
 const SidebarTuner = ({children}) => {
-    const [open, setOpen] = React.useState(false);
+    const [open, setOpen] = React.useState(true);
 
     return (
         <>

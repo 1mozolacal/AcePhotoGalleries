@@ -38,7 +38,7 @@ const Editor = (props) => {
             />
         </div>)
 
-    const formRender = refID ? (<FullForm
+    const formRender = refID ? (referenceData && <FullForm
         title="Editor"
         items={{ button: true, pic: true, title: true }}
         overrideError={override}
@@ -51,7 +51,7 @@ const Editor = (props) => {
             paypalID: referenceData[refID]['paypalID'],
             button: createFullButton(referenceData[refID]['paypalID'], referenceData[refID]['prices'])
         }}
-    />) : undefined
+    />)  : undefined
 
     const searchRender = (<Search
         lookupAgainst={referenceData}
