@@ -23,7 +23,7 @@ const Gallery = () => {
 				.then((data) => {
 					var allImage = data['ordered']
 					const unorderedMapping = data['unordered'].map((item, index) => {
-						const mapping = [4, 8, 8, 4]
+						const mapping = [6,6,6,6] //[4, 8, 8, 4]
 						return [item, mapping[index % 4]]
 					})
 					allImage.push(...unorderedMapping)
