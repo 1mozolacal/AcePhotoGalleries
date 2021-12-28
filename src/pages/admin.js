@@ -5,12 +5,14 @@ import { Grid } from "@material-ui/core";
 import AdminNavbar from "../components/AdminNavbar";
 // import watermarkLogo from '../images/waterMark.png'
 // import mergeImages from 'merge-images';
+import AuthToken from "../components/authToken";
 
 const Admin = () => {
     
     return (
         <>
         <AdminNavbar/>
+        <AuthToken alwaysShow test/>
             <h1>Admin page</h1>
             <Grid
                 container
