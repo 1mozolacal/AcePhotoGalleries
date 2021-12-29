@@ -5,6 +5,7 @@ import { getJSONData } from '../utils/azureStorage';
 import FullForm from "../components/fullForm"
 import Search from "../components/search"
 import AdminNavbar from "../components/AdminNavbar";
+import AuthToken from "../components/authToken";
 
 import "../stylesheets/home.sass"
 
@@ -18,6 +19,7 @@ const Editor = (props) => {
     const [refID, setRefID] = useState(defaultID)
     const [referenceData, setReferenceData] = useState()
     const [override, setOverride] = useState(false)
+    const [token,setToken] = useState()
 
     useEffect(() => {
         async function makeFetch() {
@@ -43,6 +45,7 @@ const Editor = (props) => {
         items={{ button: true, pic: true, title: true }}
         overrideError={override}
         onSubmit={(payload) => {setRefID(undefined)} }
+        token={token}
         preData={{
             title: referenceData[refID]['title'],
             id: refID,
@@ -59,6 +62,10 @@ const Editor = (props) => {
 
     return (
         <div>
+            {!token && 
+            <AuthToken returnToken={setToken}/>}
+            
+            {token && <>
             {overrideRender}
             <AdminNavbar/>
             {(referenceData &&
@@ -67,6 +74,7 @@ const Editor = (props) => {
                     ||  searchRender 
                 )
             ) || <div>Loading data</div>}
+            </>}
         </div>
     )
 }

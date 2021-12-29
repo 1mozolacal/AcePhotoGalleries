@@ -7,7 +7,7 @@ import { uploadFileToBlob, getJSONData, overWriteJSON } from '../utils/azureStor
 import imageCompression from 'browser-image-compression';
 import { Button, FormLabel, FormControl, FormControlLabel, RadioGroup, Radio } from "@material-ui/core";
 
-const FullForm = ({ title, items, preData, overrideError, onSubmit }) => {
+const FullForm = ({ title, items, preData, overrideError, onSubmit, token }) => {
     const [controllerData, setControllerData] = useState(() => () => console.error("controll data not set"))
     const [controllerErrors, setControllerErrors] = useState(() => () => console.error("control errors not set"))
     const [reset, setReset] = useState(0)
@@ -224,12 +224,13 @@ const FullForm = ({ title, items, preData, overrideError, onSubmit }) => {
             callBackRefData={setReferenceData}
             preData={preData} 
             overrideError={overrideError}
-            onSubmit={onSubmit}/>
+            onSubmit={onSubmit}
+            token={token}/>
     </div>)
 }
 
 
-const Controller = ({ callBackData, callBackErros, callBackReset, referenceData, callBackRefData, preData, overrideError,onSubmit }) => {
+const Controller = ({ callBackData, callBackErros, callBackReset, referenceData, callBackRefData, preData, overrideError,onSubmit, token}) => {
     const [fileSelected, setFileSelected] = useState()
     const [picName, setPicName] = useState(preData.title ? preData.title :'')
     const [paypalId, setPaypalId] = useState(preData.id ? preData.id:'')
@@ -322,10 +323,10 @@ const Controller = ({ callBackData, callBackErros, callBackReset, referenceData,
             "URL": (preData.pic && !fileSelected ? preData.pic : "https://mjmpictures.blob.core.windows.net/pics/" + fileSelected.name)
         }
 
-        await overWriteJSON(returnJSONData, "rawData.json")
-        await overWriteJSON(returnListData, "display.json")
+        await overWriteJSON(returnJSONData, "rawData.json", token)
+        await overWriteJSON(returnListData, "display.json", token)
         if (preData.pic === undefined || fileSelected)
-            await uploadFileToBlob(fileSelected)
+            await uploadFileToBlob(fileSelected, token)
         callBackRefData(returnJSONData)
         setRefListData(returnListData)
         setErrors(defaultErros)

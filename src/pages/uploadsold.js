@@ -32,6 +32,7 @@ const Uploads = () => {
         button: [false, ''],
         file: [false, '']
     })
+    const [token,setToken] = useState()
 
     const setErrorsWrapper = (type,value) =>{
         var tmpErr = { ...errors }
@@ -76,9 +77,9 @@ const Uploads = () => {
         }
 
 
-        await overWriteJSON(returnJSONData, "rawData.json")
-        await overWriteJSON(returnListData, "display.json")
-        await uploadFileToBlob(fileSelected)
+        await overWriteJSON(returnJSONData, "rawData.json", token)
+        await overWriteJSON(returnListData, "display.json", token)
+        await uploadFileToBlob(fileSelected, token)
         // await getJSONData("rawData.json").then(data => {
         //     if (data[0]) { setReferenceData(data[1]) }
         // })
@@ -191,7 +192,7 @@ const Uploads = () => {
         
     }
     return (
-        referenceData &&
+        referenceData && token &&
         (<>
         <AdminNavbar />
         <Container>
@@ -261,7 +262,7 @@ const Uploads = () => {
             </ul>
         </div>
         </>)
-    ) || (<div>Loading data...</div>)
+    ) || (<div>Loading data... (note: not yet configured with auth token)</div>)
 }
 
 export default Uploads;

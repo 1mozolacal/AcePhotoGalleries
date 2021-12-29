@@ -15,7 +15,7 @@ import SaveIcon from '@material-ui/icons/Save'
 import VisibilityIcon from '@material-ui/icons/Visibility'
 import "../stylesheets/tuner.sass"
 import AdminNavbar from "../components/AdminNavbar";
-
+import AuthToken from "../components/authToken"
 
 import Tabs from '@material-ui/core/Tabs';
 import Tab from '@material-ui/core/Tab';
@@ -51,6 +51,8 @@ const Tuner = () => {
     const [unlistedData, unlistedDataSet] = useState()//Array ele=> id
     const [value, setValue] = useState(0);
     const [showPreview, setShowPreview] = useState(false)
+
+    const [token,setToken] = useState()
 
     const handleChange = (event, newValue) => {
         setValue(newValue);
@@ -158,7 +160,7 @@ const Tuner = () => {
             unordered: unorderedData,
             unlisted: unlistedData
         }
-        await overWriteJSON(pushData, "display.json")
+        await overWriteJSON(pushData, "display.json", token)
         alert("Changes Saved")
     }
     const togglePreview = () => {
@@ -235,7 +237,11 @@ const Tuner = () => {
         <>
             <AdminNavbar />
             <br />
+
+            {!token && 
+            <AuthToken returnToken={setToken}/>}
             
+            {token && 
             <DragDropContext onDragEnd={(info) => handleOnDragEnd(info)}>
                 <div className="tuner-page">
                     {tunerHeader}
@@ -250,7 +256,7 @@ const Tuner = () => {
                             <h3>If this take more than a few seconds consult the dev team.</h3>
                         </div>)}
                 </div>
-            </DragDropContext>
+            </DragDropContext>}
         </>
     );
 }

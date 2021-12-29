@@ -2,14 +2,6 @@ import { BlobServiceClient } from '@azure/storage-blob'
 
 const baseUrl = "https://mjmpictures.blob.core.windows.net"
 
-// Make sure to hide token away
-const token = "??sv=2020-08-04&ss=bfqt&srt=sco&sp=rwdlacuptfx&se=2021-10-31T05:51:45Z&st=2021-09-28T21:51:45Z&spr=https&sig=JccU4I9E23wfWVVGKfcdceaon4qvIWVrk14%2FxdTS5x0%3D"
-// old =      "?sv=2020-08-04&ss=bfqt&srt=sco&sp=rwdlacuptfx&se=2021-09-18T23:07:06Z&st=2021-09-11T15:07:06Z&spr=https&sig=kC4%2B%2FvnFVtEZd9W1GB5NRJyFtorxkmLWBLH8IZBKmZE%3D";
-
-const conString = `${baseUrl}/${token}`
-
-const blobServiceClient = new BlobServiceClient(conString);
-
 // Fetch JSON file for data
 export const getJSONData = async (filename, container = 'config') => {
     const url = `${baseUrl}/${container}/${filename}`;
@@ -30,14 +22,14 @@ export const getJSONData = async (filename, container = 'config') => {
     return jsonData
 }
 
-export const overWriteJSON = async (payload, filename, container = 'config') => {
+export const overWriteJSON = async (payload, filename, token, container = 'config') => {
     var previous = await getJSONData(filename)
     if (previous[0]) {
         var d = new Date();
         var s = (d.getFullYear() + "|" + (d.getMonth() + 1) + "|" + d.getDate() + "  " + d.getHours() + ":" + d.getMinutes() + ":" + d.getSeconds()).toString();
-        uploadNewJsonFile(previous[1], 'backups/' + filename + "   " + s, container)
+        uploadNewJsonFile(previous[1], 'backups/' + filename + "   " + s, token, container)
     }
-    uploadNewJsonFile(payload, filename, container)
+    uploadNewJsonFile(payload, filename, token, container)
 }
 
 export const getJSONDataOLD = async (filename, container = 'config') => {
@@ -51,14 +43,18 @@ export const getJSONDataOLD = async (filename, container = 'config') => {
 }
 
 // Upload new content
-export const uploadNewJsonFile = async (jsonData, blobName, container = 'config') => {
+export const uploadNewJsonFile = async (jsonData, blobName, token, container = 'config') => {
     const strRep = JSON.stringify(jsonData)
     // 🐄 go moo 
+    const blobServiceClient = new BlobServiceClient(`${baseUrl}/${token}`);
     const containerClient = blobServiceClient.getContainerClient(container);
 
     const blockBlobClient = containerClient.getBlockBlobClient(blobName);
-    const uploadBlobResponse = await blockBlobClient.upload(strRep, strRep.length);
+    const uploadBlobResponse = await blockBlobClient.upload(strRep, strRep.length)
+    .then( res => {return res})
+    .catch( err => console.error("failed to upload to storage with: %o",err));
     console.log("Written with response of: %o", uploadBlobResponse)
+    return uploadBlobResponse
 }
 
 
@@ -84,10 +80,11 @@ const createBlobInContainer = async (containerClient, file) => {
 //     console.log("Written with response of: %o", uploadBlobResponse)
 // };
 
-export const uploadFileToBlob = async (file) => {
+export const uploadFileToBlob = async (file, token) => {
     if (!file) return [];
 
     // get Container - full public read access
+    const blobServiceClient = new BlobServiceClient(`${baseUrl}/${token}`);
     const containerClient = blobServiceClient.getContainerClient("pics");
 
     if (!containerClient.exists())
@@ -101,9 +98,10 @@ export const uploadFileToBlob = async (file) => {
 };
 
 
-export const getAllContents = async (type = "pics") => {
+export const getAllContents = async (token, type = "pics") => {
     // Get contents from blob storage
     // Type: data, pics
+    const blobServiceClient = new BlobServiceClient(`${baseUrl}/${token}`);
     const containerClient = blobServiceClient.getContainerClient(type);
 
     if (!containerClient.exists())
