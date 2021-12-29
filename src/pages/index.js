@@ -1,5 +1,6 @@
 import React from "react";
 import Sidebar from "../components/Sidebar";
+import SEO from "../components/SEO"
 
 // Material ui import
 import Grid from "@material-ui/core/Grid";
@@ -21,6 +22,11 @@ import { Link } from 'gatsby';
 const IndexPage = () => {
 
   return (
+    <>
+    <SEO
+      title='Home'
+      keywords={['photo','gallery','galleries','ace','micheal major','nature','architechture','outdoor','pictures','ace photo galleries','ace photo gallery','ace photos','ace photo']}
+    />
     <main>
       <Sidebar activeTab={0} />
       <Grid container spacing={2} alignItems="center" justifyContent="center" direction="row">
@@ -65,6 +71,7 @@ const IndexPage = () => {
         </Grid>
       </Grid>
     </main>
+    </>
   );
 };
 

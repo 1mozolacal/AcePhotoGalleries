@@ -4,6 +4,7 @@ import SideBar from "../components/Sidebar";
 import SpotLight from "../components/SpotLight";
 import PaypalBtn from "../components/PaypalBtn";
 import CardHolder from "../components/cardHolder";
+import SEO from '../components/SEO'
 
 // Material ui
 import Grid from "@material-ui/core/Grid";
@@ -57,6 +58,10 @@ const Gallery = () => {
 
 	return (
 		<>
+		<SEO
+		title='store'
+		keywords={['ace gallery','ace store','store','gallery','galleries','ace photo galleries']}
+		/>
 			<SideBar activeTab={2} />
 			{displayPicture &&
 				(<>
