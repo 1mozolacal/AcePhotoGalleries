@@ -3,7 +3,7 @@ import { BlobServiceClient } from '@azure/storage-blob'
 const baseUrl = "https://mjmpictures.blob.core.windows.net"
 
 // Make sure to hide token away
-const token = "??sv=2020-08-04&ss=bfqt&srt=sco&sp=rwdlacuptfx&se=2021-10-31T05:51:45Z&st=2021-09-28T21:51:45Z&spr=https&sig=JccU4I9E23wfWVVGKfcdceaon4qvIWVrk14%2FxdTS5x0%3D"
+const token = "?sv=2020-08-04&ss=bfqt&srt=sco&sp=rwdlacupitfx&se=2022-12-31T04:30:57Z&st=2021-12-30T20:30:57Z&spr=https&sig=r69qm2p8ojFXTv9SjYF4Zp%2FViMVBevOW4SR3%2Fe50o9E%3D"
 // old =      "?sv=2020-08-04&ss=bfqt&srt=sco&sp=rwdlacuptfx&se=2021-09-18T23:07:06Z&st=2021-09-11T15:07:06Z&spr=https&sig=kC4%2B%2FvnFVtEZd9W1GB5NRJyFtorxkmLWBLH8IZBKmZE%3D";
 
 const conString = `${baseUrl}/${token}`
@@ -14,7 +14,10 @@ const blobServiceClient = new BlobServiceClient(conString);
 export const getJSONData = async (filename, container = 'config') => {
     const url = `${baseUrl}/${container}/${filename}`;
     var jsonData;
-    await fetch(url)
+    var noCacheHeader = new Headers();
+    noCacheHeader.append('pragma', 'no-cache');
+    noCacheHeader.append('cache-control', 'no-cache');
+    await fetch(url,{cache: "no-store"})
         .then(response => {
             if (response.ok) {
                 jsonData = [true, response.json()]

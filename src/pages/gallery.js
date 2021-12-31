@@ -18,26 +18,29 @@ const Gallery = () => {
 
 	useEffect(() => {
 		async function makeFetch() {
-			const list = await fetch("https://mjmpictures.blob.core.windows.net/config/display.json")
+			var noCacheHeader = new Headers();
+			noCacheHeader.append('pragma', 'no-cache');
+			noCacheHeader.append('cache-control', 'no-cache');
+			const list = await fetch("https://mjmpictures.blob.core.windows.net/config/display.json",noCacheHeader)
 				.then(res => res.json())
 				.then((data) => {
 					var allImage = data['ordered']
 					const unorderedMapping = data['unordered'].map((item, index) => {
-						const mapping = [6,6,6,6] //[4, 8, 8, 4]
+						const mapping = [6, 6, 6, 6] //[4, 8, 8, 4]
 						return [item, mapping[index % 4]]
 					})
 					allImage.push(...unorderedMapping)
 					return allImage
 					//returns [id,width]
 				})
-			const data = await fetch("https://mjmpictures.blob.core.windows.net/config/rawData.json")
+			const data = await fetch("https://mjmpictures.blob.core.windows.net/config/rawData.json",noCacheHeader)
 				.then(res => res.json())
 				.then((data) => {
 					return data
 				})
 			const fullListData = list.map(([id, width], index) => {
-				if(data[id] === undefined){
-					console.error("Can not find %o in Database: %o",id,data)
+				if (data[id] === undefined) {
+					console.error("Can not find %o in Database: %o", id, data)
 					return undefined
 				}
 				const buttonRender = (<PaypalBtn prices={data[id]['prices']} paypalID={data[id]['paypalID']} />)

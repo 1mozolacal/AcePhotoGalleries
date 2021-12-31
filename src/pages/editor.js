@@ -22,11 +22,12 @@ const Editor = (props) => {
     useEffect(() => {
         async function makeFetch() {
             await getJSONData("rawData.json").then((data) => {
+                console.log("calvin setting :%o", data[1])
                 setReferenceData(data[1])
             })
         }
         makeFetch()
-    }, [])
+    }, [refID])
 
     const overrideRender = (
         <div style={{ zIndex: 10, position: 'absolute', right: '0px', color: "black" }}>
@@ -37,7 +38,7 @@ const Editor = (props) => {
                 inputProps={{ 'aria-label': 'controlled' }}
             />
         </div>)
-
+    console.log("Calvin-: %o", referenceData ? referenceData[refID]  : "Not set yet")
     const formRender = refID ? (referenceData && <FullForm
         title="Editor"
         items={{ button: true, pic: true, title: true }}
