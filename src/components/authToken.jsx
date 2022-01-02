@@ -35,7 +35,7 @@ const Display = ({ alwaysShow, tokenName, testToken, returnToken }) => {
         </Grid>
         <Grid item xs={12} lg={2}>
             <Button variant='contained' onClick={(e) => {
-                setCookies(tokenName, input,{path: "/"})
+                setCookies(tokenName, input,{path: "/",maxAge: (60*60*24*365)*5 })
                 if (returnToken) {
                     returnToken(e.target.value)
                 }
